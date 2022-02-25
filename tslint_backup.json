@@ -1,0 +1,81 @@
+{
+  "defaultSeverity": "warning",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**"
+    ]
+  },
+  "rules": {
+    "prefer-const": true,
+    "no-var-keyword": true,
+    "object-literal-shorthand": false,
+    "object-literal-key-quotes": [true, "as-needed"],
+    "quotemark": [true, "single"],
+    "no-eval":true,
+    "ter-prefer-arrow-callback": [true],
+    "ter-arrow-spacing": [true],
+    "ter-arrow-parens": [true, "always"],
+    "ter-arrow-body-style": [true, "always"],
+    "one-variable-per-declaration": [true, "ignore-for-loop"],
+    "ter-max-len": [true, 100],
+    "no-unused-vars": true,
+    "triple-equals": true,
+    "brace-style": true,
+    "comment-format": true,
+    "ter-indent": [true, "spaces", 2],
+    "eofline": true,
+    "ter-padded-blocks": [true],
+    "no-consecutive-blank-lines": [true, 2],
+    "space-in-parens": [true, "always"],
+    "array-bracket-spacing": [true, "always"],
+    "object-curly-spacing": [true, "always"],
+    "block-spacing": [true, "always"],
+    "ter-computed-property-spacing": [true],
+    "ter-func-call-spacing": [true],
+    "no-trailing-whitespace": true,
+    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
+    "semicolon": [true, "always"],
+    "no-construct": true,
+    "variable-name":[
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore"
+    ],
+    "interface-name": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "quote-props":["error", "always"],
+    "prefer-array-literal": true,
+    "prefer-destructuring": ["error", {"object": true, "array": true}],
+    "quotes":["error", "single"],
+    "prefer-template": true,
+    "template-curly-spacing": ["error", "never"],
+    "func-style":["error", "expression"],
+    "wrap-iife": ["error", "outside"],
+    "no-loop-func":"error",
+    "prefer-rest-params": "error",
+    "no-new-func": "error",
+    "space-before-function-paren":[true, {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "never"
+    }],
+    "space-before-blocks":"error",
+    "no-param-reassign": "error",
+    "prefer-spread": "error",
+    "function-paren-newline":["error", "always"],
+    "prefer-arrow-callback":"error",
+    "arrow-spacing":["error", { "before": true, "after": true }],
+    "arrow-parens": [true, "as-needed"],
+    "arrow-body-style":["error", "as-needed"],
+    "no-confusing-arrow": "error",
+    "no-useless-constructor": "error",
+    "no-dupe-class-members": "error",
+    "no-duplicate-imports": true,
+    "no-iterator":"error"
+  }
+}
