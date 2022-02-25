@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-const login: Object = () => import("@/views/login/login.vue");
-
+const login: Object = () => import("@/views/login/login");
+const index: Object = () => import("@/views/index/index");
 
 Vue.use(VueRouter)
 
@@ -18,6 +18,15 @@ const routes: Array<RouteConfig> = [
     path: '/login',
     name: 'login',
     component: login,
+    meta: {
+      title: "登录",
+      keepAlive:false
+    }
+  },
+  {
+    path: '/index',
+    name: 'index',
+    component: index,
     meta: {
       title: "登录",
       keepAlive:false

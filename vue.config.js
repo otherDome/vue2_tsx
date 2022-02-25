@@ -31,7 +31,8 @@ module.exports = {
     transpileDependencies,
     parallel: false,
     css: {
-        modules: true // 开启CSS module
+        requireModuleExtension: true
+            //modules: true // 开启CSS module
     },
     devServer: {
         hot: true,
@@ -88,6 +89,28 @@ module.exports = {
                     Assets: resolve("src/assets")
                 },
                 extensions: ['.js', '.ts', '.vue', '.json', ".tsx"]
+            },
+            module: {
+                rules: [{ // ts,tsx模块资源导入处理
+                    test: /(\.tsx|\.ts)$/,
+                    exclude: /node_modules/,
+                    loader: 'ts-loader',
+                    options: {
+                        transpileOnly: true,
+                        getCustomTransformers: () => ({
+                            before: [
+                                tsImportPluginFactory({
+                                    libraryName: "ant-design-vue",
+                                    libraryDirectory: "es",
+                                    style: "css"
+                                })
+                            ]
+                        }),
+                        compilerOptions: {
+                            module: "es2015"
+                        }
+                    }
+                }]
             },
             plugins: [
                 new FriendlyErrorsPlugin({
