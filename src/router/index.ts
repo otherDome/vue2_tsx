@@ -28,7 +28,7 @@ const routes: Array<RouteConfig> = [
     name: 'index',
     component: index,
     meta: {
-      title: "登录",
+      title: "蜜橙好医",
       keepAlive:false
     }
   }

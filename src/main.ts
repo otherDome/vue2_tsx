@@ -7,10 +7,12 @@ import EventBus from 'vue-bus-ts';
 import "vue-tsx-support/enable-check";
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import OnlyMessage from "./utils/onlyMsgbox"
 import "./registerServiceWorker";
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(EventBus);
+Vue.prototype.$OnlyMessage = OnlyMessage
 if (process.env.NODE_ENV !== "production") {
   console.log("当前环境", process.env.NODE_ENV);
   console.log("当前环境", process.env.VUE_APP_BASE_API);

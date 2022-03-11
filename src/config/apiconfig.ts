@@ -1,4 +1,4 @@
 const isAPI={
-  ids:'http://healthapi.dkyao.com',
+  healthapi:'http://healthapi.dkyao.com',
 }
 export default isAPI;
