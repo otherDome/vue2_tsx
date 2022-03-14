@@ -6,7 +6,7 @@
  * @function goLogin -登录接口
  * @description 登录接口
  **/
-import request from "@/utils/request";
+import request from "@/utils/https/request";
 import apiconfig from "@/config/apiconfig"
 const NODE_ENV= process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'online'
 export function goLogin(options:any){

@@ -1,7 +1,17 @@
 
 
+
+/**
+ * @name rebate
+ * @author fankai16
+ * @Time 2022/03/14
+ * @property {string}  nakcname  用户名
+ * @property {string}  pwd  密码
+ * @function goLogin -登录提交
+ * @description 首页登录
+ **/
 import { Component, Vue } from 'vue-property-decorator';
-import style from '@/views/login/style/login.module.scss';
+import style from '@/assets/styles/login/login.module.scss';
 import { throttle } from 'throttle-debounce-ts';
 import { goLogin } from '@/api/login/login';
 @Component
@@ -19,24 +29,26 @@ export default class App extends Vue {
       this.$OnlyMessage.error('密码不能为空');
       return
     }
-    const options = {
-      headers: {
-        dataType: "json"
-      },
-      data: {
-        userName: this.nakcname,
-        password: this.pwd
-      }
-    }
-    const res: any = await goLogin(options)
-    if (res.code === 1) {
-      this.$router.push({
+    this.$router.push({
+      path: "/index"
+    })
+    // const options = {
+    //   headers: {
+    //     dataType: "json"
+    //   },
+    //   data: {
+    //     userName: this.nakcname,
+    //     password: this.pwd
+    //   }
+    // }
+    // const res: any = await goLogin(options)
+    // if (res.code === 1) {
+    //   this.$router.push({
 
-      })
-    } else {
-      this.$OnlyMessage.error(res.msg);
-    }
-    console.log("aaaaaaa", res)
+    //   })
+    // } else {
+    //   this.$OnlyMessage.error(res.msg);
+    // }
   }
   protected render() {
     return <div class={style.login}>

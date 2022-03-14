@@ -1,0 +1,16 @@
+.themenu {
+    width: 100%;
+    height: 100%;
+    .themenu_box {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        .themenu_boxleft {
+            width: 64px;
+            height: 100%;
+            background: #282c34;
+            .themenu_boxleft_top {}
+        }
+        .themenu_boxright {}
+    }
+}

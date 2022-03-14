@@ -102,7 +102,7 @@
 @media screen and (max-width: 390px) {
     .login {
         background-size: auto auto;
-        min-width: auto;
+        min-width: inherit;
         .login_content {
             width: 81%;
             height: auto;
