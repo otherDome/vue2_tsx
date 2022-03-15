@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 const login: Object = () => import("@/views/login/login");
 const index: Object = () => import("@/views/index/index");
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
+  
   {
     path: "/",
-    name: "/",
     component: login,
     meta: {
       title: "登录",
@@ -35,9 +37,17 @@ const routes: Array<RouteConfig> = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  //mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+router.beforeEach((to, from, next) => {
+  NProgress.start()
+  next()
+})
+
+router.afterEach(() => {
+  NProgress.done()
 })
 
 export default router

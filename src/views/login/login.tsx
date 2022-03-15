@@ -30,7 +30,7 @@ export default class App extends Vue {
       return
     }
     this.$router.push({
-      path: "/index"
+      name: "index"
     })
     // const options = {
     //   headers: {

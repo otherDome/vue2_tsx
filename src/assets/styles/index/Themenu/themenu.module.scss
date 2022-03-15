@@ -8,8 +8,38 @@
         .themenu_boxleft {
             width: 64px;
             height: 100%;
+            padding-top: 10px;
+            box-sizing: border-box;
             background: #282c34;
-            .themenu_boxleft_top {}
+            .themenu_boxleft_top {
+                text-align: center;
+                height: 60px;
+                line-height: 60px;
+            }
+            .themenu_boxleft_footer {
+                padding: 2px 5px;
+                box-sizing: border-box;
+                ul {
+                    list-style: none;
+                    li {
+                        padding: 6px 0;
+                        box-sizing: border-box;
+                        background: none;
+                        border-radius: 5px;
+                        text-align: center;
+                        color: #fff;
+                        cursor: pointer;
+                        margin-bottom: 20px;
+                        p {
+                            font-size: 12px;
+                        }
+                    }
+                }
+                .isLiactive {
+                    transition: 0.8s;
+                    background: #1890ff;
+                }
+            }
         }
         .themenu_boxright {}
     }

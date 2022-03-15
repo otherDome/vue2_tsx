@@ -1,11 +1,14 @@
 import axios from "axios";
 import qs from "qs";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 const service = axios.create({
   baseURL: process.env.NODE_ENV === "production" ? "" : "/online",
   timeout: 60000,
 });
 service.interceptors.request.use(
   (config: any) => {
+    NProgress.start()
     const header: any = config.headers;
     const dataType = header.dataType ? header.dataType : "";
     if (process.env.NODE_ENV === "production") {
@@ -62,6 +65,7 @@ service.interceptors.response.use(
   },
   (error:any) => {
     const errList = error.response;
+    NProgress.done()
     if (errList.status === 403) {
       const errJson = {
         error: errList.data.error,

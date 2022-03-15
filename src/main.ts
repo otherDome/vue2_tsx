@@ -9,10 +9,12 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import OnlyMessage from "./utils/elementMsg/onlyMsgbox"
 import "./registerServiceWorker";
-//import  Home  from '@icon-park/vue';
+import { install } from '@icon-park/vue/es/all';
+install(Vue, 'icon');
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.prototype.$OnlyMessage = OnlyMessage
+
 if (process.env.NODE_ENV !== "production") {
   console.log(
     `%c 当前环境 %c`+ process.env.NODE_ENV+`%c`,
@@ -27,7 +29,7 @@ if (process.env.NODE_ENV !== "production") {
     'background:transparent'
   )
   Vue.config.errorHandler = function(err: any, vm: any, info: any) {
-    console.log(`组件${vm.$vnode.tag}发生错误：${err.message},${info}`);
+    console.error(`组件${vm.$vnode.tag}发生错误：${err.message},${info}`);
   };
 }
 const bus = new EventBus.Bus();
