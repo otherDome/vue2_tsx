@@ -16,4 +16,5 @@ interface Navlist {
   path: string;
   pathname: string;
   development: boolean;
+  navlist: any;
 }
