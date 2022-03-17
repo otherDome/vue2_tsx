@@ -8,6 +8,7 @@
  * @property {string} addUrlName  选中一级菜单名称
  * @property {arr}  ThesecondaryList  选中的二位数组
  * @function goLogin -登录提交
+ * @function ongoroter  点击导航获取IID
  * @description 导航栏
  **/
 import { Component, Vue } from 'vue-property-decorator';
@@ -20,7 +21,11 @@ export default class App extends Vue {
   private addUrl: string = ''
   private addUrlName: string = ''
   private ThesecondaryList = []
+  $Maxer: any;
   private mounted() {
+    const vuX = new this.$Maxer();
+    const routingJson = vuX.getvuex('routingJson')
+    console.log("测试啊", routingJson)
     if (this.navlist.length > 0) {
       this.addUrl = this.navlist[0].pathname
       this.addUrlName = this.navlist[0].name
@@ -32,6 +37,32 @@ export default class App extends Vue {
     this.addUrlName = item.name
     this.ThesecondaryList = item.navlist
     console.log("this.ThesecondaryList", this.ThesecondaryList)
+  }
+  private ongoroter(item: any) {
+    console.log('aaaaa', item)
+    const vuX = new this.$Maxer();
+    const routingJson = vuX.getvuex('routingJson')
+    const newlist = routingJson.newlist
+    if (newlist.length > 0) {
+      for (let index = 0; index < newlist.length; index++) {
+        if (newlist[index].urlID === item.urlID) {
+          return
+        } else {
+          routingJson.path = item.path
+          routingJson.pathname = item.pathname
+          routingJson.urlID = item.urlID
+          vuX.postvuex('routingJson', routingJson)
+        }
+      }
+    } else {
+      routingJson.path = item.path
+      routingJson.pathname = item.pathname
+      routingJson.urlID = item.urlID
+      vuX.postvuex('routingJson', routingJson)
+    }
+    console.log('getvuex', vuX.getvuex('routingJson'))
+    //vuX.postvuex('ceshi', '修改了')
+
   }
   protected render() {
     return <div class={style.themenu}>
@@ -63,7 +94,7 @@ export default class App extends Vue {
           </div>
           <div>
             <el-menu
-              default-active="2"
+              default-active="1-2"
               class="el-menu-vertical-demo"
               props={{
                 defaultOpeneds: ['1-1', '1-2']
@@ -82,7 +113,6 @@ export default class App extends Vue {
               }
             >
               {this.ThesecondaryList.map((pro: modelnavlist) => {
-                console.log("propro", pro)
                 if (pro.navlist.length > 0) {
                   const htmlList: any = []
                   /**
@@ -91,9 +121,7 @@ export default class App extends Vue {
                      * @property {arr}  htmlList  二级数据
                      * @description 导航栏二级
                   **/
-                  console.log("pro.navlist", pro.navlist)
                   pro.navlist.map((item: modelnavlist) => {
-                    console.log("itemitemitem", item.navlist)
                     const htmlListsan: any = []
                     /**
                       * @name menu
@@ -133,39 +161,17 @@ export default class App extends Vue {
                   )
                 } else {
                   return (
-                    <div>小于0</div>
+                    <el-menu-item index={pro.urlID} onClick={this.ongoroter.bind(this, pro)}>
+                      <i class="el-icon-document"></i>
+                      <span slot="title">{pro.name}</span>
+                    </el-menu-item>
                   )
                 }
-
               })}
-              {/* <el-submenu index="1" >
-                <template slot="title">
-                  <i class="el-icon-location"></i>
-                  <span>导航一</span>
-                </template>
-                <el-menu-item-group>
-                  <template slot="title">分组一</template>
-                  <el-menu-item index="1-1">选项1</el-menu-item>
-                  <el-menu-item index="1-2">选项2</el-menu-item>
-                </el-menu-item-group>
-
-              </el-submenu>
-              <el-menu-item index="2">
-                <i class="el-icon-menu"></i>
-                <span slot="title">导航二</span>
-              </el-menu-item>
-              <el-menu-item index="3" disabled>
-                <i class="el-icon-document"></i>
-                <span slot="title">导航三</span>
-              </el-menu-item>
-              <el-menu-item index="4">
-                <i class="el-icon-setting"></i>
-                <span slot="title">导航四</span>
-              </el-menu-item> */}
             </el-menu>
           </div>
         </div>
-      </div>
-    </div >;
+      </div >
+    </div >
   }
 }

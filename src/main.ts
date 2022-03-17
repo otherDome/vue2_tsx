@@ -10,11 +10,17 @@ import 'element-ui/lib/theme-chalk/index.css';
 import OnlyMessage from "./utils/elementMsg/onlyMsgbox"
 import "./registerServiceWorker";
 import { install } from '@icon-park/vue/es/all';
+import installMaxerStore, { Maxer } from "@/store/maxer.mixin";
+import initStorePersistence from "@/store/store.persistence";
+import filters from "@/utils/filters/filters";
 install(Vue, 'icon');
+new installMaxerStore(Vue)
+initStorePersistence(store)
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.prototype.$OnlyMessage = OnlyMessage
-
+Vue.prototype.$Maxer = Maxer
+Vue.prototype.$filters=filters
 if (process.env.NODE_ENV !== "production") {
   console.log(
     `%c 当前环境 %c`+ process.env.NODE_ENV+`%c`,

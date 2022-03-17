@@ -21,61 +21,30 @@ const navlist = [{
     "development": false,
     "navlist": [
         {
-            "name": "首页啦啦啦",
+            "name": "首页",
             "icon": "",
             "urlID": "1-1",
             "path": "/",
             "pathname": "",
             "development": false,
-            "navlist": [
-                {
-                    "name": "首页1",
-                    "icon": "",
-                    "urlID": "1-1-1",
-                    "path": "/",
-                    "pathname": "",
-                    "development": false,
-                    "navlist":[]
-                },
-                {
-                    "name": "首页2",
-                    "icon": "",
-                    "urlID": "1-1-2",
-                    "path": "/",
-                    "pathname": "",
-                    "development": false,
-                    "navlist":[]
-                },
-            ]
-        },
-        {
-            "name": "首页啦啦啦1",
+            "navlist": []
+        }, {
+            "name": "首页1",
             "icon": "",
             "urlID": "1-2",
             "path": "/",
             "pathname": "",
             "development": false,
-            "navlist": [
-                {
-                    "name": "首页1",
-                    "icon": "",
-                    "urlID": "1-1-1",
-                    "path": "/",
-                    "pathname": "",
-                    "development": false,
-                    "navlist":[]
-                },
-                {
-                    "name": "首页2",
-                    "icon": "",
-                    "urlID": "1-1-2",
-                    "path": "/",
-                    "pathname": "",
-                    "development": false,
-                    "navlist":[]
-                },
-            ]
-        },
+            "navlist": []
+        }, {
+            "name": "首页2",
+            "icon": "",
+            "urlID": "1-3",
+            "path": "/",
+            "pathname": "",
+            "development": false,
+            "navlist": []
+        }
     ]
 },
 {
