@@ -11,9 +11,11 @@
 import { Component, Vue } from 'vue-property-decorator';
 import style from '@/assets/styles/index/index.module.scss';
 import themenu from '@/views/index/Themenu/themenu'
+import componentheader from '@/views/index/header/header'
 @Component({
   components: {
-    themenu
+    themenu,
+    componentheader
   }
 })
 export default class App extends Vue {
@@ -23,7 +25,7 @@ export default class App extends Vue {
         <themenu></themenu>
       </div>
       <div class={style.fatherInde_right}>
-        右侧
+        <componentheader></componentheader>
       </div>
     </div>;
   }

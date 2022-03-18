@@ -48,11 +48,25 @@
         .themenu_boxright {
             background: #fff;
             width: calc(100% - 63px);
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+             :global(.el-menu) {
+                border-right: none;
+            }
+             :global(.el-menu-item) {
+                border-radius: 5px;
+                min-width: 180px;
+                width: 90%;
+                height: 50px;
+                line-height: 50px;
+                margin: 0 auto;
+            }
+             :global(.is-active) {
+                background: #E8F4FF;
+            }
             .themenu_boxright_title {
+                margin-bottom: 10px;
                 h1 {
                     font-size: 20px;
-                    line-height: 55px;
+                    line-height: 50px;
                     text-align: center;
                     font-weight: 500;
                     color: #515a6e;
@@ -83,4 +97,9 @@
             }
         }
     }
+}
+
+.isImg {
+    margin: 0 8px;
+    vertical-align: middle;
 }

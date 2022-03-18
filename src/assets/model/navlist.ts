@@ -1,6 +1,7 @@
 export interface  modelnavlist {
   name: string;
   icon: string;
+  activeicon:string;
   urlID: string;
   path: string;
   pathname: string;
@@ -12,6 +13,7 @@ export interface  modelnavlist {
 interface Navlist {
   name: string;
   icon: string;
+  activeicon:string;
   urlID: string;
   path: string;
   pathname: string;

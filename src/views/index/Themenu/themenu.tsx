@@ -7,7 +7,11 @@
  * @property {string}  addUrl  选中一级菜单ID
  * @property {string} addUrlName  选中一级菜单名称
  * @property {arr}  ThesecondaryList  选中的二位数组
+ * @property {string}  TheselectedUrl  选中菜单IID
+ * @property {any}  newTimeull  选择的时间戳
+ * @property {boolean} collapseTransition  导航菜单的折叠动画
  * @function goLogin -登录提交
+ * @function ongoroter  点击导航获取IID
  * @function ongoroter  点击导航获取IID
  * @description 导航栏
  **/
@@ -20,26 +24,44 @@ export default class App extends Vue {
   private navlist = navlist
   private addUrl: string = ''
   private addUrlName: string = ''
-  private ThesecondaryList = []
+  private ThesecondaryList: any = []
+  private TheselectedUrl: string = ''
+  private newTimeull: any = ''
+  private collapseTransition: boolean = false
   $Maxer: any;
   private mounted() {
+    this.init()
+  }
+  private init() {
     const vuX = new this.$Maxer();
     const routingJson = vuX.getvuex('routingJson')
+    this.TheselectedUrl = routingJson.urlID
+    const Homeindex = routingJson.Homeindex
     console.log("测试啊", routingJson)
     if (this.navlist.length > 0) {
-      this.addUrl = this.navlist[0].pathname
-      this.addUrlName = this.navlist[0].name
-      this.ThesecondaryList = this.navlist[0].navlist
+      this.addUrl = this.navlist[Homeindex].pathname
+      this.addUrlName = this.navlist[Homeindex].name
+      this.ThesecondaryList = this.navlist[Homeindex].navlist
+      this.TheselectedUrl = routingJson.urlID
     }
   }
-  private onPagesRoter(item: any) {
+  private onPagesRoter(item: any, index: number) {
+    const vuX = new this.$Maxer();
+    const routingJson = vuX.getvuex('routingJson')
     this.addUrl = item.pathname
     this.addUrlName = item.name
     this.ThesecondaryList = item.navlist
-    console.log("this.ThesecondaryList", this.ThesecondaryList)
+    routingJson.Homeindex = index
+    if (item.navlist.length > 0) {
+      routingJson.urlID = item.navlist[0].urlID
+      this.TheselectedUrl = item.navlist[0].urlID
+    }
+    vuX.postvuex('routingJson', routingJson)
+    this.newTimeull = new Date().getTime()
+    console.log('this.newTimeull', this.newTimeull)
+    console.log('数据执行', this.TheselectedUrl)
   }
   private ongoroter(item: any) {
-    console.log('aaaaa', item)
     const vuX = new this.$Maxer();
     const routingJson = vuX.getvuex('routingJson')
     const newlist = routingJson.newlist
@@ -51,6 +73,7 @@ export default class App extends Vue {
           routingJson.path = item.path
           routingJson.pathname = item.pathname
           routingJson.urlID = item.urlID
+          this.TheselectedUrl = item.urlID
           vuX.postvuex('routingJson', routingJson)
         }
       }
@@ -58,11 +81,9 @@ export default class App extends Vue {
       routingJson.path = item.path
       routingJson.pathname = item.pathname
       routingJson.urlID = item.urlID
+      this.TheselectedUrl = item.urlID
       vuX.postvuex('routingJson', routingJson)
     }
-    console.log('getvuex', vuX.getvuex('routingJson'))
-    //vuX.postvuex('ceshi', '修改了')
-
   }
   protected render() {
     return <div class={style.themenu}>
@@ -73,11 +94,11 @@ export default class App extends Vue {
           </div>
           <div class={style.themenu_boxleft_footer}>
             <ul>
-              {this.navlist.map((pro: modelnavlist) => {
+              {this.navlist.map((pro: modelnavlist, index: number) => {
                 return (
                   <li
                     class={this.addUrl === pro.pathname ? style.isLiactive : "3"}
-                    onClick={this.onPagesRoter.bind(this, pro)}
+                    onClick={this.onPagesRoter.bind(this, pro, index)}
                   >
                     <img src={pro.icon} title='加载中...' />
                     <p>{pro.name}</p>
@@ -94,10 +115,12 @@ export default class App extends Vue {
           </div>
           <div>
             <el-menu
-              default-active="1-2"
               class="el-menu-vertical-demo"
+              key={this.newTimeull}
               props={{
-                defaultOpeneds: ['1-1', '1-2']
+                defaultOpeneds: [],
+                defaultActive: this.TheselectedUrl,
+                collapseTransition: this.collapseTransition
               }}
               {
               ...{
@@ -162,7 +185,10 @@ export default class App extends Vue {
                 } else {
                   return (
                     <el-menu-item index={pro.urlID} onClick={this.ongoroter.bind(this, pro)}>
-                      <i class="el-icon-document"></i>
+                      <img class={style.isImg} src={
+                        pro.urlID === this.TheselectedUrl ?
+                          pro.activeicon : pro.icon
+                      } title='加载中...' />
                       <span slot="title">{pro.name}</span>
                     </el-menu-item>
                   )

@@ -4,6 +4,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     routingJson: {
+      Homeindex:0,
       urlID: "",
       path: '',
       pathname: '',
@@ -28,6 +29,7 @@ export default new Vuex.Store({
     },
     $clearVuex(store: any) {
       store["routingJson"] = {
+        Homeindex:0,
         urlID: "",
         path: '',
         pathname: '',

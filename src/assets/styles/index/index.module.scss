@@ -4,8 +4,11 @@
     display: flex;
     .fatherInde_letf {
         width: 266px;
+        box-shadow: 0 1px 4px #e4e7ed;
+        margin-right: 2px;
     }
     .fatherInde_right {
         width: calc(100% - 266px);
+        box-shadow: 0 1px 4px #F6F6F6;
     }
 }
