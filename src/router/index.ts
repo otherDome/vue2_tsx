@@ -35,6 +35,17 @@ const routes: Array<RouteConfig> = [
     }
   }
 ]
+// 解决重复点击路由报错的BUG  results
+const originalPush :any= VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location:any) {
+  return originalPush.call(this, location).catch((err:any) => err);
+};
+
+//解决重复点击路由报错的BUG  results
+const originalreplace:any = VueRouter.prototype.replace;
+VueRouter.prototype.replace = function replace(location:any) {
+  return originalreplace.call(this, location).catch((err:any) => err);
+};
 
 const router = new VueRouter({
   //mode: 'history',

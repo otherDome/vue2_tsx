@@ -1,3 +1,19 @@
+/**
+ * @name index
+ * @author fankai16
+ * @Time 2022/03/21
+ * @property {json,number}  Homeindex  导航索引
+ * @property {json,string}  urlID  导航字符串
+ * @property {json,string}  path    路由path
+ * @property {json,string}  pathname    路由pathname
+ * @property {json,arr}  newlist     加入进去的导航数组
+ * @property {json,arr}  oldList     旧的进去的导航数组
+ * @property {json,arr}  breadcrumb  面包屑数组
+ * @property {json,booler}  AFold    展开关闭菜单导航
+ * @property {arr}  breadcrumbList 会员数据列表
+ * @function init -页面初始化
+ * @description 导航栏
+ **/
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
@@ -5,11 +21,13 @@ export default new Vuex.Store({
   state: {
     routingJson: {
       Homeindex:0,
-      urlID: "",
+      urlID: "1-1",
       path: '',
       pathname: '',
+      AFold:true,
       newlist: [],
-      oldList:[]
+      oldList: [],
+      breadcrumb:[]
     }
   },
   mutations: {

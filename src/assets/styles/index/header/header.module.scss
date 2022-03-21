@@ -3,6 +3,24 @@
     height: 110px;
     .header_top {
         height: 60px;
+        width: 100%;
         box-shadow: 0 1px 4px #e4e7ed;
+        display: flex;
+        .header_left {
+            width: 40%;
+            display: flex;
+            align-items: center;
+            .header_left_btnl {
+                margin: 0 15px;
+                padding-top: 3px;
+                box-sizing: border-box;
+                .ispointer {
+                    cursor: pointer
+                }
+            }
+        }
+        .header_right {
+            width: 60%;
+        }
     }
 }

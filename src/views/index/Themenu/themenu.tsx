@@ -13,12 +13,14 @@
  * @function goLogin -登录提交
  * @function ongoroter  点击导航获取IID
  * @function ongoroter  点击导航获取IID
+ * @function breadcrumb  异步获取导航标签数组列
  * @description 导航栏
  **/
 import { Component, Vue } from 'vue-property-decorator';
 import style from '@/assets/styles/index/Themenu/themenu.module.scss';
 const navlist = require('@/assets/json/navlist.ts')
 import { modelnavlist } from '@/assets/model/navlist'
+
 @Component
 export default class App extends Vue {
   private navlist = navlist
@@ -58,10 +60,12 @@ export default class App extends Vue {
     }
     vuX.postvuex('routingJson', routingJson)
     this.newTimeull = new Date().getTime()
-    console.log('this.newTimeull', this.newTimeull)
-    console.log('数据执行', this.TheselectedUrl)
+    this.$bus.$emit('AFold_bus', true)
+
+    console.log('长寿', routingJson)
+    console.log('item', item)
   }
-  private ongoroter(item: any) {
+  private async ongoroter(item: any) {
     const vuX = new this.$Maxer();
     const routingJson = vuX.getvuex('routingJson')
     const newlist = routingJson.newlist
@@ -74,6 +78,8 @@ export default class App extends Vue {
           routingJson.pathname = item.pathname
           routingJson.urlID = item.urlID
           this.TheselectedUrl = item.urlID
+          const breadcrumbList = await this.breadcrumb(item)
+          routingJson.breadcrumb = breadcrumbList
           vuX.postvuex('routingJson', routingJson)
         }
       }
@@ -82,8 +88,36 @@ export default class App extends Vue {
       routingJson.pathname = item.pathname
       routingJson.urlID = item.urlID
       this.TheselectedUrl = item.urlID
+      const breadcrumbList = await this.breadcrumb(item)
+      routingJson.breadcrumb = breadcrumbList
       vuX.postvuex('routingJson', routingJson)
     }
+    this.$bus.$emit('breadcrumb')
+    console.log('执行了啊', routingJson)
+  }
+  private breadcrumb(item: any) {
+    return new Promise((resolve) => {
+      const breadcrumb = [
+        {
+          path: '/index',
+          pathname: "首页"
+        }
+      ]
+      if (item.navlist.length === 0) {
+        if (item.name !== '首页') {
+          breadcrumb.push(
+            {
+              path: item.path,
+              pathname: item.name
+            }
+          )
+        }
+        console.log('item', item)
+      } else {
+        console.log('二级以上菜单待处理')
+      }
+      resolve(breadcrumb);
+    });
   }
   protected render() {
     return <div class={style.themenu}>
@@ -113,7 +147,7 @@ export default class App extends Vue {
             <h1>health系统</h1>
             <h2>{this.addUrlName}</h2>
           </div>
-          <div>
+          <div class={style.ismenu}>
             <el-menu
               class="el-menu-vertical-demo"
               key={this.newTimeull}

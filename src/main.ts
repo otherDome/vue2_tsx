@@ -38,6 +38,7 @@ if (process.env.NODE_ENV !== "production") {
     console.error(`组件${vm.$vnode.tag}发生错误：${err.message},${info}`);
   };
 }
+Vue.use(EventBus);
 const bus = new EventBus.Bus();
 router.beforeEach((to: any, from: any, next) => {
   const title =
