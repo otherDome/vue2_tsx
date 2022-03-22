@@ -18,9 +18,13 @@
                     cursor: pointer
                 }
             }
+            .header_left_breadcrumb {
+                cursor: pointer;
+            }
         }
         .header_right {
             width: 60%;
+            line-height: 60px;
         }
     }
 }

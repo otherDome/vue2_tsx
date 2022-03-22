@@ -7,6 +7,7 @@
  * @property {boolean}  AFold   是否展开导航
  * @function init -页面初始化
  * @function AFoldClick  导航展开收起
+ * @function breadcrumbClick  头部面包点击
  * @description 导航栏
  **/
 
@@ -21,19 +22,20 @@ export default class App extends Vue {
       pathname: "首页"
     }
   ]
-
   protected AFold: boolean = true
-
   protected mounted() {
-    this.init()
-  }
-  protected init() {
     const vuX = new this.$Maxer();
     const routingJson = vuX.getvuex('routingJson')
-    this.AFold = routingJson.AFold
+    this.init(routingJson)
     this.$bus.$on('breadcrumb', () => {
-      this.breadcrumbList = routingJson.breadcrumb
+      const dynamicJSON = vuX.getvuex('routingJson')
+      this.breadcrumbList = dynamicJSON.breadcrumb
     });
+
+  }
+  protected init(routingJson: any) {
+    this.AFold = routingJson.AFold
+    this.breadcrumbList = routingJson.breadcrumb
     this.$bus.$on('AFold_bus', (e: boolean) => {
       this.AFold = e
     });
@@ -41,6 +43,36 @@ export default class App extends Vue {
   protected AFoldClick(type: string) {
     this.AFold = !this.AFold
     this.$bus.$emit('AFold_bus', this.AFold)
+  }
+  protected breadcrumbClick(item: any) {
+    const vuX = new this.$Maxer();
+    const routingJson = vuX.getvuex('routingJson')
+    if (item.pathname === 'home') {
+      const breadcrumblist = []
+      breadcrumblist.push(routingJson.breadcrumb[0])
+      const vxDataJson = {
+        AFold: routingJson.AFold,
+        Homeindex: 0,
+        newlist: routingJson.newlist,
+        oldList: routingJson.oldList,
+        breadcrumb: breadcrumblist,
+        path: '/home',
+        pathname: "home",
+        urlID: "1-1"
+      }
+      this.breadcrumbList = breadcrumblist
+      console.log('breadcrumblist', breadcrumblist)
+      vuX.postvuex('routingJson', vxDataJson)
+      this.$bus.$emit('indexInit')
+      this.$router.push({
+        name: item.pathname
+      })
+    } else {
+      this.$router.push({
+        name: item.pathname
+      })
+    }
+
   }
   protected render() {
     const isbreadcrumbList: any = []
@@ -67,19 +99,15 @@ export default class App extends Vue {
           <el-breadcrumb separator-class="el-icon-arrow-right">
             {
               this.breadcrumbList.map((item: any) => {
-                if (item.path === '') {
-                  isbreadcrumbList.push(
-                    <el-breadcrumb-item>{item.pathname}</el-breadcrumb-item>
-                  )
-                } else {
-                  isbreadcrumbList.push(
-                    <el-breadcrumb-item props={{
-                      to: {
-                        path: item.path
-                      }
-                    }}>{item.pathname}</el-breadcrumb-item>
-                  )
-                }
+                isbreadcrumbList.push(
+                  <el-breadcrumb-item>
+                    <span
+                      class={style.header_left_breadcrumb}
+                      onClick={this.breadcrumbClick.bind(this, item)}>
+                      {item.name}
+                    </span>
+                  </el-breadcrumb-item>
+                )
               }
               )
             }

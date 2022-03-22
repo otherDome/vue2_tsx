@@ -14,7 +14,7 @@
  * @function ongoroter  点击导航获取IID
  * @function ongoroter  点击导航获取IID
  * @function breadcrumb  异步获取导航标签数组列
- * @description 导航栏
+ * @description 导航栏   key={this.newTimeull}       this.newTimeull = new Date().getTime()
  **/
 import { Component, Vue } from 'vue-property-decorator';
 import style from '@/assets/styles/index/Themenu/themenu.module.scss';
@@ -33,13 +33,15 @@ export default class App extends Vue {
   $Maxer: any;
   private mounted() {
     this.init()
+    this.$bus.$on('indexInit', () => {
+      this.init()
+    });
   }
   private init() {
     const vuX = new this.$Maxer();
     const routingJson = vuX.getvuex('routingJson')
     this.TheselectedUrl = routingJson.urlID
     const Homeindex = routingJson.Homeindex
-    console.log("测试啊", routingJson)
     if (this.navlist.length > 0) {
       this.addUrl = this.navlist[Homeindex].pathname
       this.addUrlName = this.navlist[Homeindex].name
@@ -47,23 +49,28 @@ export default class App extends Vue {
       this.TheselectedUrl = routingJson.urlID
     }
   }
-  private onPagesRoter(item: any, index: number) {
+  private async onPagesRoter(item: any, index: number) {
+    this.ThesecondaryList = []
     const vuX = new this.$Maxer();
     const routingJson = vuX.getvuex('routingJson')
     this.addUrl = item.pathname
     this.addUrlName = item.name
-    this.ThesecondaryList = item.navlist
+    this.ThesecondaryList = JSON.parse(JSON.stringify(item.navlist))
+    console.log("魔王大军", this.ThesecondaryList)
     routingJson.Homeindex = index
     if (item.navlist.length > 0) {
       routingJson.urlID = item.navlist[0].urlID
       this.TheselectedUrl = item.navlist[0].urlID
+      console.log("TheselectedUrl", this.TheselectedUrl)
     }
+    const breadcrumbList = await this.breadcrumb(item, 'onPagesRoter')
+    routingJson.breadcrumb = JSON.parse(JSON.stringify(breadcrumbList))
     vuX.postvuex('routingJson', routingJson)
-    this.newTimeull = new Date().getTime()
     this.$bus.$emit('AFold_bus', true)
-
-    console.log('长寿', routingJson)
-    console.log('item', item)
+    this.$bus.$emit('breadcrumb')
+    this.$router.push({
+      name: item.pathname
+    })
   }
   private async ongoroter(item: any) {
     const vuX = new this.$Maxer();
@@ -78,7 +85,7 @@ export default class App extends Vue {
           routingJson.pathname = item.pathname
           routingJson.urlID = item.urlID
           this.TheselectedUrl = item.urlID
-          const breadcrumbList = await this.breadcrumb(item)
+          const breadcrumbList = await this.breadcrumb(item, 'ongoroter')
           routingJson.breadcrumb = breadcrumbList
           vuX.postvuex('routingJson', routingJson)
         }
@@ -88,33 +95,50 @@ export default class App extends Vue {
       routingJson.pathname = item.pathname
       routingJson.urlID = item.urlID
       this.TheselectedUrl = item.urlID
-      const breadcrumbList = await this.breadcrumb(item)
+      const breadcrumbList = await this.breadcrumb(item, 'ongoroter')
       routingJson.breadcrumb = breadcrumbList
       vuX.postvuex('routingJson', routingJson)
     }
     this.$bus.$emit('breadcrumb')
-    console.log('执行了啊', routingJson)
+    this.$router.push({
+      name: item.pathname
+    })
   }
-  private breadcrumb(item: any) {
+  private breadcrumb(item: any, type: string) {
     return new Promise((resolve) => {
-      const breadcrumb = [
+      let breadcrumb = [
         {
-          path: '/index',
-          pathname: "首页"
+          path: '/home',
+          pathname: 'home',
+          name: "首页"
         }
       ]
-      if (item.navlist.length === 0) {
-        if (item.name !== '首页') {
-          breadcrumb.push(
-            {
-              path: item.path,
-              pathname: item.name
-            }
-          )
+      if (type === 'ongoroter') {
+        if (item.navlist.length === 0) {
+          if (item.name !== '首页') {
+            breadcrumb.push(
+              {
+                path: item.path,
+                pathname: item.pathname,
+                name: item.name
+              }
+            )
+          }
+        } else {
+          console.log('二级以上菜单待处理')
         }
-        console.log('item', item)
       } else {
-        console.log('二级以上菜单待处理')
+        if (item.name !== '首页') {
+          if (item.navlist.length > 0) {
+            breadcrumb.push(
+              {
+                path: item.navlist[0].path,
+                pathname: item.navlist[0].pathname,
+                name: item.navlist[0].name
+              }
+            )
+          }
+        }
       }
       resolve(breadcrumb);
     });
@@ -147,10 +171,8 @@ export default class App extends Vue {
             <h1>health系统</h1>
             <h2>{this.addUrlName}</h2>
           </div>
-          <div class={style.ismenu}>
+          <div>
             <el-menu
-              class="el-menu-vertical-demo"
-              key={this.newTimeull}
               props={{
                 defaultOpeneds: [],
                 defaultActive: this.TheselectedUrl,
@@ -189,7 +211,11 @@ export default class App extends Vue {
                     if (item.navlist.length > 0) {
                       item.navlist.map((threeitem: modelnavlist) => {
                         htmlListsan.push(
-                          <el-menu-item index={threeitem.urlID}>{threeitem.name}</el-menu-item>
+                          <el-menu-item
+                            class={
+                              pro.urlID === this.TheselectedUrl ?
+                                style.isASctive : ''
+                            } index={threeitem.urlID}>{threeitem.name}</el-menu-item>
                         )
                       })
                       htmlList.push(
@@ -200,7 +226,11 @@ export default class App extends Vue {
                       )
                     } else {
                       htmlList.push(
-                        <el-menu-item index={item.urlID}>
+                        <el-menu-item index={item.urlID}
+                          class={
+                            pro.urlID === this.TheselectedUrl ?
+                              style.isASctive : ''
+                          }>
                           <i class="el-icon-menu"></i>
                           <span slot="title">{item.name}</span>
                         </el-menu-item>
@@ -218,7 +248,14 @@ export default class App extends Vue {
                   )
                 } else {
                   return (
-                    <el-menu-item index={pro.urlID} onClick={this.ongoroter.bind(this, pro)}>
+                    <el-menu-item
+                      index={pro.urlID}
+                      onClick={this.ongoroter.bind(this, pro)}
+                      class={
+                        pro.urlID === this.TheselectedUrl ?
+                          style.isASctive : ''
+                      }
+                    >
                       <img class={style.isImg} src={
                         pro.urlID === this.TheselectedUrl ?
                           pro.activeicon : pro.icon

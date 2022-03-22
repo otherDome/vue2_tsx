@@ -61,6 +61,7 @@
             }
              :global(.is-active) {
                 background: #E8F4FF;
+                transition: 0.8s;
             }
             .themenu_boxright_title {
                 min-width: 180px;
@@ -103,4 +104,10 @@
 .isImg {
     margin: 0 8px;
     vertical-align: middle;
+}
+
+.isASctive {
+    background: #E8F4FF;
+    transition: 0.8s;
+    color: #409EFF;
 }

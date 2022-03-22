@@ -23,6 +23,61 @@ import componentheader from '@/views/index/header/header'
 export default class App extends Vue {
   protected AFold: boolean = false
   $Maxer: any;
+  protected created() {
+    const navlist = require('@/assets/json/navlist.ts')
+    const vuX = new this.$Maxer();
+    this.$router.beforeEach((to: any, from: any, next) => {
+      const onisname = to.name
+      const routingJson = vuX.getvuex('routingJson')
+      let isbreadcrumb = []
+      for (let index = 0; index < navlist.length; index++) {
+        for (let twoInd = 0; twoInd < navlist[index].navlist.length; twoInd++) {
+          if (onisname === navlist[index].navlist[twoInd].pathname) {
+            if (onisname === 'home') {
+              isbreadcrumb.push(
+                {
+                  path: '/home',
+                  pathname: 'home',
+                  name: "首页"
+                }
+              )
+            } else {
+              const indata = [
+                {
+                  path: '/home',
+                  pathname: 'home',
+                  name: "首页"
+                }
+              ]
+              indata.push(
+                {
+                  path: navlist[index].navlist[twoInd].path,
+                  pathname: navlist[index].navlist[twoInd].pathname,
+                  name: navlist[index].navlist[twoInd].name
+                }
+              )
+              isbreadcrumb = JSON.parse(JSON.stringify(indata))
+            }
+            const postJson = {
+              AFold: routingJson.AFold,
+              Homeindex: index,
+              newlist: routingJson.newlist,
+              oldList: routingJson.oldList,
+              breadcrumb: isbreadcrumb,
+              path: navlist[index].navlist[twoInd].path,
+              pathname: navlist[index].navlist[twoInd].pathname,
+              urlID: navlist[index].navlist[twoInd].urlID
+            }
+            vuX.postvuex('routingJson', postJson)
+            this.$bus.$emit('indexInit')
+            this.$bus.$emit('breadcrumb')
+            break
+          }
+        }
+      }
+      next();
+    })
+  }
   protected mounted() {
     this.init()
   }
@@ -34,9 +89,12 @@ export default class App extends Vue {
       this.AFold = e
     });
   }
+
   protected destroyed() {
     this.$bus.$off('event_name', 0)
     this.$bus.$off('AFold_bus', 1)
+    this.$bus.$off('breadcrumb', 2)
+    this.$bus.$off('indexInit', 3)
   }
   protected render() {
     return <div class={style.fatherInde}>
@@ -58,6 +116,7 @@ export default class App extends Vue {
       ]
       }>
         <componentheader></componentheader>
+        <router-view />
       </div>
     </div>;
   }
