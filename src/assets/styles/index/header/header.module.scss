@@ -24,7 +24,57 @@
         }
         .header_right {
             width: 60%;
+            padding-right: 20px;
+            box-sizing: border-box;
             line-height: 60px;
+            display: flex;
+            justify-content: flex-end;
+            .header_right_l {
+                line-height: 65px;
+                padding: 0 15px;
+                box-sizing: border-box;
+                 :global(.is-fixed) {
+                    top: 19px;
+                    right: 15px;
+                }
+                 :global(.el-badge) {
+                    margin-top: -2px;
+                }
+                .Thebell {
+                    margin-right: 5px;
+                }
+                .xiaoshou {
+                    cursor: pointer;
+                }
+                .isicon {
+                    margin-right: 12px;
+                    margin-left: 10px;
+                    box-sizing: border-box;
+                }
+            }
+            .header_right_r {
+                display: flex;
+                .admin {
+                    display: flex;
+                    align-items: center;
+                    span {
+                        margin-left: 6px;
+                        cursor: pointer;
+                        color: #606266;
+                    }
+                    .ISimg {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        vertical-align: middle;
+                        cursor: pointer;
+                    }
+                }
+            }
         }
     }
+}
+
+::-webkit-scrollbar {
+    width: 0;
 }

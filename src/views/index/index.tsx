@@ -10,7 +10,9 @@
  * @function init -页面初始化
  * @description 首页父级
  **/
-import { Component, Vue } from 'vue-property-decorator';
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+import { Component, Vue, Provide } from 'vue-property-decorator';
 import style from '@/assets/styles/index/index.module.scss';
 import themenu from '@/views/index/Themenu/themenu'
 import componentheader from '@/views/index/header/header'
@@ -21,6 +23,19 @@ import componentheader from '@/views/index/header/header'
   }
 })
 export default class App extends Vue {
+  private isRouterAlive: boolean = true
+  @Provide('reload')
+  reload = () => {
+    reload: this.reloads()
+  }
+  private reloads() {
+    this.isRouterAlive = false
+    NProgress.start()
+    this.$nextTick(() => {
+      this.isRouterAlive = true
+      NProgress.done()
+    })
+  }
   protected AFold: boolean = false
   $Maxer: any;
   protected created() {
@@ -89,7 +104,6 @@ export default class App extends Vue {
       this.AFold = e
     });
   }
-
   protected destroyed() {
     this.$bus.$off('event_name', 0)
     this.$bus.$off('AFold_bus', 1)
@@ -116,7 +130,13 @@ export default class App extends Vue {
       ]
       }>
         <componentheader></componentheader>
-        <router-view />
+        {
+          this.isRouterAlive === true
+            ?
+            <router-view />
+            :
+            ''
+        }
       </div>
     </div>;
   }
