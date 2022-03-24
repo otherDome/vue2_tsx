@@ -67,7 +67,6 @@ export default class App extends Vue {
     routingJson.breadcrumb = JSON.parse(JSON.stringify(breadcrumbList))
     vuX.postvuex('routingJson', routingJson)
     this.$bus.$emit('AFold_bus', true)
-    this.$bus.$emit('breadcrumb')
     this.$router.push({
       name: item.pathname
     })
@@ -99,7 +98,7 @@ export default class App extends Vue {
       routingJson.breadcrumb = breadcrumbList
       vuX.postvuex('routingJson', routingJson)
     }
-    this.$bus.$emit('breadcrumb')
+    //this.$bus.$emit('breadcrumb')
     this.$router.push({
       name: item.pathname
     })

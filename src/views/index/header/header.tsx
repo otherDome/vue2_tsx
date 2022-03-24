@@ -6,6 +6,7 @@
  * @property {arr}  breadcrumbList 会员数据列表
  * @property {boolean}  AFold   是否展开导航
  * @property {arr}  message  消息列表
+ * @property {arr}  navTabList  导航数据的Table按钮
  * @function init -页面初始化
  * @function AFoldClick  导航展开收起
  * @function breadcrumbClick  头部面包点击
@@ -28,7 +29,6 @@ export default class App extends Vue {
     }
   ]
   protected AFold: boolean = true
-
   protected message: any = [
     "这是一条消息01",
     "这是一条消息02",
@@ -40,6 +40,7 @@ export default class App extends Vue {
     "这是一条消息08",
     "这是一条消息09"
   ]
+  protected navTabList: any = ['a', '2']
 
   protected mounted() {
     const vuX = new this.$Maxer();
@@ -47,6 +48,7 @@ export default class App extends Vue {
     this.init(routingJson)
     this.$bus.$on('breadcrumb', () => {
       const dynamicJSON = vuX.getvuex('routingJson')
+      console.log("aaa")
       this.breadcrumbList = dynamicJSON.breadcrumb
     });
   }
@@ -113,6 +115,7 @@ export default class App extends Vue {
   }
   protected render() {
     const isbreadcrumbList: any = []
+    const isnavTabList: any = []
     return <div class={style.header}>
       <div class={style.header_top}>
         <div class={style.header_left}>
@@ -222,7 +225,21 @@ export default class App extends Vue {
         </div>
       </div>
       <div class={style.header_bottom}>
-        头部的底部
+        <el-tabs type="card" closable >
+          {
+            this.navTabList.map((item: any) => {
+              isnavTabList.push(
+                <el-tab-pane>
+                  <span slot="label">
+                    <i class="el-icon-date"></i>
+                    首页啊
+                  </span>
+                </el-tab-pane>
+              )
+            })
+          }
+          {isnavTabList}
+        </el-tabs>
       </div>
     </div >
   }

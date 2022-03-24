@@ -1,10 +1,11 @@
 .header {
     background: #fff;
     height: 110px;
+    box-shadow: 0 1px 4px #e4e7ed;
     .header_top {
         height: 60px;
         width: 100%;
-        box-shadow: 0 1px 4px #e4e7ed;
+        box-shadow: 0 1px 1px #e4e7ed;
         display: flex;
         .header_left {
             width: 40%;
@@ -71,6 +72,44 @@
                     }
                 }
             }
+        }
+    }
+    .header_bottom {
+        padding: 10px 10px 0 10px;
+        box-sizing: border-box;
+        height: 48px;
+        overflow: hidden;
+         :global(.el-tabs__nav) {
+            border: none;
+        }
+         :global(.el-tabs__item):nth-child(1) {
+            span:nth-child(2) {
+                display: none;
+            }
+        }
+         :global(.el-tabs__item) {
+            border: none;
+            height: 38px;
+        }
+         :global(.el-tabs__header) {
+            border-bottom: none;
+        }
+         :global(.el-tabs__item):hover {
+            background: #DEE1E6;
+            mask: url('../../../img/nav/hx/bgdjt.png');
+            mask-size: 100% 100%;
+            background-size: 100% 100%;
+            color: #303133;
+        }
+         :global(.is-active) {
+            background: #E8F4FF!important;
+            mask: url('../../../img/nav/hx/bgdjt.png')!important;
+            mask-size: 100% 100%!important;
+            background-size: 100% 100%!important;
+            color: #409EFF!important;
+        }
+         :global(.is-top) {
+            font-size: 13px;
         }
     }
 }
