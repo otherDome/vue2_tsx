@@ -56,12 +56,10 @@ export default class App extends Vue {
     this.addUrl = item.pathname
     this.addUrlName = item.name
     this.ThesecondaryList = JSON.parse(JSON.stringify(item.navlist))
-    console.log("魔王大军", this.ThesecondaryList)
     routingJson.Homeindex = index
     if (item.navlist.length > 0) {
       routingJson.urlID = item.navlist[0].urlID
       this.TheselectedUrl = item.navlist[0].urlID
-      console.log("TheselectedUrl", this.TheselectedUrl)
     }
     const breadcrumbList = await this.breadcrumb(item, 'onPagesRoter')
     routingJson.breadcrumb = JSON.parse(JSON.stringify(breadcrumbList))
@@ -78,11 +76,15 @@ export default class App extends Vue {
     if (newlist.length > 0) {
       for (let index = 0; index < newlist.length; index++) {
         if (newlist[index].urlID === item.urlID) {
+          this.$router.push({
+            name: item.pathname
+          })
           return
         } else {
           routingJson.path = item.path
           routingJson.pathname = item.pathname
           routingJson.urlID = item.urlID
+          routingJson.tabsValuevux = item.pathname
           this.TheselectedUrl = item.urlID
           const breadcrumbList = await this.breadcrumb(item, 'ongoroter')
           routingJson.breadcrumb = breadcrumbList
@@ -93,6 +95,7 @@ export default class App extends Vue {
       routingJson.path = item.path
       routingJson.pathname = item.pathname
       routingJson.urlID = item.urlID
+      routingJson.tabsValuevux = item.pathname
       this.TheselectedUrl = item.urlID
       const breadcrumbList = await this.breadcrumb(item, 'ongoroter')
       routingJson.breadcrumb = breadcrumbList

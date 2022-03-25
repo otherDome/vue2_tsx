@@ -24,10 +24,25 @@ export default new Vuex.Store({
       urlID: "1-1",
       path: '',
       pathname: '',
-      AFold:true,
-      newlist: [],
+      AFold: true,
+      tabsValuevux: 'home',
+      newlist: [
+        {
+          path: '/home',
+          pathname: 'home',
+          name: "首页",
+          activeicon: require("@/assets/img/nav/index/home_active.svg"),
+          icon:require("@/assets/img/nav/index/home.svg")
+        }
+      ],
       oldList: [],
-      breadcrumb:[]
+      breadcrumb: [
+        {
+        path: '/home',
+        pathname: 'home',
+        name: "首页"
+        }
+      ]
     }
   },
   mutations: {
@@ -51,8 +66,25 @@ export default new Vuex.Store({
         urlID: "",
         path: '',
         pathname: '',
-        newlist: [],
-        oldList:[]
+        AFold: true,
+        tabsValuevux:'home',
+        newlist: [
+          {
+            path: '/home',
+            pathname: 'home',
+            name: "首页",
+            activeicon: require("@/assets/img/nav/index/home_active.svg"),
+            icon:require("@/assets/img/nav/index/home.svg")
+          }
+        ],
+        oldList: [],
+        breadcrumb: [
+          {
+          path: '/home',
+          pathname: 'home',
+          name: "首页"
+          }
+        ]
       };
       console.log("数据缓存清空", store);
     },

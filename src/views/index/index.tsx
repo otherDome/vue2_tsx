@@ -23,6 +23,8 @@ import componentheader from '@/views/index/header/header'
   }
 })
 export default class App extends Vue {
+  $filters: any;
+  $Maxer: any;
   private isRouterAlive: boolean = true
   @Provide('reload')
   reload = () => {
@@ -37,13 +39,14 @@ export default class App extends Vue {
     })
   }
   protected AFold: boolean = false
-  $Maxer: any;
+
   protected created() {
     const navlist = require('@/assets/json/navlist.ts')
     const vuX = new this.$Maxer();
     this.$router.beforeEach((to: any, from: any, next) => {
       const onisname = to.name
       const routingJson = vuX.getvuex('routingJson')
+      const isnewlist = JSON.parse(JSON.stringify(routingJson.newlist))
       let isbreadcrumb = []
       for (let index = 0; index < navlist.length; index++) {
         for (let twoInd = 0; twoInd < navlist[index].navlist.length; twoInd++) {
@@ -74,22 +77,38 @@ export default class App extends Vue {
               isbreadcrumb = JSON.parse(JSON.stringify(indata))
             }
             const postJson = {
-              AFold: routingJson.AFold,
               Homeindex: index,
+              urlID: navlist[index].navlist[twoInd].urlID,
+              path: navlist[index].navlist[twoInd].path,
+              pathname: navlist[index].navlist[twoInd].pathname,
+              AFold: routingJson.AFold,
+              tabsValuevux: routingJson.tabsValuevux,
               newlist: routingJson.newlist,
               oldList: routingJson.oldList,
               breadcrumb: isbreadcrumb,
-              path: navlist[index].navlist[twoInd].path,
-              pathname: navlist[index].navlist[twoInd].pathname,
-              urlID: navlist[index].navlist[twoInd].urlID
             }
+            const tabList = navlist[index].navlist[twoInd]
+            const tabListJson = {
+              activeicon: tabList.activeicon,
+              icon: tabList.icon,
+              name: tabList.name,
+              path: tabList.path,
+              pathname: tabList.pathname,
+              urlID: tabList.urlID
+            }
+            if (tabListJson.pathname !== 'home') {
+              isnewlist.push(tabListJson)
+            }
+            const newlist = this.$filters.roteraRR(isnewlist)
+            postJson.newlist = newlist
+            postJson.tabsValuevux = tabList.pathname
             vuX.postvuex('routingJson', postJson)
-            this.$bus.$emit('indexInit')
-            this.$bus.$emit('breadcrumb')
             break
           }
         }
       }
+      this.$bus.$emit('indexInit')
+      this.$bus.$emit('breadcrumb')
       next();
     })
   }

@@ -13,6 +13,7 @@
  * @function Therefresh   刷新了全局
  * @function Fullscreen   全屏
  * @function  messageLoading   消息加载
+ * @function  tabsClick   点击下部导航
  * @description 导航栏
  **/
 
@@ -40,21 +41,27 @@ export default class App extends Vue {
     "这是一条消息08",
     "这是一条消息09"
   ]
-  protected navTabList: any = ['a', '2']
-
+  protected navTabList: any = []
+  protected tabsValue = 'home'
   protected mounted() {
     const vuX = new this.$Maxer();
     const routingJson = vuX.getvuex('routingJson')
     this.init(routingJson)
     this.$bus.$on('breadcrumb', () => {
       const dynamicJSON = vuX.getvuex('routingJson')
-      console.log("aaa")
+      this.navTabList = dynamicJSON.newlist
+      this.tabsValue = dynamicJSON.tabsValuevux
+      console.log('dynamicJSONdynamicJSON', dynamicJSON)
+      console.log('执行breadcrumb', this.tabsValue)
       this.breadcrumbList = dynamicJSON.breadcrumb
     });
   }
   protected init(routingJson: any) {
     this.AFold = routingJson.AFold
     this.breadcrumbList = routingJson.breadcrumb
+    this.navTabList = routingJson.newlist
+    this.tabsValue = routingJson.tabsValuevux
+    console.log("头部组件初始化获取tabsValue", this.tabsValue)
     this.$bus.$on('AFold_bus', (e: boolean) => {
       this.AFold = e
     });
@@ -93,12 +100,12 @@ export default class App extends Vue {
         newlist: routingJson.newlist,
         oldList: routingJson.oldList,
         breadcrumb: breadcrumblist,
+        tabsValuevux: routingJson.tabsValuevux,
         path: '/home',
         pathname: "home",
         urlID: "1-1"
       }
       this.breadcrumbList = breadcrumblist
-      console.log('breadcrumblist', breadcrumblist)
       vuX.postvuex('routingJson', vxDataJson)
       this.$bus.$emit('indexInit')
       this.$router.push({
@@ -112,6 +119,9 @@ export default class App extends Vue {
   }
   protected messageLoading() {
     console.log("ssssaazxc")
+  }
+  protected tabsClick() {
+    console.log("点击导航")
   }
   protected render() {
     const isbreadcrumbList: any = []
@@ -179,7 +189,6 @@ export default class App extends Vue {
               <div>
                 <ul
                   class={style.infinitelist}
-                  style="height: 80px;overflow-y: scroll;list-style: none;"
                   v-infinite-scroll={
                     this.messageLoading
                   }
@@ -225,14 +234,29 @@ export default class App extends Vue {
         </div>
       </div>
       <div class={style.header_bottom}>
-        <el-tabs type="card" closable >
+        <el-tabs type="card"
+          closable
+          value={this.tabsValue}
+        >
           {
             this.navTabList.map((item: any) => {
               isnavTabList.push(
-                <el-tab-pane>
-                  <span slot="label">
-                    <i class="el-icon-date"></i>
-                    首页啊
+                <el-tab-pane name={item.pathname}>
+                  <span slot="label"
+                    onClick={this.tabsClick.bind(this, item)}
+                  >
+                    <img
+                      class={
+                        style.tabsisIMg
+                      }
+                      src={
+                        item.pathname === this.tabsValue
+                          ?
+                          item.activeicon
+                          :
+                          item.icon
+                      } title='加载中...' />
+                    {item.name}
                   </span>
                 </el-tab-pane>
               )
