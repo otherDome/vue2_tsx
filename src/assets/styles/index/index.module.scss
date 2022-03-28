@@ -24,3 +24,33 @@
         transition: 0.8s;
     }
 }
+
+@media screen and (max-width: 1920px) {}
+
+@media screen and (max-width: 1280px) {}
+
+@media screen and (max-width: 1024px) {}
+
+@media screen and (max-width: 680px) {
+    .fatherInde {
+        .fatherInde_letf {
+            width: 0;
+            box-shadow: initial;
+        }
+        .fatherInde_right {
+            width: 100%;
+        }
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .fatherInde {
+        .fatherInde_letf {
+            width: 0;
+            box-shadow: initial;
+        }
+        .fatherInde_right {
+            width: 100%;
+        }
+    }
+}

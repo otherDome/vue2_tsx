@@ -13,7 +13,6 @@
  * @function Therefresh   刷新了全局
  * @function Fullscreen   全屏
  * @function  messageLoading   消息加载
- * @function  tabsClick   点击下部导航
  * @description 导航栏
  **/
 
@@ -44,6 +43,7 @@ export default class App extends Vue {
   protected navTabList: any = []
   protected tabsValue = 'home'
   protected mounted() {
+
     const vuX = new this.$Maxer();
     const routingJson = vuX.getvuex('routingJson')
     this.init(routingJson)
@@ -120,9 +120,7 @@ export default class App extends Vue {
   protected messageLoading() {
     console.log("ssssaazxc")
   }
-  protected tabsClick() {
-    console.log("点击导航")
-  }
+
   protected render() {
     const isbreadcrumbList: any = []
     const isnavTabList: any = []
@@ -209,10 +207,10 @@ export default class App extends Vue {
               size="16"
               fill="#5D5D5F"
               onClick={this.Fullscreen.bind(this)}
-              class={[style.xiaoshou, style.isicon]}
+              class={[style.xiaoshou, style.isicon, style.min360]}
             />
             <icon-refresh
-              class={style.xiaoshou}
+              class={[style.xiaoshou, style.min360]}
               onClick={this.Therefresh.bind(this)}
               theme="outline"
               size="16"
@@ -222,7 +220,7 @@ export default class App extends Vue {
           <div class={style.header_right_r}>
             <el-dropdown>
               <div class={style.admin}>
-                <img class={style.ISimg} src='https://i.gtimg.cn/club/item/face/img/2/16022_100.gif'></img>
+                <img class={style.ISimg} src='https://i.gtimg.cn/club/item/face/img/2/16022_100.gif' title='加载中...' />
                 <span>admin</span>
               </div>
               <el-dropdown-menu slot="dropdown">
@@ -237,13 +235,45 @@ export default class App extends Vue {
         <el-tabs type="card"
           closable
           value={this.tabsValue}
+          {
+          ...{
+            on: {
+              'tab-click': (key: any) => {
+                const items = this.navTabList[key.index]
+                this.$router.push({
+                  name: items.pathname
+                })
+                this.tabsValue = items.pathname
+              },
+              'tab-remove': (key: any) => {
+                let iid = 0
+                for (let index = 0; index < this.navTabList.length; index++) {
+                  if (this.navTabList[index].pathname === key) {
+                    this.navTabList.splice(index, 1)
+                    iid = index
+                    break
+                  }
+                }
+                const isrouter: any = this.$router
+                const nackName = isrouter.history.current.name
+                if (nackName === key) {
+                  this.$router.push({
+                    name: this.navTabList[iid - 1].pathname
+                  })
+                }
+              },
+            }
+          }
+          }
         >
           {
             this.navTabList.map((item: any) => {
               isnavTabList.push(
-                <el-tab-pane name={item.pathname}>
+                <el-tab-pane
+                  name={item.pathname}
+                  key={item.pathname}
+                >
                   <span slot="label"
-                    onClick={this.tabsClick.bind(this, item)}
                   >
                     <img
                       class={
