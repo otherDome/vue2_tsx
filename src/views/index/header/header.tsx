@@ -7,18 +7,25 @@
  * @property {boolean}  AFold   是否展开导航
  * @property {arr}  message  消息列表
  * @property {arr}  navTabList  导航数据的Table按钮
+ * @property {boolean}  headerpositioning680390  开启关闭导航
  * @function init -页面初始化
  * @function AFoldClick  导航展开收起
  * @function breadcrumbClick  头部面包点击
  * @function Therefresh   刷新了全局
  * @function Fullscreen   全屏
  * @function  messageLoading   消息加载
+ * @function  headerpositioningClick  点击开启导航菜单
  * @description 导航栏
  **/
 
 import { Component, Vue, Inject } from 'vue-property-decorator';
+import themenu from '@/views/index/Themenu/themenu'
 import style from '@/assets/styles/index/header/header.module.scss';
-@Component
+@Component({
+  components: {
+    themenu
+  }
+})
 export default class App extends Vue {
   @Inject('reload') readonly reload!: Function;
   $Maxer: any;
@@ -42,8 +49,8 @@ export default class App extends Vue {
   ]
   protected navTabList: any = []
   protected tabsValue = 'home'
+  protected headerpositioning680390: boolean = false
   protected mounted() {
-
     const vuX = new this.$Maxer();
     const routingJson = vuX.getvuex('routingJson')
     this.init(routingJson)
@@ -51,9 +58,8 @@ export default class App extends Vue {
       const dynamicJSON = vuX.getvuex('routingJson')
       this.navTabList = dynamicJSON.newlist
       this.tabsValue = dynamicJSON.tabsValuevux
-      console.log('dynamicJSONdynamicJSON', dynamicJSON)
-      console.log('执行breadcrumb', this.tabsValue)
       this.breadcrumbList = dynamicJSON.breadcrumb
+      this.headerpositioning680390 = false
     });
   }
   protected init(routingJson: any) {
@@ -61,7 +67,6 @@ export default class App extends Vue {
     this.breadcrumbList = routingJson.breadcrumb
     this.navTabList = routingJson.newlist
     this.tabsValue = routingJson.tabsValuevux
-    console.log("头部组件初始化获取tabsValue", this.tabsValue)
     this.$bus.$on('AFold_bus', (e: boolean) => {
       this.AFold = e
     });
@@ -118,16 +123,18 @@ export default class App extends Vue {
     }
   }
   protected messageLoading() {
-    console.log("ssssaazxc")
+    console.log("拉动了导航列表")
   }
-
+  protected headerpositioningClick() {
+    this.headerpositioning680390 = true
+  }
   protected render() {
     const isbreadcrumbList: any = []
     const isnavTabList: any = []
     return <div class={style.header}>
       <div class={style.header_top}>
         <div class={style.header_left}>
-          <div class={style.header_left_btnl}>
+          <div class={[style.header_left_btnl, style.header_left_680]}>
             {
               this.AFold === true ?
                 <icon-expand-right
@@ -143,6 +150,13 @@ export default class App extends Vue {
                   onClick={this.AFoldClick.bind(this, '2')}
                   class={style.ispointer} />
             }
+          </div>
+          <div class={[style.header_left_btnl, style.header_left_390]}>
+            <icon-hamburger-button
+              theme="outline"
+              size="16"
+              onClick={this.headerpositioningClick.bind(this)}
+              fill="#5D5D5F" />
           </div>
           <el-breadcrumb separator-class="el-icon-arrow-right">
             {
@@ -294,6 +308,23 @@ export default class App extends Vue {
           }
           {isnavTabList}
         </el-tabs>
+      </div>
+      <div class={style.headerpositioning680390}>
+        <el-drawer
+          props={{
+            'visible': this.headerpositioning680390,
+            'direction': 'ltr',
+            'showClose': false,
+            'size': '266px',
+            'withHeader': false,
+            'wrapperClosable': true,
+            'beforeClose': () => {
+              this.headerpositioning680390 = false
+            }
+          }}
+        >
+          <themenu></themenu>
+        </el-drawer>
       </div>
     </div >
   }

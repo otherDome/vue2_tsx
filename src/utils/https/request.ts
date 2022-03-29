@@ -1,6 +1,7 @@
 import axios from "axios";
 import qs from "qs";
 import NProgress from "nprogress";
+import OnlyMessage from "../elementMsg/onlyMsgbox"
 import "nprogress/nprogress.css";
 const service = axios.create({
   baseURL: process.env.NODE_ENV === "production" ? "" : "/online",
@@ -47,7 +48,6 @@ service.interceptors.request.use(
         config.data = qs.stringify(config.data);
       }
     }
-    console.log("configconfig", config)
     return config;
   },
   (error:any) => {

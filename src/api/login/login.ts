@@ -11,7 +11,7 @@ import apiconfig from "@/config/apiconfig"
 const NODE_ENV= process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'online'
 export function goLogin(options:any){
   return request({
-        url: "/api/admin/auth/login",
+        url: "/api/login",
         method: 'post',
         baseURL: NODE_ENV ? apiconfig.healthapi : '/online',
         headers: options.headers,

@@ -7,20 +7,21 @@
  * @Time 2022/03/14
  * @property {string}  nakcname  用户名
  * @property {string}  pwd  密码
- * @function goLogin -登录提交
+ * @function goLoginAPI -登录提交
  * @description 首页登录
  **/
 import { Component, Vue } from 'vue-property-decorator';
 import style from '@/assets/styles/login/login.module.scss';
-import { throttle } from 'throttle-debounce-ts';
+// import { throttle } from 'throttle-debounce-ts';
 import { goLogin } from '@/api/login/login';
 @Component
 export default class App extends Vue {
   private nakcname: string = ''
   private pwd: string = ''
   $OnlyMessage: any;
-  private goLogin = throttle(1000, this.goLoginAPI)
-  private async goLoginAPI() {
+  private async goLoginAPI(e: any) {
+    let ev = e || window.event
+    ev.preventDefault()
     if (this.nakcname === '') {
       this.$OnlyMessage.error('用户名不能为空');
       return
@@ -29,26 +30,25 @@ export default class App extends Vue {
       this.$OnlyMessage.error('密码不能为空');
       return
     }
-    this.$router.push({
-      name: "home"
-    })
-    // const options = {
-    //   headers: {
-    //     dataType: "json"
-    //   },
-    //   data: {
-    //     userName: this.nakcname,
-    //     password: this.pwd
-    //   }
-    // }
-    // const res: any = await goLogin(options)
-    // if (res.code === 1) {
-    //   this.$router.push({
+    const options = {
+      headers: {
+        dataType: "json"
+      },
+      data: {
+        username: this.nakcname,
+        password: this.pwd
+      }
+    }
+    const res: any = await goLogin(options)
+    if (res.code === 0) {
+      this.$OnlyMessage.success(res.msg);
 
-    //   })
-    // } else {
-    //   this.$OnlyMessage.error(res.msg);
-    // }
+      // this.$router.push({
+
+      // })
+    } else {
+      this.$OnlyMessage.error(res.msg);
+    }
   }
   protected render() {
     return <div class={style.login}>
@@ -60,7 +60,13 @@ export default class App extends Vue {
         <div class={style.login_from}>
           <div class={style.biaodan}>
             <p>用户登录</p>
-            <el-form ref="form_login" label-width="80px" size='mini'>
+            <el-form
+              ref="form_login"
+              label-width="80px"
+              size='mini'
+
+            //onSubmit={this.goLogin.bind(this)}
+            >
               <el-form-item label="用户名">
                 <el-input v-model={this.nakcname} placeholder="请输入用户名">
                   <i slot="prefix" class="el-input__icon el-icon-s-custom"></i>
@@ -71,8 +77,20 @@ export default class App extends Vue {
                   <i slot="prefix" class="el-input__icon el-icon-lock"></i>
                 </el-input>
               </el-form-item>
+              <el-form-item>
+                <el-button
+                  props={{
+                    "nativeType": 'submit'
+                  }}
+                  type="primary"
+                  class={style.gologin}
+                  onClick={this.goLoginAPI.bind(this)}
+                  size='mini'>
+                  登录
+                </el-button>
+              </el-form-item>
             </el-form>
-            <el-button type="primary" class={style.gologin} onClick={this.goLogin.bind(this)} size='mini'>登录</el-button>
+
           </div>
         </div>
       </div>

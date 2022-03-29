@@ -99,6 +99,26 @@
     }
 }
 
+@media screen and (max-width: 680px) {
+    .login {
+        background-size: auto auto;
+        min-width: inherit;
+        .login_content {
+            width: 81%;
+            height: auto;
+            .login_logo {
+                display: none;
+            }
+            .login_from {
+                width: 100%;
+                padding: 25px 0;
+                box-sizing: border-box;
+                border-radius: 4px;
+            }
+        }
+    }
+}
+
 @media screen and (max-width: 390px) {
     .login {
         background-size: auto auto;

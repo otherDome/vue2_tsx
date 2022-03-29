@@ -36,7 +36,7 @@ module.exports = {
     },
     devServer: {
         hot: true,
-        host: 'text.health.365care.com',
+        host: '0.0.0.0', //'text.health.365care.com',
         port: devPort,
         open: true,
         noInfo: false,

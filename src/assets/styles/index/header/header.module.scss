@@ -19,6 +19,9 @@
                     cursor: pointer
                 }
             }
+            .header_left_390 {
+                display: none;
+            }
             .header_left_breadcrumb {
                 cursor: pointer;
             }
@@ -116,6 +119,9 @@
             font-size: 13px;
         }
     }
+    .headerpositioning680390 {
+        display: none;
+    }
 }
 
 ::-webkit-scrollbar {
@@ -139,14 +145,19 @@
         .header_top {
             .header_left {
                 width: 50%;
+                .header_left_680 {
+                    display: none;
+                }
             }
             .header_right {
                 width: 50%;
                 .min360 {
                     display: none;
                 }
-                .header_right_r {}
             }
+        }
+        .headerpositioning680390 {
+            display: inline;
         }
     }
 }
@@ -156,14 +167,19 @@
         .header_top {
             .header_left {
                 width: 50%;
+                .header_left_390 {
+                    display: inline;
+                }
             }
             .header_right {
                 width: 50%;
                 .min360 {
                     display: none;
                 }
-                .header_right_r {}
             }
+        }
+        .headerpositioning680390 {
+            display: inline;
         }
     }
 }
