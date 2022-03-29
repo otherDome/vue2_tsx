@@ -13,12 +13,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import style from '@/assets/styles/login/login.module.scss';
 // import { throttle } from 'throttle-debounce-ts';
-import { goLogin } from '@/api/login/login';
+import { goLogin, gomenuAPI } from '@/api/login/login';
 @Component
 export default class App extends Vue {
-  private nakcname: string = ''
-  private pwd: string = ''
   $OnlyMessage: any;
+  $Maxer: any;
+  private nakcname: string = 'admin'
+  private pwd: string = '123456'
   private async goLoginAPI(e: any) {
     let ev = e || window.event
     ev.preventDefault()
@@ -42,13 +43,22 @@ export default class App extends Vue {
     const res: any = await goLogin(options)
     if (res.code === 0) {
       this.$OnlyMessage.success(res.msg);
-
+      const vuX = new this.$Maxer();
+      const tokenJSON = res.data
+      vuX.postvuex('information', tokenJSON)
+      vuX.getvuex('information')
+      this.getmenuAPI()
+      console.log("zzzzzzzz", vuX.getvuex('information'))
       // this.$router.push({
 
       // })
     } else {
       this.$OnlyMessage.error(res.msg);
     }
+  }
+  private async getmenuAPI() {
+    const res: any = await gomenuAPI()
+    console.log("执行", res)
   }
   protected render() {
     return <div class={style.login}>

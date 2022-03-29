@@ -1,6 +1,4 @@
 [
     "/",
-    "/api/login",
-    "/api/register",
-    "/api/resetPwd"
+    "/api/login"
 ]

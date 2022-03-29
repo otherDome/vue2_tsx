@@ -43,6 +43,9 @@ export default new Vuex.Store({
         name: "首页"
         }
       ]
+    },
+    information: {
+      tokenJSON:{}
     }
   },
   mutations: {
@@ -86,6 +89,9 @@ export default new Vuex.Store({
           }
         ]
       };
+      store["information"] = {
+        tokenJSON:{}
+      }
       console.log("数据缓存清空", store);
     },
   },

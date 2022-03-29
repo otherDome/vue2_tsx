@@ -12,6 +12,7 @@
 
 const mysql = require('mysql');
 const config = require('../db/dbConfig');
+const colors = require('colors');
 
 function connect() {
     const { host, user, password, database } = config;
@@ -31,6 +32,7 @@ function querySql(sql) {
                 if (err) {
                     reject(err);
                 } else {
+
                     resolve(res);
                 }
             })
@@ -46,7 +48,6 @@ function querySql(sql) {
 function queryOne(sql) {
     return new Promise((resolve, reject) => {
         querySql(sql).then(res => {
-            console.log('res===', res)
             if (res && res.length > 0) {
                 resolve(res[0]);
             } else {

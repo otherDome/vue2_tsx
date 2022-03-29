@@ -3,6 +3,7 @@ import qs from "qs";
 import NProgress from "nprogress";
 import OnlyMessage from "../elementMsg/onlyMsgbox"
 import "nprogress/nprogress.css";
+import { Maxer } from "@/store/maxer.mixin";
 const service = axios.create({
   baseURL: process.env.NODE_ENV === "production" ? "" : "/online",
   timeout: 60000,
@@ -12,11 +13,20 @@ service.interceptors.request.use(
     NProgress.start()
     const header: any = config.headers;
     const dataType = header.dataType ? header.dataType : "";
-    if (process.env.NODE_ENV === "production") {
-      config.headers["Authorization"] = "Bearer ";
+    const isurl = config.url
+    if (isurl === '/api/login') {
+      console.log("这是登录接口无操作",)
     } else {
-      config.headers["Authorization"] = "Bearer ";
+      const vuX = new Maxer();
+      const information= vuX.getvuex('information')
+      const token=information.token
+      if (process.env.NODE_ENV === "production") {
+        config.headers["Authorization"] = token;
+      } else {
+        config.headers["Authorization"] = token;
+      }
     }
+
     if (config.method === "post") {
       if (dataType === "img") {
         config.headers["Content-Type"] = "multipart/form-data";
@@ -50,20 +60,21 @@ service.interceptors.request.use(
     }
     return config;
   },
-  (error:any) => {
+  (error: any) => {
     console.log(error);
     Promise.reject(error);
   }
 );
 service.interceptors.response.use(
-  (response:any) => {
+  (response: any) => {
     /**
      * code为非20000是抛错 可结合自己业务进行修改
      */
     const res = response.data;
+    NProgress.done()
     return res;
   },
-  (error:any) => {
+  (error: any) => {
     const errList = error.response;
     NProgress.done()
     if (errList.status === 403) {
@@ -78,7 +89,7 @@ service.interceptors.response.use(
         error: errList.data.error,
         status: 500,
       };
-      return errJson;
+      OnlyMessage.error(errJson)
     }
     else if (errList.status === 400) {
     } else {

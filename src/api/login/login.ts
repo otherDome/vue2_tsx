@@ -18,3 +18,11 @@ export function goLogin(options:any){
         data: options.data
     })
 }
+
+export function gomenuAPI(){
+  return request({
+        url: "/api/menu",
+        method: 'get',
+        baseURL: NODE_ENV ? apiconfig.healthapi : '/online',
+    })
+}

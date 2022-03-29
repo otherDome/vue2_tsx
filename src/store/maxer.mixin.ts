@@ -14,6 +14,7 @@ export class Maxer {
     const isData = store.state;
     const datalist = {
       routingJson: isData.routingJson,
+      information:isData.information
     } as any;
     const resultsOf = datalist[name] ? datalist[name] : "";
     return resultsOf;

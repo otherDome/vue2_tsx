@@ -4,18 +4,24 @@
  * @Time 2021/12/28
  * @property {module}  mysql  数据库模块
  * @property {object}  config 数据库链接对象
- * @property {module}  userRouter // 引入user路由模块
+ * @property {module}  userAPI // 登录API
+ * @property {module}  menuAPI // 菜单API
  * @description 路由配置文件
  **/
 const express = require('express');
-const userRouter = require('./APIuser/userAPI');
+const userAPI = require('./APIuser/userAPI');
+const menuAPI = require('./APImenu/menuAPI');
+
 const apiList = require('../config/apiList')
 const nodeConfig = require('../config/node.config')
 
 const router = express.Router(); // 注册路由 
 const { jwtAuth, decode } = require('../utils/user-jwt');
+
 router.use(jwtAuth); // 注入认证模块
-router.use('/api', userRouter); // 注入用户路由模块
+router.use('/api', userAPI); // 注入登录模块
+router.use('/api', menuAPI); // 注入菜单模块
+
 
 // 自定义统一异常处理中间件，需要放在代码最后
 router.use((err, req, res, next) => {
