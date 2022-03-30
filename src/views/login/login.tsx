@@ -10,6 +10,7 @@
  * @function goLoginAPI -登录提交
  * @description 首页登录
  **/
+
 import { Component, Vue } from 'vue-property-decorator';
 import style from '@/assets/styles/login/login.module.scss';
 // import { throttle } from 'throttle-debounce-ts';
@@ -46,19 +47,29 @@ export default class App extends Vue {
       const vuX = new this.$Maxer();
       const tokenJSON = res.data
       vuX.postvuex('information', tokenJSON)
-      vuX.getvuex('information')
       this.getmenuAPI()
-      console.log("zzzzzzzz", vuX.getvuex('information'))
-      // this.$router.push({
-
-      // })
     } else {
       this.$OnlyMessage.error(res.msg);
     }
   }
   private async getmenuAPI() {
+    const vuX = new this.$Maxer();
+    const routingJson = vuX.getvuex('routingJson')
     const res: any = await gomenuAPI()
-    console.log("执行", res)
+    if (res.code === 0) {
+      routingJson.ThemenuList = res.data
+      vuX.postvuex('routingJson', routingJson)
+      this.$router.push({
+        name: 'home'
+      })
+    } else {
+      this.$OnlyMessage.error(res.msg);
+    }
+    console.log("执行", vuX.getvuex('routingJson'))
+  }
+  //数组去重
+  protected duplicate(item: any) {
+
   }
   protected render() {
     return <div class={style.login}>
@@ -74,8 +85,6 @@ export default class App extends Vue {
               ref="form_login"
               label-width="80px"
               size='mini'
-
-            //onSubmit={this.goLogin.bind(this)}
             >
               <el-form-item label="用户名">
                 <el-input v-model={this.nakcname} placeholder="请输入用户名">

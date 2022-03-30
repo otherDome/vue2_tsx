@@ -10,6 +10,10 @@
  * @property {json,arr}  oldList     旧的进去的导航数组
  * @property {json,arr}  breadcrumb  面包屑数组
  * @property {json,booler}  AFold    展开关闭菜单导航
+ * @property {json,string}  tabsValuevux  tab的储存器
+ * @property {json,arr}  ThemenuList  导航数组接口获取
+ * ------------information-----------------------
+ * @property {json,json}  information  用户凭证
  * @property {arr}  breadcrumbList 会员数据列表
  * @function init -页面初始化
  * @description 导航栏
@@ -42,7 +46,8 @@ export default new Vuex.Store({
         pathname: 'home',
         name: "首页"
         }
-      ]
+      ],
+      ThemenuList:[]
     },
     information: {
       tokenJSON:{}
@@ -87,7 +92,8 @@ export default new Vuex.Store({
           pathname: 'home',
           name: "首页"
           }
-        ]
+        ],
+        ThemenuList:[]
       };
       store["information"] = {
         tokenJSON:{}

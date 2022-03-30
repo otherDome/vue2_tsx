@@ -41,11 +41,13 @@ export default class App extends Vue {
   protected AFold: boolean = false
 
   protected created() {
-    const navlist = require('@/assets/json/navlist.ts')
+    // const navlist = require('@/assets/json/navlist.ts')
     const vuX = new this.$Maxer();
     this.$router.beforeEach((to: any, from: any, next) => {
       const onisname = to.name
       const routingJson = vuX.getvuex('routingJson')
+      const navlist = routingJson.ThemenuList
+      console.log("点击进来了", navlist)
       const isnewlist = JSON.parse(JSON.stringify(routingJson.newlist))
       let isbreadcrumb = []
       for (let index = 0; index < navlist.length; index++) {
@@ -86,6 +88,7 @@ export default class App extends Vue {
               newlist: routingJson.newlist,
               oldList: routingJson.oldList,
               breadcrumb: isbreadcrumb,
+              ThemenuList: routingJson.ThemenuList
             }
             const tabList = navlist[index].navlist[twoInd]
             const tabListJson = {
@@ -148,14 +151,20 @@ export default class App extends Vue {
           style.fatherInde_right_active
       ]
       }>
-        <componentheader></componentheader>
-        {
-          this.isRouterAlive === true
-            ?
-            <router-view />
-            :
-            ''
-        }
+        <div class={style.componentheader}>
+          <componentheader></componentheader>
+        </div>
+        <div class={style.routerView}>
+          <div class={style.routerViewBOX}>
+            {
+              this.isRouterAlive === true
+                ?
+                <router-view />
+                :
+                ''
+            }
+          </div>
+        </div>
       </div>
     </div>;
   }

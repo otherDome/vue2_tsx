@@ -124,7 +124,7 @@
     }
 }
 
-::-webkit-scrollbar {
+.elpopover ::-webkit-scrollbar {
     width: 0;
 }
 
@@ -147,6 +147,9 @@
                 width: 50%;
                 .header_left_680 {
                     display: none;
+                }
+                .header_left_390 {
+                    display: inline;
                 }
             }
             .header_right {

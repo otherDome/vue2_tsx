@@ -8,6 +8,7 @@
  * @property {arr}  message  消息列表
  * @property {arr}  navTabList  导航数据的Table按钮
  * @property {boolean}  headerpositioning680390  开启关闭导航
+ * @property {json}  usinof  用户信息
  * @function init -页面初始化
  * @function AFoldClick  导航展开收起
  * @function breadcrumbClick  头部面包点击
@@ -50,9 +51,12 @@ export default class App extends Vue {
   protected navTabList: any = []
   protected tabsValue = 'home'
   protected headerpositioning680390: boolean = false
+  protected usinof: any = {}
   protected mounted() {
     const vuX = new this.$Maxer();
     const routingJson = vuX.getvuex('routingJson')
+    const information = vuX.getvuex('information')
+    this.usinof = information.userData
     this.init(routingJson)
     this.$bus.$on('breadcrumb', () => {
       const dynamicJSON = vuX.getvuex('routingJson')
@@ -108,7 +112,8 @@ export default class App extends Vue {
         tabsValuevux: routingJson.tabsValuevux,
         path: '/home',
         pathname: "home",
-        urlID: "1-1"
+        urlID: "1-1",
+        ThemenuList: routingJson.ThemenuList
       }
       this.breadcrumbList = breadcrumblist
       vuX.postvuex('routingJson', vxDataJson)
@@ -198,7 +203,7 @@ export default class App extends Vue {
                   />
                 </el-badge>
               </span>
-              <div>
+              <div class={style.elpopover}>
                 <ul
                   class={style.infinitelist}
                   v-infinite-scroll={
@@ -232,14 +237,30 @@ export default class App extends Vue {
             />
           </div>
           <div class={style.header_right_r}>
-            <el-dropdown>
+            <el-dropdown
+              {
+              ...{
+                on: {
+                  'command': (command: any) => {
+                    const vuX = new this.$Maxer();
+                    if (command === 'exe') {
+                      vuX.clearvuex()
+                      this.$router.replace({
+                        path: "/login"
+                      })
+                    }
+                  },
+                }
+              }
+              }
+            >
               <div class={style.admin}>
                 <img class={style.ISimg} src='https://i.gtimg.cn/club/item/face/img/2/16022_100.gif' title='加载中...' />
-                <span>admin</span>
+                <span>{this.usinof.username}</span>
               </div>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>修改密码</el-dropdown-item>
-                <el-dropdown-item>退出</el-dropdown-item>
+                <el-dropdown-item command='xgm'>修改密码</el-dropdown-item>
+                <el-dropdown-item command='exe'>退出</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>

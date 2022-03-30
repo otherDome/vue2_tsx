@@ -34,9 +34,9 @@ if (process.env.NODE_ENV !== "production") {
     'background:#41b883 ; padding: 4px; border-radius: 0 3px 3px 0;  color: #fff',
     'background:transparent'
   )
-  Vue.config.errorHandler = function(err: any, vm: any, info: any) {
-    console.error(`组件${vm.$vnode.tag}发生错误：${err.message},${info}`);
-  };
+  // Vue.config.errorHandler = function(err: any, vm: any, info: any) {
+  //   console.error(`组件${vm.$vnode.tag}发生错误：${err.message},${info}`);
+  // };
 }
 Vue.use(EventBus);
 const bus = new EventBus.Bus();

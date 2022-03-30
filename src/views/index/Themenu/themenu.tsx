@@ -18,12 +18,12 @@
  **/
 import { Component, Vue } from 'vue-property-decorator';
 import style from '@/assets/styles/index/Themenu/themenu.module.scss';
-const navlist = require('@/assets/json/navlist.ts')
+//const navlist = require('@/assets/json/navlist.ts')
 import { modelnavlist } from '@/assets/model/navlist'
 
 @Component
 export default class App extends Vue {
-  private navlist = navlist
+  private navlist: any = []
   private addUrl: string = ''
   private addUrlName: string = ''
   private ThesecondaryList: any = []
@@ -31,6 +31,13 @@ export default class App extends Vue {
   private newTimeull: any = ''
   private collapseTransition: boolean = false
   $Maxer: any;
+  private created() {
+    const vuX = new this.$Maxer();
+    const routingJson = vuX.getvuex('routingJson')
+    this.navlist = routingJson.ThemenuList
+    console.log("routingJsonroutingJson", routingJson)
+    console.log("进来吗？", this.navlist)
+  }
   private mounted() {
     this.init()
     this.$bus.$on('indexInit', () => {
@@ -53,6 +60,7 @@ export default class App extends Vue {
     this.ThesecondaryList = []
     const vuX = new this.$Maxer();
     const routingJson = vuX.getvuex('routingJson')
+    console.log('aaaaaaa', routingJson)
     this.addUrl = item.pathname
     this.addUrlName = item.name
     this.ThesecondaryList = JSON.parse(JSON.stringify(item.navlist))
