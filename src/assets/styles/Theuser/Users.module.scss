@@ -1,4 +1,231 @@
 .Users {
     width: 100%;
     height: auto;
+    box-sizing: border-box;
+    .elFrom {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0px 4px #e4e7ed;
+        margin-bottom: 15px;
+        .fatherscreening {
+            cursor: pointer;
+            .screening {
+                display: flex;
+                color: #409EFF;
+                .icon_filter {
+                    margin-top: 2px;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+    .elFromACTIVE {
+        padding: 10px 20px;
+    }
+    //媒介查询兼容设备模块--el-from基础筛选
+    .elFrom_header1980 {
+        display: inline;
+    }
+    .elFrom_header1750 {
+        display: inline-block;
+    }
+    .elFrom_header1500 {
+        display: inline-block;
+    }
+    .elFrom_header1280 {
+        display: inline-block;
+    }
+    .elFrom_header1024 {
+        display: inline-block;
+    }
+    .elFrom_header800 {
+        display: inline;
+    }
+    .elFrom_header680 {
+        display: none;
+    }
+    .elFrom_header390 {
+        display: none;
+    }
+    .screeningFalse,
+    .screeningTrue {
+        display: inline;
+    }
+    .Mobilephone {
+        display: none;
+    }
+    //媒介查询兼容设备模块--el-from高级筛选
+    .elFrom_bottom800 {
+        display: inline;
+    }
+    .screeningTrue {
+        width: 100%;
+        .elFrom_bottomTitle {
+            box-sizing: border-box;
+            border-bottom: 1px solid #e4e7ed;
+            padding: 0 0 10px 0;
+            box-sizing: border-box;
+            display: flex;
+            .elFrom_bottomTitle_left {
+                width: 50%;
+                .shaixuan {
+                    display: flex;
+                    cursor: pointer;
+                    color: #409EFF;
+                    .icon_filter {
+                        margin-top: 2px;
+                        margin-right: 3px;
+                    }
+                }
+            }
+            .elFrom_bottomTitle_right {
+                width: 50%;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+        .elFrom_bottomfrom {
+            padding: 15px 0 0px 0;
+            box-sizing: border-box;
+             :global(.el-form-item) {
+                margin-bottom: 10px!important;
+                margin-right: 20px;
+            }
+            .elform_width {
+                width: 200px;
+            }
+        }
+    }
+    //媒介查询兼容样式模块手机版本
+    .Mobilephone680_390 {
+        display: none;
+    }
+    .Mobilephone390_390 {
+        display: none;
+    }
+    //修改UI组件内核样式
+     :global(.el-form-item) {
+        margin-bottom: 0;
+    }
+    //这是表格区域
+    .elTablePackage {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0px 4px #e4e7ed;
+        .elTablePackage_title {
+            width: 100%;
+            display: flex;
+            .elTablePackage_title_l {
+                width: 50%;
+            }
+            .elTablePackage_title_r {
+                width: 50%;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1920px) {
+    .Users {
+        .elFrom_header1750 {
+            display: inline-block;
+        }
+    }
+}
+
+@media screen and (max-width: 1750px) {
+    .Users {
+        .elFrom_header1980 {
+            display: inline;
+        }
+        .elFrom_header1750 {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .Users {
+        .elFrom_header1980 {
+            display: inline;
+        }
+        .elFrom_header1750 {
+            display: none;
+        }
+        .elFrom_header1500 {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .Users {
+        .elFrom_header1980 {
+            display: none;
+        }
+        .elFrom_header1280 {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .Users {
+        .elFrom_header1280 {
+            display: none;
+        }
+        .elFrom_header1024 {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .Users {
+        .elFrom_header800 {
+            display: none;
+        }
+        .elFrom_bottom800 {
+            display: none;
+        }
+        .Mobilephone680_390 {
+            display: inline;
+        }
+        .Mobilephone390_390 {
+            display: inline;
+        }
+        .screeningFalse,
+        .screeningTrue {
+            display: none;
+        }
+        .Mobilephone {
+            display: inline;
+        }
+    }
+}
+
+@media screen and (max-width: 680px) and (max-width: 390px) {
+    .Users {
+        .elFrom_header1024 {
+            display: none;
+        }
+        .elFrom_header680 {
+            display: inline;
+        }
+        .Mobilephone680_390 {
+            display: inline;
+        }
+        //这是底部
+        .elFrom_bottom800 {
+            display: none;
+        }
+    }
 }

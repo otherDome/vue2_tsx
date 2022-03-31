@@ -77,6 +77,10 @@ export default class App extends Vue {
   }
   protected AFoldClick(type: string) {
     this.AFold = !this.AFold
+    const vuX = new this.$Maxer();
+    const dynamicJSON = vuX.getvuex('routingJson')
+    dynamicJSON.AFold = this.AFold
+    vuX.postvuex('routingJson', dynamicJSON)
     this.$bus.$emit('AFold_bus', this.AFold)
   }
   protected Therefresh() {

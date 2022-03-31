@@ -35,8 +35,6 @@ export default class App extends Vue {
     const vuX = new this.$Maxer();
     const routingJson = vuX.getvuex('routingJson')
     this.navlist = routingJson.ThemenuList
-    console.log("routingJsonroutingJson", routingJson)
-    console.log("进来吗？", this.navlist)
   }
   private mounted() {
     this.init()
