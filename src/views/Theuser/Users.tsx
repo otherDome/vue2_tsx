@@ -5,51 +5,31 @@
  * @Time 2022/03/30
  * @property {number}  elFromwidth  这是usinof 的元素宽度
  * @property {any}  Widthtimer  这是节流
- * @property {boolean} AFold_bus  这是菜单是展开还是收起
  * @property {boolean} screening  这是高级筛选还是初级筛选
  * @function onScreeningClk -点击展开高级筛选初级筛选
  * @description 用户分配
  **/
-import { Component, Vue, Watch } from 'vue-property-decorator';
+import { Component, Mixins, Prop } from 'vue-property-decorator';
 import style from '@/assets/styles/Theuser/Users.module.scss';
+import datalistTableTitle from '@/components/public/datalistTableTitle'
+import UsersTable from '@/views/Theuser/Table/UsersTable.vue'
+import { onresize } from '@/components/mixins/onresize';
+const that: any = this
+@Component({
+  components: {
+    datalistTableTitle,
+    UsersTable
+  }
+})
 @Component
-export default class App extends Vue {
-  $Maxer: any;
-  protected elFromwidth: any = 0
-  protected Widthtimer: any = null
-  protected AFold_bus: boolean = false
+export default class Users extends Mixins(onresize) {
   protected screening: boolean = false
   protected istext: any = ["历史数据", "禁用时间"]
-  @Watch('elFromwidth')
-  private elFromwidthChange(val: number) {
-    if (!this.Widthtimer) {
-      this.elFromwidth = val
-      this.Widthtimer = true
-      const that = this;
-      setTimeout(function () {
-        that.Widthtimer = false;
-      }, 400);
-    }
-  }
   protected created() {
-    const that = this;
-    window.onresize = () => {
-      return (() => {
-        (window as any).screenWidth = document.getElementById("elFromwidth")?.offsetWidth
-        that.elFromwidth = (window as any).screenWidth
-      })();
-    }
+    this.onOnreSize('elFromwidth')
   }
   protected mounted() {
-    const vuX = new this.$Maxer();
-    const routingJson = vuX.getvuex('routingJson')
-    this.AFold_bus = routingJson.AFold
-    this.elFromwidth = (window as any).screenWidth = document.getElementById("elFromwidth")?.offsetWidth
-    this.$bus.$on('AFold_bus', (e: boolean) => {
-      this.AFold_bus = e
-      this.elFromwidth = (window as any).screenWidth = document.getElementById("elFromwidth")?.offsetWidth
-    });
-
+    this.onresizeInit('elFromwidth')
   }
   protected onScreeningClk() {
     this.screening = !this.screening
@@ -392,7 +372,7 @@ export default class App extends Vue {
 
 
       </div>
-      <div class={style.elTablePackage}>
+      <div class={[style.elTablePackage, style.elTablePackage]}>
         <div class={style.elTablePackage_title}>
           <div class={style.elTablePackage_title_l}>
             <el-button
@@ -427,14 +407,28 @@ export default class App extends Vue {
             </el-button>
           </div>
           <div class={style.elTablePackage_title_r}>
-            <el-button
-              size="mini"
-              icon='el-icon-date'
-            >
-              列表
-            </el-button>
+            <datalistTableTitle
+              {
+              ...{
+                on: {
+                  'checkboxGroup': (item: any) => {
+                    console.log('数据回传表格斑马线', item)
+                  },
+                  'radioGroup': (item: any) => {
+                    console.log('数据回传大小', item)
+                  },
+                }
+              }
+              }
+            ></datalistTableTitle>
           </div>
         </div>
+        <div class={style.elTableTb}>
+          <UsersTable></UsersTable>
+        </div>
+      </div >
+      <div>
+
       </div>
     </div >
   }

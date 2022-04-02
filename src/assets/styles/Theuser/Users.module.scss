@@ -121,14 +121,22 @@
         .elTablePackage_title {
             width: 100%;
             display: flex;
+            justify-content: space-between;
             .elTablePackage_title_l {
-                width: 50%;
+                width: auto;
             }
             .elTablePackage_title_r {
-                width: 50%;
+                width: auto;
                 display: flex;
                 justify-content: flex-end;
             }
+        }
+    }
+    .elTablePackage {
+        display: block;
+        .elTableTb {
+            padding-top: 20px;
+            box-sizing: border-box;
         }
     }
 }
@@ -208,6 +216,9 @@
         }
         .Mobilephone {
             display: inline;
+        }
+        .elTablePackage {
+            display: none;
         }
     }
 }

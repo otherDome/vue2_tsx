@@ -47,4 +47,40 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 
+slot-scope={{
+                scope: (scope: any) => {
+                  console.log("zxcvb", scope)
+                  return <div>
+                    <el-button type="text" size="small">查看</el-button>
+                    <el-button type="text" size="small">编辑</el-button>
 
+                  </div>
+                }
+              }}
+
+
+
+
+
+
+
+
+
+/deep/.el-table {
+		 border: 0;
+		 th,
+		 tr,
+		 td{
+			  border: 0;
+			  background-color: #fff;
+		 }
+		 &::before {
+			  height: 0px;
+		  }
+		  &::after {
+			 width: 0;
+		  }
+		 .el-table__fixed:before {
+			 height: 0;
+		  }
+	 }
