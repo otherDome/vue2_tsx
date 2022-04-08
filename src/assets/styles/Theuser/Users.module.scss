@@ -124,6 +124,10 @@
             justify-content: space-between;
             .elTablePackage_title_l {
                 width: auto;
+                .elTablePackage_Theimport {
+                    background: linear-gradient(to bottom, #EEF5FB 0%, #E2EDFA 100%);
+                    border: #E2EDFA;
+                }
             }
             .elTablePackage_title_r {
                 width: auto;

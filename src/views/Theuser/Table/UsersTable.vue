@@ -2,11 +2,11 @@
   <div>
     <el-table
       :data="tableData"
-      border
+     
+      stripe
       tooltip-effect="dark"
       size="mini"
       show-summary
-      stripe
       style="width: 100%"
       class="tableBox"
       :row-style="iRowStyle"
@@ -15,81 +15,73 @@
       :header-cell-style="iHeaderCellStyle"
       :row-class-name="tableRowClassName"
     >
-      <el-table-column label="第一类标题" align="center">
-        <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column label="详情" :show-header="false" type="expand">
-          <template slot-scope="scope">
-            <div style="padding: 0 15px 15px 15px; box-sizing: border-box">
-              <h6 style="padding: 8px 0; box-sizing: border-box">编号:12987123</h6>
-              <el-descriptions class="margin-top" :column="3" size="mini" border>
-                <el-descriptions-item>
-                  <template slot="label">
-                    <i class="el-icon-user"></i>
-                    用户名
-                  </template>
-                  kooriookami
-                </el-descriptions-item>
-                <el-descriptions-item>
-                  <template slot="label">
-                    <i class="el-icon-mobile-phone"></i>
-                    手机号
-                  </template>
-                  18100000000
-                </el-descriptions-item>
-                <el-descriptions-item>
-                  <template slot="label">
-                    <i class="el-icon-location-outline"></i>
-                    居住地
-                  </template>
-                  苏州市
-                </el-descriptions-item>
-                <el-descriptions-item>
-                  <template slot="label">
-                    <i class="el-icon-tickets"></i>
-                    备注
-                  </template>
-                  <el-tag size="small">学校</el-tag>
-                </el-descriptions-item>
-                <el-descriptions-item>
-                  <template slot="label">
-                    <i class="el-icon-office-building"></i>
-                    联系地址
-                  </template>
-                  江苏省苏州市吴中区吴中大道 1188 号
-                </el-descriptions-item>
-              </el-descriptions>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column prop="id" label="ID" width="100"></el-table-column>
-        <el-table-column :show-header="false" :render-header="atteLeavetooltip" label="姓名">
-          <template slot-scope="scope">
-            <i class="el-icon-time"></i>
-            <span style="margin-left: 10px">{{ scope.row.name }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="amount1" sortable label="数值 1"></el-table-column>
+      <el-table-column show-overflow-tooltip   type="selection" width="55"></el-table-column>
+      <el-table-column show-overflow-tooltip   label="详情" :show-header="false" type="expand">
+        <template slot-scope="scope">
+          <div style="padding: 0 15px 15px 15px; box-sizing: border-box">
+            <h6 style="padding: 8px 0; box-sizing: border-box">编号:12987123</h6>
+            <el-descriptions class="margin-top" :column="3" size="mini" border>
+              <el-descriptions-item>
+                <template slot="label">
+                  <i class="el-icon-user"></i>
+                  用户名
+                </template>
+                kooriookami
+              </el-descriptions-item>
+              <el-descriptions-item>
+                <template slot="label">
+                  <i class="el-icon-mobile-phone"></i>
+                  手机号
+                </template>
+                18100000000
+              </el-descriptions-item>
+              <el-descriptions-item>
+                <template slot="label">
+                  <i class="el-icon-location-outline"></i>
+                  居住地
+                </template>
+                苏州市
+              </el-descriptions-item>
+              <el-descriptions-item>
+                <template slot="label">
+                  <i class="el-icon-tickets"></i>
+                  备注
+                </template>
+                <el-tag size="small">学校</el-tag>
+              </el-descriptions-item>
+              <el-descriptions-item>
+                <template slot="label">
+                  <i class="el-icon-office-building"></i>
+                  联系地址
+                </template>
+                江苏省苏州市吴中区吴中大道 1188 号
+              </el-descriptions-item>
+            </el-descriptions>
+          </div>
+        </template>
       </el-table-column>
-      <el-table-column label="第二类标题" align="center">
-        <el-table-column prop="amount2" sortable label="数值 2"></el-table-column>
-        <el-table-column prop="amount3" sortable label="数值 3"></el-table-column>
-        <el-table-column prop="amount4" sortable label="数值 4"></el-table-column>
-        <el-table-column prop="amount5" sortable label="数值 5"></el-table-column>
-        <el-table-column prop="amount6" sortable label="数值 6"></el-table-column>
-        <el-table-column prop="amount7" sortable label="数值 7"></el-table-column>
-        <el-table-column fixed="right" label="操作" width="100">
-          <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-            <el-button type="text" size="small">编辑</el-button>
-          </template>
-        </el-table-column>
+      <el-table-column show-overflow-tooltip   prop="id" label="ID" width="100"></el-table-column>
+      <el-table-column show-overflow-tooltip   :show-header="false" :render-header="atteLeavetooltip" label="姓名">
+        <template slot-scope="scope">
+          <i class="el-icon-time"></i>
+          <span style="margin-left: 10px">{{ scope.row.name }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column show-overflow-tooltip   prop="amount1" sortable label="数值 1"></el-table-column>
+      <el-table-column show-overflow-tooltip   prop="amount2" sortable label="数值 2"></el-table-column>
+      <el-table-column show-overflow-tooltip   prop="amount3" sortable label="数值 3"></el-table-column>
+      <el-table-column show-overflow-tooltip   prop="amount4" sortable label="数值 4"></el-table-column>
+      <el-table-column show-overflow-tooltip   prop="amount5" sortable label="数值 5"></el-table-column>
+      <el-table-column show-overflow-tooltip   prop="amount6" sortable label="数值 6"></el-table-column>
+      <el-table-column show-overflow-tooltip   prop="amount7" sortable label="数值 7"></el-table-column>
+      <el-table-column fixed="right" label="操作" width="100">
+        <template slot-scope="scope">
+          <el-button @click="handleClick(scope.row)" type="text" size="mini" class="btmmini">查看</el-button>
+          <el-button type="text" size="mini" class="btmmini">编辑</el-button>
+        </template>
       </el-table-column>
     </el-table>
     <div class="datasize">
-      <div>
-        <el-button size="mini">按钮</el-button>
-        <el-button size="mini">按钮</el-button>
-      </div>
       <div>
         <el-pagination
           @size-change="handleSizeChange"
@@ -245,7 +237,15 @@ export default class UsersTable extends Vue {
             placement: "top",
           },
         },
-        [h("span", { class: { "el-icon-question": true } })]
+        [
+          h(
+            "span",
+            {
+              class: "el-icon-question",
+              style: "color:#409EFF;"
+            }
+          )
+        ]
       ),
     ];
   }
@@ -264,11 +264,18 @@ export default class UsersTable extends Vue {
   }
 
   protected iCellStyle({ row, rowIndex }: any) {  //行内
-    return "height:20px;padding:0px";
+    var bgstyle = 'height:22px;padding:0px;font-size:13px;line-height: 22px;'
+    if (rowIndex % 2 == 0) {
+      bgstyle += 'background: rgb(238 250 255 / 80%);'
+    }
+    if (rowIndex % 2 !== 0) {
+      bgstyle += 'background: rgb(238 250 255 / 30%);'
+    }
+    return bgstyle
   }
 
   protected iHeaderCellStyle({ row, rowIndex }: any) {
-    return "height:20px;padding:1px";  //头部标题
+    return "height:20px;padding:0px; background: linear-gradient(to bottom, #EEF5FB 0%,#E2EDFA 100%);";  //头部标题
   }
 
   protected tableRowClassName({ row, rowIndex }: any) {
@@ -297,7 +304,18 @@ export default class UsersTable extends Vue {
   padding: 18px 0 0 0;
   box-sizing: border-box;
   justify-content: space-between;
+  justify-content: center;
 }
-
-
+.tableBox {
+  border-radius: 5px;
+  box-shadow: #ebeef5 0px 0px 13px;
+  color:#515151;
+}
+.btmmini{
+  font-size: 12px;
+  padding:0;
+}
+.isbtnshod{
+  box-shadow: #ebeef5 0px 0px 13px;
+}
 </style>

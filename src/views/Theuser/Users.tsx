@@ -378,6 +378,7 @@ export default class Users extends Mixins(onresize) {
             <el-button
               size="mini"
               icon='el-icon-download'
+              class={style.elTablePackage_Theimport}
             >
               导入
             </el-button>
