@@ -7,22 +7,189 @@
  * @property {any}  Widthtimer  这是节流
  * @property {boolean} screening  这是高级筛选还是初级筛选
  * @function onScreeningClk -点击展开高级筛选初级筛选
+ * @function onOnreSize      获取指定元素的宽度
+ * @function onThePhonelock  点击电话锁定标记弹窗
  * @description 用户分配
  **/
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 import style from '@/assets/styles/Theuser/Users.module.scss';
 import datalistTableTitle from '@/components/public/datalistTableTitle'
 import UsersTable from '@/views/Theuser/Table/UsersTable.vue'
+import elTabletsx from '@/components/tabletsx/elTabletsx.vue'
 import { onresize } from '@/components/mixins/onresize';
 const that: any = this
 @Component({
   components: {
     datalistTableTitle,
-    UsersTable
+    UsersTable,
+    elTabletsx
   }
 })
-@Component
 export default class Users extends Mixins(onresize) {
+  //这是数据列表tableData 开始
+  protected tableData: any = [
+    {
+      id: "12987122",
+      name: "王小虎",
+      amount1: "234",
+      amount2: "3.2",
+      amount3: 10,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+    },
+    {
+      id: "12987123",
+      name: "王小虎",
+      amount1: "165",
+      amount2: "4.43",
+      amount3: 12,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+    },
+    {
+      id: "12987124",
+      name: "王小虎",
+      amount1: "324",
+      amount2: "1.9",
+      amount3: 9,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+    },
+    {
+      id: "12987125",
+      name: "王小虎",
+      amount1: "621",
+      amount2: "2.2",
+      amount3: 17,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+    },
+    {
+      id: "12987126",
+      name: "王小虎",
+      amount1: "539",
+      amount2: "4.1",
+      amount3: 15,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+    },
+    {
+      id: "12987126",
+      name: "王小虎",
+      amount1: "539",
+      amount2: "4.1",
+      amount3: 15,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+    },
+    {
+      id: "12987126",
+      name: "王小虎",
+      amount1: "539",
+      amount2: "4.1",
+      amount3: 15,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+    },
+    {
+      id: "12987126",
+      name: "王小虎",
+      amount1: "539",
+      amount2: "4.1",
+      amount3: 15,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+    },
+    {
+      id: "12987126",
+      name: "王小虎",
+      amount1: "539",
+      amount2: "4.1",
+      amount3: 15,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+    },
+    {
+      id: "12987126",
+      name: "王小虎",
+      amount1: "539",
+      amount2: "4.1",
+      amount3: 15,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+    },
+  ];
+  protected elTableColumn: any = [
+    {
+      type: "expand",
+      label: "详情",
+    },
+    {
+      label: "ID",
+      prop: "id",
+      width: "100",
+      showOverflowTooltip: true
+    }, {
+      label: "姓名",
+      prop: "name",
+      showOverflowTooltip: true,
+      renderHeader: (h: any, { column }: any) => {
+        return [
+          column.label,
+          h(
+            "el-tooltip",
+            {
+              props: {
+                content: "这是提示文案123",
+                placement: "top",
+              },
+            },
+            [
+              h(
+                "span",
+                {
+                  class: "el-icon-question",
+                  style: "color:#409EFF;"
+                }
+              )
+            ]
+          ),
+        ];
+      }
+    }
+  ]
+
+  //这是数据列表tableData 结束
   protected screening: boolean = false
   protected istext: any = ["历史数据", "禁用时间"]
   protected created() {
@@ -34,7 +201,13 @@ export default class Users extends Mixins(onresize) {
   protected onScreeningClk() {
     this.screening = !this.screening
   }
+  protected onThePhonelock() {
+    console.log("sonThePhonelock")
+  }
   protected render() {
+    const slot: any = {
+      item: (scope: any) => [<p>输出值: {scope.text}</p>],
+    }
     return <div class={style.Users}>
       <div class={[this.screening === true ? style.elFromACTIVE : '', style.elFrom]} id='elFromwidth'>
         {
@@ -109,7 +282,6 @@ export default class Users extends Mixins(onresize) {
                             value-format="yyyy-MM-dd HH:mm:ss"
                             type="datetimerange"
                             range-separator="至"
-                            clearable="false"
                             start-placeholder="查询开始时间"
                             end-placeholder="查询结束时间"></el-date-picker>
                         </el-form-item>
@@ -124,7 +296,6 @@ export default class Users extends Mixins(onresize) {
                           value-format="yyyy-MM-dd HH:mm:ss"
                           type="datetimerange"
                           range-separator="至"
-                          clearable="false"
                           start-placeholder="查询开始时间"
                           end-placeholder="查询结束时间"></el-date-picker>
                       </el-form-item>
@@ -257,7 +428,7 @@ export default class Users extends Mixins(onresize) {
                         placeholder="请选择">
                         <el-option
                           label="item.label"
-                          value="item.value">
+                        >
                         </el-option>
                       </el-select>
                     </el-form-item>
@@ -341,7 +512,6 @@ export default class Users extends Mixins(onresize) {
                         value-format="yyyy-MM-dd HH:mm:ss"
                         type="datetimerange"
                         range-separator="至"
-                        clearable="false"
                         start-placeholder="查询开始时间"
                         end-placeholder="查询结束时间"></el-date-picker>
                     </el-form-item>
@@ -377,32 +547,23 @@ export default class Users extends Mixins(onresize) {
           <div class={style.elTablePackage_title_l}>
             <el-button
               size="mini"
-              icon='el-icon-download'
-              class={style.elTablePackage_Theimport}
-            >
-              导入
-            </el-button>
-            <el-button
-              size="mini"
-              icon='el-icon-upload2'
-            >
-              导出
-            </el-button>
-            <el-button
-              size="mini"
               icon='el-icon-lock'
+              type='success'
             >
               批量锁定
             </el-button>
             <el-button
               size="mini"
               icon='el-icon-unlock'
+              type="warning"
             >
               批量解锁
             </el-button>
             <el-button
               size="mini"
               icon='el-icon-mobile-phone'
+              type="danger"
+              onClick={this.onThePhonelock.bind(this)}
             >
               电话锁定标记
             </el-button>
@@ -426,6 +587,40 @@ export default class Users extends Mixins(onresize) {
         </div>
         <div class={style.elTableTb}>
           <UsersTable></UsersTable>
+          <div style='margin-bottom:15px;'></div>
+          <elTabletsx
+            props={{
+              data: this.tableData,
+              border: true,
+              stripe: true,
+              tooltipEffect: "dark",
+              selection: true,
+              serialnumber: true,
+              elTableColumn: this.elTableColumn,
+              stylecLIS: "border-radius: 5px;box-shadow: #ebeef5 0px 0px 13px;color:#515151;",
+              cellStyle: ({ row, rowIndex }: any) => {
+                var style = 'height:22px;padding:0px;font-size:13px;line-height: 22px;text-align: center;'
+                if (rowIndex % 2 == 0) {
+                  style += 'background: rgb(238 250 255 / 80%);'
+                }
+                if (rowIndex % 2 !== 0) {
+                  style += 'background: rgb(238 250 255 / 30%);'
+                }
+                return style
+              },
+              headercellstyle: () => {
+                return "height:20px;padding:0px; background: linear-gradient(to bottom, #EEF5FB 0%,#E2EDFA 100%);text-align: center;";
+              }
+            }}
+          >
+            {/* <template slot='expand' slot-scope='msg'>
+              <div>
+                {msg}
+                这是什么按钮啊
+              </div>
+
+            </template> */}
+          </elTabletsx>
         </div>
       </div >
       <div>
