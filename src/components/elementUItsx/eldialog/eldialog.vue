@@ -2,7 +2,7 @@
   <div class="eldialog">
     <el-dialog
       title="提示"
-      :visible.sync="visibleSync"
+      :visible.sync="isvisible"
       :width="iswidth"
       :fullscreen="fullscreen"
       :top="marginTop"
@@ -16,6 +16,7 @@
       :show-close="showClose"
       :center="center"
       :destroy-on-close="destroyOnClose"
+      @close="Shutdown"
     >
       <span slot="title" v-if="titleShow"> </span>
       <slot name="elcontentFK"></slot>
@@ -48,7 +49,7 @@
  * @property {Function}  headerRowStyle  表头行的 style 的回调方法
  * @description el-dialog 的封装
  **/
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 @Component
 export default class eldialogtsxFk extends Vue {
   //visibleSync 打开关闭自定义弹窗
@@ -171,6 +172,21 @@ export default class eldialogtsxFk extends Vue {
     },
   })
   public destroyOnClose!: boolean;
+  //Shutdown 关闭回调
+  @Prop({
+    type: Function,
+    default: () => {
+      return "";
+    },
+  })
+  public Shutdown!: Function;
+
+  protected isvisible: boolean = false;
+
+  @Watch("visibleSync")
+  private visibleSynchange() {
+    this.isvisible = this.visibleSync;
+  }
 }
 </script>
 <style lang="scss" scoped>

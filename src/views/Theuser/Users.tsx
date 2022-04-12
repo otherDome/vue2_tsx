@@ -14,6 +14,7 @@
  * @property {string}  elTabletsxoddnumber   列表奇数背景颜色
  * @property {string}  elTabletsxevennumber  列表偶数背景颜色
  * @property {string}  elTabletsxheaderBGS   列表头部背景颜色
+ * @property {boolean} eldialogVsibleSync     电话标记true false变量
  * @function onScreeningClk -点击展开高级筛选初级筛选
  * @function onOnreSize      获取指定元素的宽度
  * @function onThePhonelock  点击电话锁定标记弹窗
@@ -503,9 +504,9 @@ export default class Users extends Mixins(onresize) {
   protected onScreeningClk() {
     this.screening = !this.screening
   }
+  protected eldialogVsibleSync: boolean = false
   protected onThePhonelock() {
-
-    console.log("sonThePhonelock")
+    this.eldialogVsibleSync = !this.eldialogVsibleSync
   }
   //表格设置数据变量
   protected elTabletsxborder: boolean = true
@@ -971,7 +972,10 @@ export default class Users extends Mixins(onresize) {
         <div>
           <eldialog
             props={{
-              visibleSync: true
+              visibleSync: this.eldialogVsibleSync,
+              Shutdown: () => {
+                this.eldialogVsibleSync = false
+              }
             }}
             scopedSlots={{
               elcontentFK: () => {
