@@ -7,15 +7,27 @@
  * @property {number}  elFromwidth  这是usinof 的元素宽度
  * @property {any}  Widthtimer  这是节流
  * @property {boolean} screening  这是高级筛选还是初级筛选
+ * @property {any}  tableColumn  这是获取列表的设置
  * @function onScreeningClk -点击展开高级筛选初级筛选
  * @description Table 表格设置
  **/
-import { Component, Vue } from 'vue-property-decorator';
-import style from '@/components/public/scss/datalistTableTitle.module.scss';
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import style from '@/components/elementUItsx/eltabletsx/scss/datalistTableTitle.module.scss';
 @Component
-export default class App extends Vue {
-  protected TableSetup = []
+export default class datalistTableTitle extends Vue {
+  @Prop({
+    type: Array,
+    default: () => {
+      return [];
+    },
+  })
+  public tableColumn!: any;
+
+  protected TableSetup = ['斑马线', '边框']
   protected Tablesize: string = 'mini'
+  protected onClickColumn(item: any) {
+    item.showtableColumn = !item.showtableColumn
+  }
   protected render() {
     return <div class={style.datalistTableTitle}>
       <el-popover
@@ -74,7 +86,7 @@ export default class App extends Vue {
       </el-popover>
       <el-popover
         placement="bottom-end"
-        title="列表设置"
+        title="自定义显示列项"
         width="300"
         trigger="hover">
         <span slot="reference">
@@ -89,7 +101,51 @@ export default class App extends Vue {
           </el-badge>
         </span>
         <div class={style.screeningTable}>
-          筛选列表
+          <div class={style.screeningTable_hd}>
+            <div class={style.screeningTable_hd_l}>
+              显示
+            </div>
+            <div class={style.screeningTable_hd_r}>
+              列表
+            </div>
+          </div>
+          <div class={style.screeningTable_list}>
+            {
+              this.tableColumn.map((pro: any) => {
+                return (
+                  <div class={style.screeningTable_list_tr}>
+                    <div class={style.screeningTable_list_tr_l}>
+                      {
+                        pro.banshowtableColumn ?
+                          <icon-down-square
+                            theme="outline"
+                            size="14"
+                            fill="#909399" />
+                          :
+                          pro.showtableColumn === true ?
+                            <icon-down-square
+                              class={style.csspointer}
+                              theme="outline"
+                              size="14"
+                              onClick={this.onClickColumn.bind(this, pro)}
+                              fill="#409EFF" />
+                            :
+                            <icon-square
+                              class={style.csspointer}
+                              theme="outline"
+                              size="14"
+                              onClick={this.onClickColumn.bind(this, pro)}
+                              fill="#9b9b9b" />
+                      }
+                    </div>
+                    <div class={style.screeningTable_list_tr_r}>
+                      {pro.label}
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
         </div>
       </el-popover>
 

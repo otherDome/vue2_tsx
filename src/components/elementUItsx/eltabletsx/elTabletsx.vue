@@ -22,7 +22,7 @@
         @summary-method="summaryMethod"
       >
         <el-table-column v-if="selection" type="selection" width="55"> </el-table-column>
-        <el-table-column v-if="serialnumber" label="序号" type="index" width="45">
+        <el-table-column v-if="serialnumber" label="序号" type="index" width="55">
         </el-table-column>
         <el-table-column
           v-for="(item, isindex) in elTableColumn"
@@ -39,6 +39,7 @@
           :min-width="item.minwidth ? item.minwidth : ''"
           :filters="item.filters"
           :filterMethod="item.filterMethod"
+          v-if="item.showtableColumn"
         >
           <template slot-scope="scope">
             <div v-if="item.type === 'expand'">
@@ -110,7 +111,9 @@
  *        width:"对应列的宽度",
  *      minwidth:"最小宽度队列"
  *        filters:"该列的筛选",
- *   filterMethod:"该列的筛选函数"
+ *   filterMethod:"该列的筛选函数",
+ * showtableColumn:"是否展示当前列表自定义列表",
+ * banshowtableColumn:'禁止当前key是否展示当前列表自定义列表'
  * }
  * @property {Function}  headerRowStyle  表头行的 style 的回调方法
  * @property {Function}  headercellstyle 表头单元格的 style 的回调

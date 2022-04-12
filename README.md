@@ -1,155 +1,87 @@
-# text
+# 德开医药科技有限公司health前端框架
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
+___@author 范凯___  
+___@email  1038886097@qq.com___
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+## 兼容性说明
 
- <!-- 这是登录
-      <el-form ref="form" props={{
-        model: this.elProps
-      }} label-width="80px">
-        <el-form-item label="活动名称">
-          <el-input v-model={this.nakcname} placeholder="请输入内容"></el-input>
-        </el-form-item>
-      </el-form>
-      <el-button type="danger" onClick={this.logs.bind(this)}>危险按钮</el-button> -->
+应用的&框架
 
+<kbd style='color:green'>vueCLI4.12</kbd>
+<kbd style='color:green'>vue内核2.6</kbd>
+<kbd style='color:green'>TS4.1.6</kbd>
+<kbd style='color:green'>TSx</kbd>
 
+# elementUItsx 文档
 
+## elTabletsx文件夹
 
-slot-scope={{
-                scope: (scope: any) => {
-                  console.log("zxcvb", scope)
-                  return <div>
-                    <el-button type="text" size="small">查看</el-button>
-                    <el-button type="text" size="small">编辑</el-button>
-
-                  </div>
-                }
-              }}
-
-
-
-        <el-table-column show-overflow-tooltip type="selection" width="55"></el-table-column>
-        <el-table-column show-overflow-tooltip label="详情" :show-header="false" type="expand">
-          <template slot-scope="scope">
-            <div style="padding: 0 15px 15px 15px; box-sizing: border-box">
-              <h6 style="padding: 8px 0; box-sizing: border-box">编号:12987123</h6>
-              <el-descriptions class="margin-top" :column="3" size="mini" border>
-                <el-descriptions-item>
-                  <template slot="label">
-                    <i class="el-icon-user"></i>
-                    用户名
-                  </template>
-                  kooriookami
-                </el-descriptions-item>
-                <el-descriptions-item>
-                  <template slot="label">
-                    <i class="el-icon-mobile-phone"></i>
-                    手机号
-                  </template>
-                  18100000000
-                </el-descriptions-item>
-                <el-descriptions-item>
-                  <template slot="label">
-                    <i class="el-icon-location-outline"></i>
-                    居住地
-                  </template>
-                  苏州市
-                </el-descriptions-item>
-                <el-descriptions-item>
-                  <template slot="label">
-                    <i class="el-icon-tickets"></i>
-                    备注
-                  </template>
-                  <el-tag size="small">学校</el-tag>
-                </el-descriptions-item>
-                <el-descriptions-item>
-                  <template slot="label">
-                    <i class="el-icon-office-building"></i>
-                    联系地址
-                  </template>
-                  江苏省苏州市吴中区吴中大道 1188 号
-                </el-descriptions-item>
-              </el-descriptions>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column show-overflow-tooltip prop="id" label="ID" width="100"></el-table-column>
-        <el-table-column
-          show-overflow-tooltip
-          :show-header="false"
-          label="姓名"
-        > 
-        <!--:render-header="atteLeavetooltip"-->
-          <template slot-scope="scope">
-            <i class="el-icon-time"></i>
-            <span style="margin-left: 10px">{{ scope.row.name }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column show-overflow-tooltip prop="amount1" sortable label="数值 1"></el-table-column>
-        <el-table-column show-overflow-tooltip prop="amount2" sortable label="数值 2"></el-table-column>
-        <el-table-column show-overflow-tooltip prop="amount3" sortable label="数值 3"></el-table-column>
-        <el-table-column show-overflow-tooltip prop="amount4" sortable label="数值 4"></el-table-column>
-        <el-table-column show-overflow-tooltip prop="amount5" sortable label="数值 5"></el-table-column>
-        <el-table-column show-overflow-tooltip prop="amount6" sortable label="数值 6"></el-table-column>
-        <el-table-column show-overflow-tooltip prop="amount7" sortable label="数值 7"></el-table-column>
-        <el-table-column fixed="right" label="操作" width="100">
-          <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="mini" class="btmmini">查看</el-button>
-            <el-button type="text" size="mini" class="btmmini">编辑</el-button>
-          </template>
-        </el-table-column>
-
-
-
-
-
-/deep/.el-table {
-		 border: 0;
-		 th,
-		 tr,
-		 td{
-			  border: 0;
-			  background-color: #fff;
-		 }
-		 &::before {
-			  height: 0px;
-		  }
-		  &::after {
-			 width: 0;
-		  }
-		 .el-table__fixed:before {
-			 height: 0;
-		  }
-	 }
+### elTabletsx主要组件(table)
+/**
+ * @name elTabletsx
+ * @author fankai16
+ * @Time 2022/04/11
+ * @property {any}  data  表格列表数据
+ * @property {any}  elTableColumn   表格行设置
+ * @property {Boolean}  stripe  是否为斑马纹 table
+ * @property {string}  tooltipEffect   tooltip effect 属性
+ * @property {string}  size   表格粗细大小
+ * @property {Boolean}  showSummary   是否在表尾显示合计行
+ * @property {string}  stylecLIS  style 行内样式结束
+ * @property {string}  border  是否展示border样式
+ * @property {Boolean}  selection   是否展示出选择器
+ * @property {Boolean}  serialnumber  是否展示序号
+ * @property {Function}  rowStyle  行内样式函数
+ * @property {Function}  cellStyle  单元格样式函数
+ * @property {arr}       elTableColumn    表投行设置
+ * {
+ * type:'expand/index/Thecustom/operation'  打开表格下箭头参数/自定义index函数/自定义表格插槽/按钮操作
+ * label:"列表名字",
+ * prop:"数据的key",
+ * sortable:"是否带筛选",
+ * showHeader:"是否展示表头行"
+ * renderHeader:"列标题 Label 区域渲染使用的 Function",
+ * showOverflowTooltip:"当内容过长被隐藏时显示 tooltip",
+ * fixed:"	列是否固定在左侧或者右侧，true 表示固定在左侧",
+ * width:"对应列的宽度",
+ * minwidth:"最小宽度队列"
+ * filters:"该列的筛选",
+ * filterMethod:"该列的筛选函数",
+ * showtableColumn:"是否展示当前列表自定义列表",
+ * banshowtableColumn:'禁止当前key是否展示当前列表自定义列表'
+ * }
+ * @property {Function}  headerRowStyle  表头行的 style 的回调方法
+ * @property {Function}  headercellstyle 表头单元格的 style 的回调
+ * @property {Function}  rowClassName    行的 className 的回调方
+ * @property {Function}  headerRowClassName   行的 className 的回调方
+ * @property {Function}  selectionChange 多选单选数据
+ * @property {Function}  sortChange  当表格的排序条件发生变化的时候会触发该事件
+ * @property {Function}  filterHandler  当前表格赛选检测
+ * @property {Function}  expandChange   检测展开收回
+ * @property {Function}  summaryMethod  自定义计算函数回传
+ * -----------------------分页数据区域-------------------------
+ * @property {Boolean}   showpagination 是否展示分页
+ * @property {Function}  sizeChange 请定义分页size
+ * @property {Function}  currentChange 请定义分页page
+ * @property {number}    currentPage   定义分页第几页
+ * @property {number}    pageSize   定义默认几页
+ * @property {number}    total   总条数
+ * @property {string}    pagedirection 分页条方向
+ * @property {arr}      pageSizes  每页展示多少条数据
+ * @description elTable tsx 组件用
+**/
+### datalistTableTitle(table 设置组件)
+/**
+ * @name Users
+ * @author fankai16
+ * @Time 2022/03/30
+ * @property {number}  elFromwidth  这是usinof 的元素宽度
+ * @property {any}  Widthtimer  这是节流
+ * @property {boolean} screening  这是高级筛选还是初级筛选
+ * @property {any}  tableColumn  这是获取列表的设置
+ * @function onScreeningClk -点击展开高级筛选初级筛选
+ * @description Table 表格设置
+**/

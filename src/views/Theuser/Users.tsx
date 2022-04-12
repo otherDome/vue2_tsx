@@ -6,20 +6,30 @@
  * @property {number}  elFromwidth  这是usinof 的元素宽度
  * @property {any}  Widthtimer  这是节流
  * @property {boolean} screening  这是高级筛选还是初级筛选
+ * @property {boolean} elTabletsxborder 是否展示列表Border
+ * @property {boolean} elTabletsxstripe 是否展示斑马线
+ * @property {string}  elTabletsxsize   列表大小
+ * @property {string}  elTabletsxcellStyle  列表行内样式
+ * @property {string}  elTabletsxheadercellstyle  列表头部样式
+ * @property {string}  elTabletsxoddnumber   列表奇数背景颜色
+ * @property {string}  elTabletsxevennumber  列表偶数背景颜色
+ * @property {string}  elTabletsxheaderBGS   列表头部背景颜色
  * @function onScreeningClk -点击展开高级筛选初级筛选
  * @function onOnreSize      获取指定元素的宽度
  * @function onThePhonelock  点击电话锁定标记弹窗
  * @description 用户分配
  **/
-import { Component, Mixins, Prop } from 'vue-property-decorator';
+import { Component, Mixins } from 'vue-property-decorator';
 import style from '@/assets/styles/Theuser/Users.module.scss';
-import datalistTableTitle from '@/components/public/datalistTableTitle'
-import elTabletsx from '@/components/tabletsx/elTabletsx.vue'
+import datalistTableTitle from '@/components/elementUItsx/eltabletsx/datalistTableTitle'
+import elTabletsx from '@/components/elementUItsx/eltabletsx/elTabletsx.vue'
+import eldialog from '@/components/elementUItsx/eldialog/eldialog.vue'
 import { onresize } from '@/components/mixins/onresize';
 @Component({
   components: {
     datalistTableTitle,
-    elTabletsx
+    elTabletsx,
+    eldialog
   }
 })
 export default class Users extends Mixins(onresize) {
@@ -319,12 +329,16 @@ export default class Users extends Mixins(onresize) {
     {
       type: "expand",
       label: "详情",
+      width: '55',
+      showtableColumn: true,
+      banshowtableColumn: true
     },
     {
       label: "ID",
       prop: "id",
       width: "100",
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     }, {
       type: "Thecustom",
       label: "姓名",
@@ -353,111 +367,127 @@ export default class Users extends Mixins(onresize) {
             ]
           ),
         ];
-      }
+      },
+      showtableColumn: true
     }, {
       label: "参数1",
-      minwidth: '80',
+      minwidth: '85',
       prop: "amount1",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       label: "参数2",
-      minwidth: '80',
+      minwidth: '85',
       prop: "amount2",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       label: "参数3",
-      minwidth: '80',
+      minwidth: '85',
       prop: "amount3",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       label: "参数4",
-      minwidth: '80',
+      minwidth: '85',
       prop: "amount4",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       label: "参数5",
-      minwidth: '80',
+      minwidth: '85',
       prop: "amount5",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       label: "参数5",
-      minwidth: '80',
+      minwidth: '85',
       prop: "amount6",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       label: "参数6",
-      minwidth: '80',
+      minwidth: '85',
       prop: "amount7",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       label: "参数7",
-      minwidth: '80',
+      minwidth: '85',
       prop: "amount8",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       label: "参数8",
-      minwidth: '80',
+      minwidth: '85',
       prop: "amount9",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       label: "参数9",
-      minwidth: '80',
+      minwidth: '85',
       prop: "amount9",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       label: "参数10",
-      minwidth: '90',
+      minwidth: '95',
       prop: "amount10",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       label: "参数11",
-      minwidth: '90',
+      minwidth: '95',
       prop: "amount11",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       label: "参数12",
-      minwidth: '90',
+      minwidth: '95',
       prop: "amount12",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       label: "参数13",
-      minwidth: '90',
+      minwidth: '95',
       prop: "amount13",
       sortable: true,
-      showOverflowTooltip: true
+      showOverflowTooltip: true,
+      showtableColumn: true
     },
     {
       type: "operation",
       minwidth: '100',
       label: "操作",
       prop: "",
-      fixed: "right"
+      fixed: "right",
+      showtableColumn: true
     }
   ]
 
@@ -474,8 +504,18 @@ export default class Users extends Mixins(onresize) {
     this.screening = !this.screening
   }
   protected onThePhonelock() {
+
     console.log("sonThePhonelock")
   }
+  //表格设置数据变量
+  protected elTabletsxborder: boolean = true
+  protected elTabletsxstripe: boolean = true
+  protected elTabletsxsize: String = 'mini'
+  protected elTabletsxcellStyle: string = 'height:22px;padding:0px;font-size:13px;line-height: 22px;text-align: center;'
+  protected elTabletsxheadercellstyle: string = 'height:20px;padding:0px;text-align: center;'
+  protected elTabletsxoddnumber: string = 'background: rgb(238 250 255 / 80%);'
+  protected elTabletsxevennumber: string = 'background: rgb(238 250 255 / 30%);'
+  protected elTabletsxheaderBGS: string = "background: linear-gradient(to bottom, #EEF5FB 0%,#E2EDFA 100%);"
   protected render() {
     return <div class={style.Users}>
       <div class={[this.screening === true ? style.elFromACTIVE : '', style.elFrom]} id='elFromwidth'>
@@ -839,14 +879,34 @@ export default class Users extends Mixins(onresize) {
           </div>
           <div class={style.elTablePackage_title_r}>
             <datalistTableTitle
+              props={{
+                tableColumn: this.elTableColumn
+              }}
               {
               ...{
                 on: {
                   'checkboxGroup': (item: any) => {
-                    console.log('数据回传表格斑马线', item)
+                    this.elTabletsxstripe = item.includes('斑马线')
+                    this.elTabletsxborder = item.includes('边框')
+                    if (this.elTabletsxstripe) {
+                      this.elTabletsxoddnumber = 'background: rgb(238 250 255 / 80%);'
+                      this.elTabletsxevennumber = 'background: rgb(238 250 255 / 30%);'
+                      this.elTabletsxheaderBGS = "background: linear-gradient(to bottom, #EEF5FB 0%,#E2EDFA 100%);"
+                    } else {
+                      this.elTabletsxoddnumber = ''
+                      this.elTabletsxevennumber = ''
+                      this.elTabletsxheaderBGS = 'background:#F5F7FA;'
+                    }
                   },
                   'radioGroup': (item: any) => {
-                    console.log('数据回传大小', item)
+                    if (item === 'mini') {
+                      this.elTabletsxcellStyle = 'height:22px;padding:0px;font-size:13px;line-height: 22px;text-align: center;'
+                      this.elTabletsxheadercellstyle = 'height:20px;padding:0px;text-align: center;'
+                    } else if (item === 'small' || item === 'medium') {
+                      this.elTabletsxcellStyle = 'text-align: center;'
+                      this.elTabletsxheadercellstyle = 'text-align: center;'
+                    }
+                    this.elTabletsxsize = item
                   },
                 }
               }
@@ -858,8 +918,9 @@ export default class Users extends Mixins(onresize) {
           <elTabletsx
             props={{
               data: this.tableData,
-              border: true,
-              stripe: true,
+              border: this.elTabletsxborder,
+              stripe: this.elTabletsxstripe,
+              size: this.elTabletsxsize,
               tooltipEffect: "dark",
               selection: true,
               serialnumber: true,
@@ -867,17 +928,19 @@ export default class Users extends Mixins(onresize) {
               showSummary: true,
               stylecLIS: "border-radius: 5px;box-shadow: #ebeef5 0px 0px 13px;color:#515151;",
               cellStyle: ({ row, rowIndex }: any) => {
-                var style = 'height:22px;padding:0px;font-size:13px;line-height: 22px;text-align: center;'
+                var style = this.elTabletsxcellStyle
                 if (rowIndex % 2 == 0) {
-                  style += 'background: rgb(238 250 255 / 80%);'
+                  style += this.elTabletsxoddnumber
                 }
                 if (rowIndex % 2 !== 0) {
-                  style += 'background: rgb(238 250 255 / 30%);'
+                  style += this.elTabletsxevennumber
                 }
                 return style
               },
               headercellstyle: () => {
-                return "height:20px;padding:0px; background: linear-gradient(to bottom, #EEF5FB 0%,#E2EDFA 100%);text-align: center;";
+                var style = this.elTabletsxheadercellstyle
+                style += this.elTabletsxheaderBGS
+                return style;
               },
               showpagination: true,
               total: 50
@@ -905,10 +968,29 @@ export default class Users extends Mixins(onresize) {
           >
           </elTabletsx>
         </div>
-      </div >
-      <div>
+        <div>
+          <eldialog
+            props={{
+              visibleSync: true
+            }}
+            scopedSlots={{
+              elcontentFK: () => {
+                return <div>
+                  asdasdaasa
+                </div>
+              },
+              elfooterFK: () => {
+                return <div>
+                  <el-button>取 消</el-button>
+                  <el-button type="primary">确 定</el-button>
+                </div>
+              }
+            }}
+          >
 
-      </div>
+          </eldialog>
+        </div>
+      </div >
     </div >
   }
 }
