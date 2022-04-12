@@ -14,14 +14,11 @@
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 import style from '@/assets/styles/Theuser/Users.module.scss';
 import datalistTableTitle from '@/components/public/datalistTableTitle'
-import UsersTable from '@/views/Theuser/Table/UsersTable.vue'
 import elTabletsx from '@/components/tabletsx/elTabletsx.vue'
 import { onresize } from '@/components/mixins/onresize';
-const that: any = this
 @Component({
   components: {
     datalistTableTitle,
-    UsersTable,
     elTabletsx
   }
 })
@@ -39,6 +36,11 @@ export default class Users extends Mixins(onresize) {
       amount6: "3.2",
       amount7: "3.2",
       amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
     },
     {
       id: "12987123",
@@ -51,6 +53,11 @@ export default class Users extends Mixins(onresize) {
       amount6: "3.2",
       amount7: "3.2",
       amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
     },
     {
       id: "12987124",
@@ -63,6 +70,11 @@ export default class Users extends Mixins(onresize) {
       amount6: "3.2",
       amount7: "3.2",
       amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
     },
     {
       id: "12987125",
@@ -75,6 +87,11 @@ export default class Users extends Mixins(onresize) {
       amount6: "3.2",
       amount7: "3.2",
       amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
     },
     {
       id: "12987126",
@@ -87,6 +104,11 @@ export default class Users extends Mixins(onresize) {
       amount6: "3.2",
       amount7: "3.2",
       amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
     },
     {
       id: "12987126",
@@ -99,6 +121,11 @@ export default class Users extends Mixins(onresize) {
       amount6: "3.2",
       amount7: "3.2",
       amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
     },
     {
       id: "12987126",
@@ -111,6 +138,11 @@ export default class Users extends Mixins(onresize) {
       amount6: "3.2",
       amount7: "3.2",
       amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
     },
     {
       id: "12987126",
@@ -123,6 +155,11 @@ export default class Users extends Mixins(onresize) {
       amount6: "3.2",
       amount7: "3.2",
       amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
     },
     {
       id: "12987126",
@@ -135,6 +172,11 @@ export default class Users extends Mixins(onresize) {
       amount6: "3.2",
       amount7: "3.2",
       amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
     },
     {
       id: "12987126",
@@ -147,6 +189,130 @@ export default class Users extends Mixins(onresize) {
       amount6: "3.2",
       amount7: "3.2",
       amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
+    },
+    {
+      id: "12987126",
+      name: "王小虎",
+      amount1: "539",
+      amount2: "4.1",
+      amount3: 15,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
+    },
+    {
+      id: "12987126",
+      name: "王小虎",
+      amount1: "539",
+      amount2: "4.1",
+      amount3: 15,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
+    },
+    {
+      id: "12987126",
+      name: "王小虎",
+      amount1: "539",
+      amount2: "4.1",
+      amount3: 15,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
+    },
+    {
+      id: "12987126",
+      name: "王小虎",
+      amount1: "539",
+      amount2: "4.1",
+      amount3: 15,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
+    },
+    {
+      id: "12987126",
+      name: "王小虎",
+      amount1: "539",
+      amount2: "4.1",
+      amount3: 15,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
+    },
+    {
+      id: "12987126",
+      name: "王小虎",
+      amount1: "539",
+      amount2: "4.1",
+      amount3: 15,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
+    },
+    {
+      id: "12987126",
+      name: "王小虎",
+      amount1: "539",
+      amount2: "4.1",
+      amount3: 15,
+      amount4: "3.2",
+      amount5: "3.2",
+      amount6: "3.2",
+      amount7: "3.2",
+      amount8: "3.2",
+      amount9: "3.2",
+      amount10: "-3.2",
+      amount11: "983.2",
+      amount12: "-3.2",
+      amount13: "53.2",
     },
   ];
   protected elTableColumn: any = [
@@ -160,7 +326,9 @@ export default class Users extends Mixins(onresize) {
       width: "100",
       showOverflowTooltip: true
     }, {
+      type: "Thecustom",
       label: "姓名",
+      width: "85",
       prop: "name",
       showOverflowTooltip: true,
       renderHeader: (h: any, { column }: any) => {
@@ -186,6 +354,110 @@ export default class Users extends Mixins(onresize) {
           ),
         ];
       }
+    }, {
+      label: "参数1",
+      minwidth: '80',
+      prop: "amount1",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      label: "参数2",
+      minwidth: '80',
+      prop: "amount2",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      label: "参数3",
+      minwidth: '80',
+      prop: "amount3",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      label: "参数4",
+      minwidth: '80',
+      prop: "amount4",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      label: "参数5",
+      minwidth: '80',
+      prop: "amount5",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      label: "参数5",
+      minwidth: '80',
+      prop: "amount6",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      label: "参数6",
+      minwidth: '80',
+      prop: "amount7",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      label: "参数7",
+      minwidth: '80',
+      prop: "amount8",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      label: "参数8",
+      minwidth: '80',
+      prop: "amount9",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      label: "参数9",
+      minwidth: '80',
+      prop: "amount9",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      label: "参数10",
+      minwidth: '90',
+      prop: "amount10",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      label: "参数11",
+      minwidth: '90',
+      prop: "amount11",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      label: "参数12",
+      minwidth: '90',
+      prop: "amount12",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      label: "参数13",
+      minwidth: '90',
+      prop: "amount13",
+      sortable: true,
+      showOverflowTooltip: true
+    },
+    {
+      type: "operation",
+      minwidth: '100',
+      label: "操作",
+      prop: "",
+      fixed: "right"
     }
   ]
 
@@ -205,9 +477,6 @@ export default class Users extends Mixins(onresize) {
     console.log("sonThePhonelock")
   }
   protected render() {
-    const slot: any = {
-      item: (scope: any) => [<p>输出值: {scope.text}</p>],
-    }
     return <div class={style.Users}>
       <div class={[this.screening === true ? style.elFromACTIVE : '', style.elFrom]} id='elFromwidth'>
         {
@@ -586,8 +855,6 @@ export default class Users extends Mixins(onresize) {
           </div>
         </div>
         <div class={style.elTableTb}>
-          <UsersTable></UsersTable>
-          <div style='margin-bottom:15px;'></div>
           <elTabletsx
             props={{
               data: this.tableData,
@@ -597,6 +864,7 @@ export default class Users extends Mixins(onresize) {
               selection: true,
               serialnumber: true,
               elTableColumn: this.elTableColumn,
+              showSummary: true,
               stylecLIS: "border-radius: 5px;box-shadow: #ebeef5 0px 0px 13px;color:#515151;",
               cellStyle: ({ row, rowIndex }: any) => {
                 var style = 'height:22px;padding:0px;font-size:13px;line-height: 22px;text-align: center;'
@@ -610,16 +878,31 @@ export default class Users extends Mixins(onresize) {
               },
               headercellstyle: () => {
                 return "height:20px;padding:0px; background: linear-gradient(to bottom, #EEF5FB 0%,#E2EDFA 100%);text-align: center;";
+              },
+              showpagination: true,
+              total: 50
+            }}
+            scopedSlots={{
+              expand: (param: any) => {
+                const item: any = param.isitem
+                return <div>这是一个名字为expand的插槽可以自定义里面内容 {item.id}</div>
+              },
+              Thecustom: (param: any) => {
+                const item: any = param.isitem
+                return <div>
+                  <i class="el-icon-time"></i>
+                  <span style="margin-left: 10px">{item.name}</span>
+                </div>
+              },
+              operation: (param: any) => {
+                const item: any = param.isitem
+                return <div>
+                  <el-button type="text" size="mini" class="btmmini">删除</el-button>
+                  <el-button type="text" size="mini" class="btmmini">编辑</el-button>
+                </div>
               }
             }}
           >
-            {/* <template slot='expand' slot-scope='msg'>
-              <div>
-                {msg}
-                这是什么按钮啊
-              </div>
-
-            </template> */}
           </elTabletsx>
         </div>
       </div >

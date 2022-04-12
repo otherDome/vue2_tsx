@@ -19,9 +19,10 @@
         @selection-change="selectionChange"
         @sort-change="sortChange"
         @expand-change="expandChange"
+        @summary-method="summaryMethod"
       >
         <el-table-column v-if="selection" type="selection" width="55"> </el-table-column>
-        <el-table-column v-if="serialnumber" label="序号" type="index" width="55">
+        <el-table-column v-if="serialnumber" label="序号" type="index" width="45">
         </el-table-column>
         <el-table-column
           v-for="(item, isindex) in elTableColumn"
@@ -35,14 +36,22 @@
           :show-overflow-tooltip="item.showOverflowTooltip"
           :fixed="item.fixed"
           :width="item.width"
+          :min-width="item.minwidth ? item.minwidth : ''"
           :filters="item.filters"
           :filterMethod="item.filterMethod"
         >
           <template slot-scope="scope">
             <div v-if="item.type === 'expand'">
-             <slot name="expand" msg="我是子组件的内容">
-
-             </slot>
+              <slot name="expand" :isitem="scope.row"> </slot>
+            </div>
+            <div
+              v-else-if="item.type === 'Thecustom'"
+              :class="item.showOverflowTooltip === true ? 'Overflowhidden' : ''"
+            >
+              <slot name="Thecustom" :isitem="scope.row"> </slot>
+            </div>
+            <div v-else-if="item.type === 'operation'">
+              <slot name="operation" :isitem="scope.row"> </slot>
             </div>
             <div v-else style="width: 100%">
               <div :class="item.showOverflowTooltip === true ? 'Overflowhidden' : ''">
@@ -52,6 +61,21 @@
           </template>
         </el-table-column>
       </el-table>
+    </div>
+    <div
+      class="elTabletsxFk_paging"
+      v-if="showpagination"
+      :style="'text-align:' + pagedirection + ';'"
+    >
+      <el-pagination
+        @size-change="sizeChange"
+        @current-change="currentChange"
+        :current-page="currentPage"
+        :page-sizes="pageSizes"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      ></el-pagination>
     </div>
   </div>
 </template>
@@ -74,6 +98,7 @@
  * @property {Function}  cellStyle  单元格样式函数
  * @property {arr}       elTableColumn    表投行设置
  * {
+ *       type:'expand/index/Thecustom/operation'  打开表格下箭头参数/自定义index函数/自定义表格插槽/按钮操作
  *        key:"当前索引",
  *      label:"列表名字",
  *       prop:"数据的key",
@@ -82,7 +107,8 @@
  *  renderHeader:"列标题 Label 区域渲染使用的 Function",
  * showOverflowTooltip:"当内容过长被隐藏时显示 tooltip",
  *        fixed:"	列是否固定在左侧或者右侧，true 表示固定在左侧",
- *        width:"对应列的宽度"
+ *        width:"对应列的宽度",
+ *      minwidth:"最小宽度队列"
  *        filters:"该列的筛选",
  *   filterMethod:"该列的筛选函数"
  * }
@@ -94,7 +120,16 @@
  * @property {Function}  sortChange  当表格的排序条件发生变化的时候会触发该事件
  * @property {Function}  filterHandler  当前表格赛选检测
  * @property {Function}  expandChange   检测展开收回
- * @function onThePhonelock  点击电话锁定标记弹窗
+ * @property {Function}  summaryMethod  自定义计算函数回传
+ * ********************分页数据区域*****************************
+ * @property {Boolean}   showpagination 是否展示分页
+ * @property {Function}  sizeChange 请定义分页size
+ * @property {Function}  currentChange 请定义分页page
+ * @property {number}    currentPage   定义分页第几页
+ * @property {number}    pageSize   定义默认几页
+ * @property {number}    total   总条数
+ * @property {string}    pagedirection 分页条方向
+ * @property {arr}      pageSizes  每页展示多少条数据
  * @description elTable tsx 组件用
  **/
 import { Component, Vue, Prop } from "vue-property-decorator";
@@ -153,6 +188,15 @@ export default class elTabletsxFk extends Vue {
     },
   })
   public showSummary!: boolean;
+
+  //summaryMethod 计算自定义回传
+  @Prop({
+    type: Function,
+    default: () => {
+      return "";
+    },
+  })
+  public summaryMethod!: Function;
 
   //style 行内样式开始
   @Prop({
@@ -244,15 +288,14 @@ export default class elTabletsxFk extends Vue {
   })
   public sortChange!: Function;
 
- //检测展开收回
- @Prop({
+  //检测展开收回
+  @Prop({
     type: Function,
     default: () => {
       return "";
     },
   })
   public expandChange!: Function;
-
 
   //selection 展示多选列表
   @Prop({
@@ -271,6 +314,79 @@ export default class elTabletsxFk extends Vue {
     },
   })
   public serialnumber!: Boolean;
+  //分页数据区域*********************************
+
+  //sizeChange 分页size检测
+  @Prop({
+    type: Function,
+    default: () => {
+      console.log("请定义分页size:sizeChange");
+    },
+  })
+  public sizeChange!: Function;
+
+  //currentChange 分页pages检测
+  @Prop({
+    type: Function,
+    default: () => {
+      console.log("请定义分页page:currentChange");
+    },
+  })
+  public currentChange!: Function;
+
+  //currentPage  定义分页第几页
+  @Prop({
+    type: Number,
+    default: () => {
+      return 1;
+    },
+  })
+  public currentPage!: Number;
+
+  //pageSize  定义默认几页
+  @Prop({
+    type: Number,
+    default: () => {
+      return 17;
+    },
+  })
+  public pageSize!: Number;
+
+  //total  总条数
+  @Prop({
+    type: Number,
+    default: () => {
+      return 0;
+    },
+  })
+  public total!: Number;
+
+  //pagedirection  分页条方向
+  @Prop({
+    type: String,
+    default: () => {
+      return "center";
+    },
+  })
+  public pagedirection!: String;
+
+  //showpagination是否展示分页
+  @Prop({
+    type: Boolean,
+    default: () => {
+      return false;
+    },
+  })
+  public showpagination!: Boolean;
+
+  //分页每页多少条展示
+  @Prop({
+    type: Array,
+    default: () => {
+      return [10, 20, 30, 40];
+    },
+  })
+  public pageSizes!: any;
 }
 </script>
 <style lang="scss" scoped>
@@ -288,6 +404,11 @@ export default class elTabletsxFk extends Vue {
       text-overflow: ellipsis; //溢出用省略号显示
       white-space: nowrap; //溢出不换行
     }
+  }
+  .elTabletsxFk_paging {
+    width: 100%;
+    height: 100%;
+    margin-top: 15px;
   }
 }
 </style>
