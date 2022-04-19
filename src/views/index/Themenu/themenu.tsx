@@ -58,7 +58,6 @@ export default class App extends Vue {
     this.ThesecondaryList = []
     const vuX = new this.$Maxer();
     const routingJson = vuX.getvuex('routingJson')
-    console.log('aaaaaaa', routingJson)
     this.addUrl = item.pathname
     this.addUrlName = item.name
     this.ThesecondaryList = JSON.parse(JSON.stringify(item.navlist))

@@ -13,3 +13,8 @@ body {
         background: #F6F8F9;
     }
 }
+
+:global(.el-dialog__header) {
+    background: #f8f8f8;
+    font-size: 13px;
+}

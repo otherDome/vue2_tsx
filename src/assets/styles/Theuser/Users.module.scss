@@ -139,6 +139,42 @@
             box-sizing: border-box;
         }
     }
+    .elTablePackage {
+         :global(.el-dialog__body) {
+            padding: 0;
+        }
+        .eldialog_div {
+            width: 100%;
+            .eldialog_div_header {
+                width: 100%;
+                .eldialog_div_header_p {
+                    padding: 5px 18px;
+                    font-size: 10px;
+                    color: #606266;
+                    font-weight: bold;
+                    .eldialog_div_header_span {
+                        margin-right: 2px;
+                        color: red;
+                    }
+                }
+            }
+            .eldialog_div_footer {
+                width: 100%;
+                padding: 5px 18px;
+                box-sizing: border-box;
+                 :global(.el-textarea__inner) {
+                    font-size: 10px;
+                    font-weight: 700;
+                }
+                .eldialog_div_footer_title {
+                    padding: 10px 0;
+                    font-size: 10px;
+                    font-weight: bold;
+                    box-sizing: border-box;
+                }
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 1920px) {

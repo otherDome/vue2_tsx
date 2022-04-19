@@ -65,7 +65,6 @@ export default class App extends Vue {
     } else {
       this.$OnlyMessage.error(res.msg);
     }
-    console.log("执行", vuX.getvuex('routingJson'))
   }
   //数组去重
   protected duplicate(item: any) {

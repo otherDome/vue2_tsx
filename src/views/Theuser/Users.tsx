@@ -493,6 +493,7 @@ export default class Users extends Mixins(onresize) {
   ]
 
   //这是数据列表tableData 结束
+  protected isvalue: string = ''
   protected screening: boolean = false
   protected istext: any = ["历史数据", "禁用时间"]
   protected created() {
@@ -519,9 +520,11 @@ export default class Users extends Mixins(onresize) {
   protected elTabletsxheaderBGS: string = "background: linear-gradient(to bottom, #EEF5FB 0%,#E2EDFA 100%);"
   protected render() {
     return <div class={style.Users}>
+      {/* 搜索头区域 */}
       <div class={[this.screening === true ? style.elFromACTIVE : '', style.elFrom]} id='elFromwidth'>
         {
           this.screening === false ?
+            //普通搜索区域开始
             <div
               class={style.screeningFalse}
             >
@@ -578,6 +581,7 @@ export default class Users extends Mixins(onresize) {
                         <el-form-item class={style.elFrom_header1500}>
                           <el-select
                             filterable
+                            v-model={this.isvalue}
                             placeholder="商品金额">
                             <el-option label="区域一" value="shanghai"></el-option>
                             <el-option label="区域二" value="beijing"></el-option>
@@ -639,6 +643,7 @@ export default class Users extends Mixins(onresize) {
               </div>
             </div>
             :
+            //高级搜索区域开始
             <div
               class={style.screeningTrue}
             >
@@ -699,6 +704,7 @@ export default class Users extends Mixins(onresize) {
                       label="店铺类别"
                     >
                       <el-select
+                        v-model={this.isvalue}
                         filterable
                         class={style.elform_width}
                         placeholder="请选择店铺">
@@ -711,6 +717,7 @@ export default class Users extends Mixins(onresize) {
                     >
                       <el-select
                         filterable
+                        v-model={this.isvalue}
                         class={style.elform_width}
                         placeholder="请选择是否锁定">
                         <el-option label="区域一" value="shanghai"></el-option>
@@ -722,6 +729,7 @@ export default class Users extends Mixins(onresize) {
                     >
                       <el-select
                         filterable
+                        v-model={this.isvalue}
                         class={style.elform_width}
                         placeholder="请选择微信标记">
                         <el-option label="区域一" value="shanghai"></el-option>
@@ -732,6 +740,7 @@ export default class Users extends Mixins(onresize) {
                       label="订单来源"
                     >
                       <el-select
+                        v-model={this.isvalue}
                         multiple
                         collapse-tags
                         class={style.elform_width}
@@ -746,6 +755,7 @@ export default class Users extends Mixins(onresize) {
                       label="商品类别"
                     >
                       <el-select
+                        v-model={this.isvalue}
                         class={style.elform_width}
                         clearable
                         placeholder="请选择商品类别"
@@ -777,6 +787,7 @@ export default class Users extends Mixins(onresize) {
                     >
                       <el-select
                         filterable
+                        v-model={this.isvalue}
                         class={style.elform_width}
                         placeholder="请选择时间类别">
                         <el-option label="区域一" value="shanghai"></el-option>
@@ -787,6 +798,7 @@ export default class Users extends Mixins(onresize) {
                       label="渠道来源"
                     >
                       <el-select
+                        v-model={this.isvalue}
                         filterable
                         class={style.elform_width}
                         placeholder="请选择渠道来源">
@@ -807,6 +819,7 @@ export default class Users extends Mixins(onresize) {
                     >
                       <el-select
                         filterable
+                        v-model={this.isvalue}
                         class={style.elform_width}
                         placeholder="请选择金额">
                         <el-option label="区域一" value="shanghai"></el-option>
@@ -852,7 +865,9 @@ export default class Users extends Mixins(onresize) {
 
 
       </div>
-      <div class={[style.elTablePackage, style.elTablePackage]}>
+      {/* 表格区域 */}
+      <div class={[style.elTablePackage]}>
+        {/* 表格设置功能按钮区域 */}
         <div class={style.elTablePackage_title}>
           <div class={style.elTablePackage_title_l}>
             <el-button
@@ -915,6 +930,7 @@ export default class Users extends Mixins(onresize) {
             ></datalistTableTitle>
           </div>
         </div>
+        {/* 表格主体区域 */}
         <div class={style.elTableTb}>
           <elTabletsx
             props={{
@@ -969,7 +985,8 @@ export default class Users extends Mixins(onresize) {
           >
           </elTabletsx>
         </div>
-        <div>
+        {/* 弹窗 */}
+        <div class={style.Popupwindow}>
           <eldialog
             props={{
               visibleSync: this.eldialogVsibleSync,
@@ -979,14 +996,36 @@ export default class Users extends Mixins(onresize) {
             }}
             scopedSlots={{
               elcontentFK: () => {
-                return <div>
-                  asdasdaasa
+                return <div class={style.eldialog_div}>
+                  <div class={style.eldialog_div_header}>
+                    <p class={style.eldialog_div_header_p}>
+                      <span class={style.eldialog_div_header_span}>*</span>
+                      <span>输入会员手机号用"</span>
+                      <span class={style.eldialog_div_header_span}>,</span>
+                      <span>"隔开或者换行</span>
+                      <span class={style.eldialog_div_header_span}>Enter</span>
+                      <span>最多</span>
+                      <span class={style.eldialog_div_header_span}>30</span>
+                      <span>个手机号</span>
+                    </p>
+                  </div>
+                  <div class={style.eldialog_div_footer}>
+                    <el-input
+                      rows='5'
+                      type="textarea"
+                      placeholder="请输入要锁定的会员手机号用,号隔开"
+                      maxlength="359"
+                      show-word-limit
+                    >
+                    </el-input>
+                    <h1 class={style.eldialog_div_footer_title}>微信标记:</h1>
+                  </div>
                 </div>
               },
               elfooterFK: () => {
                 return <div>
-                  <el-button>取 消</el-button>
-                  <el-button type="primary">确 定</el-button>
+                  <el-button size='mini'>取 消</el-button>
+                  <el-button size='mini' type="primary">确 定</el-button>
                 </div>
               }
             }}
