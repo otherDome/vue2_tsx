@@ -1,7 +1,7 @@
 <template>
   <div class="eldialog">
     <el-dialog
-      title="提示"
+      :title="title"
       :visible.sync="isvisible"
       :width="iswidth"
       :fullscreen="fullscreen"
@@ -132,6 +132,14 @@ export default class eldialogtsxFk extends Vue {
     },
   })
   public customClass!: boolean;
+  // title  标题
+  @Prop({
+    type: String,
+    default: () => {
+      return "提示";
+    },
+  })
+  public title!: boolean;
   //close-on-click-modal 是否可以通过点击 modal 关闭 Dialog
   @Prop({
     type: Boolean,
@@ -181,7 +189,7 @@ export default class eldialogtsxFk extends Vue {
   })
   public Shutdown!: Function;
 
-  protected isvisible: boolean = false;
+  public isvisible: boolean = false;
 
   @Watch("visibleSync")
   private visibleSynchange() {
@@ -192,5 +200,9 @@ export default class eldialogtsxFk extends Vue {
 <style lang="scss" scoped>
 .eldialog {
   width: 100%;
-}
+
+}  
+:global(.el-dialog){
+    width: 680px;
+  }
 </style>

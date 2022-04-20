@@ -8,6 +8,7 @@
         :tooltip-effect="tooltipEffect"
         :size="size"
         :show-summary="showSummary"
+        :max-height="maxHeight"
         :style="stylecLIS"
         class="tableBox"
         :row-style="rowStyle"
@@ -210,6 +211,14 @@ export default class elTabletsxFk extends Vue {
   })
   public stylecLIS!: string;
 
+  @Prop({
+    type: Number,
+    default: () => {
+      return 680;
+    },
+  })
+  public maxHeight!: Number;
+  
   //border 是否展示
   @Prop({
     type: Boolean,

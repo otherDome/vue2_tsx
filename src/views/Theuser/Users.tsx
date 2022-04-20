@@ -18,6 +18,8 @@
  * @function onScreeningClk -点击展开高级筛选初级筛选
  * @function onOnreSize      获取指定元素的宽度
  * @function onThePhonelock  点击电话锁定标记弹窗
+ * @function onpopupWindow   取消弹窗按钮
+ * @function ondetermineWindow  电话锁定标记
  * @description 用户分配
  **/
 import { Component, Mixins } from 'vue-property-decorator';
@@ -484,7 +486,7 @@ export default class Users extends Mixins(onresize) {
     },
     {
       type: "operation",
-      minwidth: '100',
+      minwidth: '80',
       label: "操作",
       prop: "",
       fixed: "right",
@@ -508,6 +510,13 @@ export default class Users extends Mixins(onresize) {
   protected eldialogVsibleSync: boolean = false
   protected onThePhonelock() {
     this.eldialogVsibleSync = !this.eldialogVsibleSync
+  }
+  protected onpopupWindow() {
+    this.eldialogVsibleSync = false
+  }
+  protected ondetermineWindow() {
+    console.log("点击率电话锁定标记")
+    this.eldialogVsibleSync = false
   }
   //表格设置数据变量
   protected elTabletsxborder: boolean = true
@@ -977,8 +986,7 @@ export default class Users extends Mixins(onresize) {
               operation: (param: any) => {
                 const item: any = param.isitem
                 return <div>
-                  <el-button type="text" size="mini" class="btmmini">删除</el-button>
-                  <el-button type="text" size="mini" class="btmmini">编辑</el-button>
+                  <el-button type="text" size="mini" class="btmmini">锁定</el-button>
                 </div>
               }
             }}
@@ -992,7 +1000,8 @@ export default class Users extends Mixins(onresize) {
               visibleSync: this.eldialogVsibleSync,
               Shutdown: () => {
                 this.eldialogVsibleSync = false
-              }
+              },
+              iswidth: "680px"
             }}
             scopedSlots={{
               elcontentFK: () => {
@@ -1019,13 +1028,21 @@ export default class Users extends Mixins(onresize) {
                     >
                     </el-input>
                     <h1 class={style.eldialog_div_footer_title}>微信标记:</h1>
+                    <el-select
+                      filterable
+                      size='mini'
+                      v-model={this.isvalue}
+                      placeholder="请选择类型">
+                      <el-option label="区域一" value="shanghai"></el-option>
+                      <el-option label="区域二" value="beijing"></el-option>
+                    </el-select>
                   </div>
                 </div>
               },
               elfooterFK: () => {
                 return <div>
-                  <el-button size='mini'>取 消</el-button>
-                  <el-button size='mini' type="primary">确 定</el-button>
+                  <el-button size='mini' onClick={this.onpopupWindow.bind(this)}>取 消</el-button>
+                  <el-button size='mini' onClick={this.ondetermineWindow.bind(this)} type="primary">确 定</el-button>
                 </div>
               }
             }}
