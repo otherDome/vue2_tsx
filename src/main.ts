@@ -13,11 +13,13 @@ import { install } from '@icon-park/vue/es/all';
 import installMaxerStore, { Maxer } from "@/store/maxer.mixin";
 import initStorePersistence from "@/store/store.persistence";
 import filters from "@/utils/filters/filters";
+import directive from '@/components/elementUItsx/eldialog/directive';
 install(Vue, 'icon');
 new installMaxerStore(Vue)
 initStorePersistence(store)
 Vue.config.productionTip = false
 Vue.use(ElementUI);
+Vue.use(directive);
 Vue.prototype.$OnlyMessage = OnlyMessage
 Vue.prototype.$Maxer = Maxer
 Vue.prototype.$filters=filters

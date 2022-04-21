@@ -22,8 +22,14 @@
         @expand-change="expandChange"
         @summary-method="summaryMethod"
       >
-        <el-table-column v-if="selection" type="selection" width="55"> </el-table-column>
-        <el-table-column v-if="serialnumber" label="序号" type="index" width="55">
+        <el-table-column v-if="selection" type="selection" width="55">
+        </el-table-column>
+        <el-table-column
+          v-if="serialnumber"
+          label="序号"
+          type="index"
+          width="55"
+        >
         </el-table-column>
         <el-table-column
           v-for="(item, isindex) in elTableColumn"
@@ -43,7 +49,10 @@
           v-if="item.showtableColumn"
         >
           <template slot-scope="scope">
-            <div v-if="item.type === 'expand'">
+            <div
+              v-if="item.type === 'expand'"
+              :class="item.showOverflowTooltip === true ? 'Overflowhidden' : ''"
+            >
               <slot name="expand" :isitem="scope.row"> </slot>
             </div>
             <div
@@ -52,11 +61,18 @@
             >
               <slot name="Thecustom" :isitem="scope.row"> </slot>
             </div>
-            <div v-else-if="item.type === 'operation'">
+            <div
+              v-else-if="item.type === 'operation'"
+              :class="item.showOverflowTooltip === true ? 'Overflowhidden' : ''"
+            >
               <slot name="operation" :isitem="scope.row"> </slot>
             </div>
             <div v-else style="width: 100%">
-              <div :class="item.showOverflowTooltip === true ? 'Overflowhidden' : ''">
+              <div
+                :class="
+                  item.showOverflowTooltip === true ? 'Overflowhidden' : ''
+                "
+              >
                 {{ scope.row[item.prop] }}
               </div>
             </div>
@@ -77,7 +93,8 @@
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
-      ></el-pagination>
+      >
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -136,269 +153,269 @@
  * @property {arr}      pageSizes  每页展示多少条数据
  * @description elTable tsx 组件用
  **/
-import { Component, Vue, Prop } from "vue-property-decorator";
+import { Component, Vue, Prop } from "vue-property-decorator"
 @Component
 export default class elTabletsxFk extends Vue {
   //表格数据列表开始
   @Prop({
     type: Array,
     default: () => {
-      return [];
+      return []
     },
   })
-  public data!: any;
+  public data!: any
 
   //表格行设置
   @Prop({
     type: Array,
     default: () => {
-      return [];
+      return []
     },
   })
-  public elTableColumn!: any;
+  public elTableColumn!: any
 
   //是否为斑马纹 table
   @Prop({
     type: Boolean,
     default: () => {
-      return false;
+      return false
     },
   })
-  public stripe!: boolean;
+  public stripe!: boolean
 
   //tooltip effect 属性
   @Prop({
     type: String,
     default: () => {
-      return "";
+      return ""
     },
   })
-  public tooltipEffect!: string;
+  public tooltipEffect!: string
 
   //size 表格粗细大小
   @Prop({
     type: String,
     default: () => {
-      return "mini";
+      return "mini"
     },
   })
-  public size!: string;
+  public size!: string
 
   //是否在表尾显示合计行
   @Prop({
     type: Boolean,
     default: () => {
-      return false;
+      return false
     },
   })
-  public showSummary!: boolean;
+  public showSummary!: boolean
 
   //summaryMethod 计算自定义回传
   @Prop({
     type: Function,
     default: () => {
-      return "";
+      return ""
     },
   })
-  public summaryMethod!: Function;
+  public summaryMethod!: Function
 
   //style 行内样式开始
   @Prop({
     type: String,
     default: () => {
-      return "width:100%;";
+      return "width:100%;"
     },
   })
-  public stylecLIS!: string;
+  public stylecLIS!: string
 
   @Prop({
     type: Number,
     default: () => {
-      return 680;
+      return 680
     },
   })
-  public maxHeight!: Number;
-  
+  public maxHeight!: Number
+
   //border 是否展示
   @Prop({
     type: Boolean,
     default: () => {
-      return false;
+      return false
     },
   })
-  public border!: boolean;
+  public border!: boolean
 
   //rowStyle 行内样式函数
   @Prop({
     type: Function,
     default: () => {
-      return "";
+      return ""
     },
   })
-  public rowStyle!: Function;
+  public rowStyle!: Function
 
   //单元格的 cellStyle 的回调方法，也可以使用一个固定的 Object 为所有单元格设置一样的 Style。
   @Prop({
     type: Function,
     default: () => {
-      return "";
+      return ""
     },
   })
-  public cellStyle!: Function;
+  public cellStyle!: Function
 
   //表头行的 style 的回调方法，也可以使用一个固定的 Object 为所有表头行设置一样的 Style。
   @Prop({
     type: Function,
     default: () => {
-      return "";
+      return ""
     },
   })
-  public headerRowStyle!: Function;
+  public headerRowStyle!: Function
 
   //表头单元格的 style 的回调
   @Prop({
     type: Function,
     default: () => {
-      return "";
+      return ""
     },
   })
-  public headercellstyle!: Function;
+  public headercellstyle!: Function
 
   //行的 className 的回调方
   @Prop({
     type: Function,
     default: () => {
-      return "";
+      return ""
     },
   })
-  public rowClassName!: Function;
+  public rowClassName!: Function
 
   //表头行的 headerRowClassName 的回调方法
   @Prop({
     type: Function,
     default: () => {
-      return "";
+      return ""
     },
   })
-  public headerRowClassName!: Function;
+  public headerRowClassName!: Function
 
   //selectionChange多选单选数据
   @Prop({
     type: Function,
     default: () => {
-      return "";
+      return ""
     },
   })
-  public selectionChange!: Function;
+  public selectionChange!: Function
 
   //当表格的排序条件发生变化的时候会触发该事件
   @Prop({
     type: Function,
     default: () => {
-      return "";
+      return ""
     },
   })
-  public sortChange!: Function;
+  public sortChange!: Function
 
   //检测展开收回
   @Prop({
     type: Function,
     default: () => {
-      return "";
+      return ""
     },
   })
-  public expandChange!: Function;
+  public expandChange!: Function
 
   //selection 展示多选列表
   @Prop({
     type: Boolean,
     default: () => {
-      return false;
+      return false
     },
   })
-  public selection!: Boolean;
+  public selection!: Boolean
 
   //serialnumber 是否展示序号
   @Prop({
     type: Boolean,
     default: () => {
-      return false;
+      return false
     },
   })
-  public serialnumber!: Boolean;
+  public serialnumber!: Boolean
   //分页数据区域*********************************
 
   //sizeChange 分页size检测
   @Prop({
     type: Function,
     default: () => {
-      console.log("请定义分页size:sizeChange");
+      console.log("请定义分页size:sizeChange")
     },
   })
-  public sizeChange!: Function;
+  public sizeChange!: Function
 
   //currentChange 分页pages检测
   @Prop({
     type: Function,
     default: () => {
-      console.log("请定义分页page:currentChange");
+      console.log("请定义分页page:currentChange")
     },
   })
-  public currentChange!: Function;
+  public currentChange!: Function
 
   //currentPage  定义分页第几页
   @Prop({
     type: Number,
     default: () => {
-      return 1;
+      return 1
     },
   })
-  public currentPage!: Number;
+  public currentPage!: Number
 
   //pageSize  定义默认几页
   @Prop({
     type: Number,
     default: () => {
-      return 17;
+      return 17
     },
   })
-  public pageSize!: Number;
+  public pageSize!: Number
 
   //total  总条数
   @Prop({
     type: Number,
     default: () => {
-      return 0;
+      return 0
     },
   })
-  public total!: Number;
+  public total!: Number
 
   //pagedirection  分页条方向
   @Prop({
     type: String,
     default: () => {
-      return "center";
+      return "center"
     },
   })
-  public pagedirection!: String;
+  public pagedirection!: String
 
   //showpagination是否展示分页
   @Prop({
     type: Boolean,
     default: () => {
-      return false;
+      return false
     },
   })
-  public showpagination!: Boolean;
+  public showpagination!: Boolean
 
   //分页每页多少条展示
   @Prop({
     type: Array,
     default: () => {
-      return [10, 20, 30, 40];
+      return [10, 20, 30, 40]
     },
   })
-  public pageSizes!: any;
+  public pageSizes!: any
 }
 </script>
 <style lang="scss" scoped>
@@ -417,6 +434,7 @@ export default class elTabletsxFk extends Vue {
       white-space: nowrap; //溢出不换行
     }
   }
+
   .elTabletsxFk_paging {
     width: 100%;
     height: 100%;

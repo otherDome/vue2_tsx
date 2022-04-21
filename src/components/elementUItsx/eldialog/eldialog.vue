@@ -2,6 +2,7 @@
   <div class="eldialog">
     <el-dialog
       :title="title"
+      v-draggable
       :visible.sync="isvisible"
       :width="iswidth"
       :fullscreen="fullscreen"
@@ -139,7 +140,7 @@ export default class eldialogtsxFk extends Vue {
       return "提示";
     },
   })
-  public title!: boolean;
+  public title!: String;
   //close-on-click-modal 是否可以通过点击 modal 关闭 Dialog
   @Prop({
     type: Boolean,

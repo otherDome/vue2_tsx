@@ -2,7 +2,7 @@
     width: 100%;
     .userservice_elfrom {
         width: 100%;
-        padding: 20px;
+        padding: 20px 20px 0px 20px;
         box-sizing: border-box;
         background: #fff;
         border-radius: 5px;
@@ -11,6 +11,7 @@
         .userservice_elfrom_header {
             width: 100%;
             display: flex;
+            padding-bottom: 20px;
             .userservice_elfrom_left {
                 width: calc(100% - 250px);
                  :global(.el-form-item--mini) {
@@ -64,6 +65,15 @@
             .userservice_elfrom_header_b {
                 padding-top: 15px;
                 box-sizing: border-box;
+                 :global(.el-form-item--mini) {
+                    margin-bottom: 15px;
+                }
+                .userservice_elfrom_header_b_widt {
+                    width: 160px;
+                }
+                .userservice_elfrom_header_b_widt200 {
+                    width: 225px;
+                }
             }
         }
         .userservice_elfrom580 {}
@@ -75,6 +85,56 @@
     .userservice_elfrommin850 {}
     .userservice_elfrommax850 {
         display: none;
+    }
+    .userservice_tables {
+        width: 100%;
+        padding: 20px 19px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0px 4px #e4e7ed;
+        .userservice_tables_header {
+            width: 100%;
+            display: flex;
+            .userservice_tables_header_left {
+                width: 50%;
+                .userservice_tables_header_leftH1 {
+                    font-size: 14px;
+                    color: #333;
+                    font-weight: 600;
+                    line-height: 28px;
+                    .margin_right {
+                        margin-right: 15px;
+                    }
+                    .SIclaoer_67C23A {
+                        color: #67C23A;
+                    }
+                    .Siclaoer_909399 {
+                        color: #909399;
+                    }
+                    .margin_const {
+                        margin: 0 8px 0 0;
+                    }
+                }
+            }
+            .userservice_tables_header_right {
+                width: 50%;
+                display: flex;
+                justify-content: flex-end;
+                .serservice_tables_header_right_marg {
+                    margin-right: 15px;
+                }
+            }
+        }
+        .userservice_tables_footer {
+            margin-top: 20px;
+            .comprehensive {
+                color: #67C23A;
+            }
+            .lock {
+                color: #f56c6c;
+            }
+        }
     }
 }
 
