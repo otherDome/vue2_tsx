@@ -16,9 +16,13 @@
  * @property {string}  elTabletsxoddnumber   列表奇数背景颜色
  * @property {string}  elTabletsxevennumber  列表偶数背景颜色
  * @property {string}  elTabletsxheaderBGS   列表头部背景颜色
+ * @property {boolean} LockingMember         锁定会员弹窗
+ * @property {boolean} information           会员综合信息
+ * @property {string}  activeName            选项卡
  * @function onCheckthedetails  详情弹窗
  * @function onScreeningClk -点击展开高级筛选初级筛选
  * @function onOnreSize      获取指定元素的宽度
+ * @function oncomprehensive   点击综合信息
  * @description 用户服务
  **/
 import { Component, Mixins } from 'vue-property-decorator';
@@ -26,10 +30,12 @@ import style from '@/assets/styles/Theuser/userservice.module.scss';
 import { onresize } from '@/components/mixins/onresize';
 import datalistTableTitle from '@/components/elementUItsx/eltabletsx/datalistTableTitle'
 import elTabletsx from '@/components/elementUItsx/eltabletsx/elTabletsx.vue'
+import eldialog from '@/components/elementUItsx/eldialog/eldialog.vue'
 @Component({
   components: {
     datalistTableTitle,
-    elTabletsx
+    elTabletsx,
+    eldialog
   }
 })
 export default class userservice extends Mixins(onresize) {
@@ -471,6 +477,9 @@ export default class userservice extends Mixins(onresize) {
   ]
   protected isvalue: string = ''
   protected screening: boolean = false
+  protected LockingMember: boolean = false
+  protected oninformation: boolean = false
+  protected activeName: string = '0'
 
   //表格设置数据变量
   protected elTabletsxborder: boolean = true
@@ -481,7 +490,6 @@ export default class userservice extends Mixins(onresize) {
   protected elTabletsxoddnumber: string = 'background: rgb(238 250 255 / 80%);'
   protected elTabletsxevennumber: string = 'background: rgb(238 250 255 / 30%);'
   protected elTabletsxheaderBGS: string = "background: linear-gradient(to bottom, #EEF5FB 0%,#E2EDFA 100%);"
-
   protected onScreeningClk() {
     this.screening = !this.screening
   }
@@ -490,6 +498,12 @@ export default class userservice extends Mixins(onresize) {
   }
   protected mounted() {
     this.onresizeInit('elFromwidth')
+  }
+  protected onLockingMember() {
+    this.LockingMember = !this.LockingMember
+  }
+  protected oncomprehensive() {
+    this.oninformation = !this.oninformation
   }
   protected render() {
     return <div class={style.userservice}>
@@ -699,6 +713,7 @@ export default class userservice extends Mixins(onresize) {
               size='mini'
               icon="el-icon-refresh-right"
               type="success"
+              onClick={this.onLockingMember.bind(this)}
             >锁定会员</el-button>
             <datalistTableTitle
               props={{
@@ -778,7 +793,7 @@ export default class userservice extends Mixins(onresize) {
               operation: (param: any) => {
                 const item: any = param.isitem
                 return <div>
-                  <el-button type="text" size="mini" class={style.comprehensive}>综合信息</el-button>
+                  <el-button type="text" size="mini" onClick={this.oncomprehensive.bind(this)} class={style.comprehensive}>综合信息</el-button>
                   <el-button type="text" size="mini" class={style.lock}>锁定死粉</el-button>
                 </div>
               }
@@ -788,6 +803,85 @@ export default class userservice extends Mixins(onresize) {
           </elTabletsx>
         </div>
       </div>
-    </div>
+      <div class={style.LockingMember}>
+        <eldialog
+          props={{
+            visibleSync: this.LockingMember,
+            Shutdown: () => {
+              this.LockingMember = false
+            },
+            title: '锁定会员',
+            iswidth: "680px"
+          }}
+          scopedSlots={{
+            elcontentFK: () => {
+              return <div class={style.LockingMember_eldialog}>
+                <div class={style.LockingMember_eldialog_search}>
+                  <el-descriptions
+                    props={{
+                      column: 2
+                    }}
+                    border>
+                    <el-descriptions-item label="会员手机号">
+                      <el-input size='mini' placeholder="请输入要搜索的手机号"></el-input>
+                    </el-descriptions-item>
+                    <el-descriptions-item label="会员名称">搜索名字</el-descriptions-item>
+                    <el-descriptions-item label="锁定状态">搜索锁定状态</el-descriptions-item>
+                    <el-descriptions-item label="锁定时间">搜索锁定时间</el-descriptions-item>
+                  </el-descriptions>
+                </div>
+              </div>
+            },
+            elfooterFK: () => {
+              return <div>
+                <el-button icon='el-icon-search' size='mini' type="success">保存</el-button>
+                <el-button icon='el-icon-refresh' size='mini' type="warning">重置</el-button>
+              </div>
+            }
+          }}
+        >
+        </eldialog>
+      </div>
+      <div class={style.information}>
+        <eldialog
+          props={{
+            visibleSync: this.oninformation,
+            Shutdown: () => {
+              this.oninformation = false
+            },
+            title: '会员综合信息',
+            iswidth: "680px"
+          }}
+          scopedSlots={{
+            elcontentFK: () => {
+              return <div class={style.informationeldialog}>
+                <div class={style.informationeldialogtabs}>
+                  <el-tabs
+                    v-model={this.activeName} type="card"
+                    props={{
+                      beforeLeave: (tab: string) => {
+                        console.log(tab);
+                      }
+                    }}>
+                    <el-tab-pane label="会员资料" name="0"></el-tab-pane>
+                    <el-tab-pane label="购药情况" name="1"></el-tab-pane>
+                    <el-tab-pane label="地址本" name="2"></el-tab-pane>
+                    <el-tab-pane label="回访历史" name="3"></el-tab-pane>
+                    <el-tab-pane label="电子药历" name="4"></el-tab-pane>
+                  </el-tabs>
+                </div>
+
+              </div>
+            },
+            elfooterFK: () => {
+              return <div>
+                759
+              </div>
+            }
+          }}
+        >
+        </eldialog>
+      </div >
+    </div >
   }
 }

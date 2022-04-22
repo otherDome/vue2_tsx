@@ -136,6 +136,28 @@
             }
         }
     }
+    .LockingMember {
+        width: 100%;
+        .LockingMember_eldialog {
+            width: 100%;
+        }
+    }
+    .information {
+        width: 100%;
+         :global(.el-dialog__body) {
+            padding: 0 0px 20px 0px;
+            box-sizing: border-box;
+        }
+        .informationeldialog {
+            width: 100%;
+            .informationeldialogtabs {
+                width: 100%;
+                padding: 0;
+                box-sizing: border-box;
+                border-bottom: #E4E7ED;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 580px) {
