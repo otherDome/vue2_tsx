@@ -22,7 +22,7 @@ import componentheader from '@/views/index/header/header'
     componentheader
   }
 })
-export default class App extends Vue {
+export default class HomeIndex extends Vue {
   $filters: any;
   $Maxer: any;
   private isRouterAlive: boolean = true
@@ -47,7 +47,6 @@ export default class App extends Vue {
       const onisname = to.name
       const routingJson = vuX.getvuex('routingJson')
       const navlist = routingJson.ThemenuList
-      console.log("点击进来了", navlist)
       const isnewlist = JSON.parse(JSON.stringify(routingJson.newlist))
       let isbreadcrumb = []
       for (let index = 0; index < navlist.length; index++) {

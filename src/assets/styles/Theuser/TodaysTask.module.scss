@@ -1,0 +1,165 @@
+.TodaysTask {
+    width: 100%;
+    .TodaysTask_from {
+        width: 100%;
+        .TodaysTask_from_header {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0px 4px #e4e7ed;
+            margin-bottom: 15px;
+            display: flex;
+             :global(.el-form-item) {
+                margin-bottom: 0;
+            }
+            .TodaysTask_from_header_l {
+                width: calc( 100% - 250px);
+            }
+            .TodaysTask_from_header_r {
+                width: 250px;
+                display: flex;
+                justify-content: flex-end;
+                .fatherscreening {
+                    cursor: pointer;
+                    .screening {
+                        display: flex;
+                        color: #409EFF;
+                        .icon_filter {
+                            margin-top: 2px;
+                            margin-left: 5px;
+                        }
+                    }
+                }
+            }
+        }
+        .TodaysTask_from_footer {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0px 4px #e4e7ed;
+            margin-bottom: 15px;
+            .TodaysTask_from_footer_bottomTitle {
+                width: 100%;
+                box-sizing: border-box;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #e4e7ed;
+                box-sizing: border-box;
+                display: flex;
+                .TodaysTask_from_footer_bottomTitle_left {
+                    width: 50%;
+                    .shaixuan {
+                        display: flex;
+                        cursor: pointer;
+                        color: #409EFF;
+                        .icon_filter {
+                            margin-top: 2px;
+                            margin-right: 3px;
+                        }
+                    }
+                }
+                .TodaysTask_from_footer_bottomTitle_right {
+                    width: 50%;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+            }
+            .TodaysTask_from_footer_bottofrom {
+                padding: 15px 0 0px 0;
+                box-sizing: border-box;
+                 :global(.el-form-item) {
+                    margin-bottom: 10px!important;
+                    margin-right: 20px;
+                }
+                .elform_width {
+                    width: 200px;
+                }
+            }
+        }
+    }
+    //媒介查询兼容设备模块--el-from基础筛选
+    .elFrom_headermax850 {
+        display: inline-block;
+    }
+    .elFrom_headermin850 {
+        display: none;
+    }
+    .elFrom_headermin1100 {
+        display: inline-block;
+    }
+    .elFrom_headermin1000 {
+        display: inline-block;
+    }
+    .elFrom_headermin810 {
+        display: inline-block;
+    }
+    .elTable_list {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0px 4px #e4e7ed;
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .TodaysTask {
+        .elFrom_headermin810 {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .TodaysTask {
+        .elFrom_headermin1000 {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 1175px) {
+    .TodaysTask {
+        .elFrom_headermin1100 {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .TodaysTask {
+        .elFrom_headermax850 {
+            display: inline-block;
+        }
+        .elFrom_headermin850 {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .TodaysTask {
+        .elFrom_headermax850 {
+            display: none;
+        }
+        .elFrom_headermin850 {
+            display: inline-block;
+        }
+    }
+}
+
+@media screen and (max-width: 680px) and (max-width: 390px) {
+    .TodaysTask {
+        .elFrom_headermax850 {
+            display: none;
+        }
+        .elFrom_headermin850 {
+            display: inline-block;
+        }
+    }
+}

@@ -8,6 +8,7 @@
  * @property {boolean} screening   这是打开高级或者基础
  * @property {arr}  tableData    数据列表数据
  * @property {arr}  elTableColumn  数据表格列表
+ * @property {arr}  detailsColumn  购药概况临时数组
  * @property {boolean} elTabletsxborder 是否展示列表Border
  * @property {boolean} elTabletsxstripe 是否展示斑马线
  * @property {string}  elTabletsxsize   列表大小
@@ -19,11 +20,17 @@
  * @property {boolean} LockingMember         锁定会员弹窗
  * @property {boolean} information           会员综合信息
  * @property {string}  activeName            选项卡
+ * @property {Array}   ComprehensiveinofNamv  综合信息导航列表
+ * @property {Array}   genderList            性别列表
+ * @property {string}  genderMod             已选性别列表
+ * @property {booler}  Newaddyl              新增弹窗
  * @function onCheckthedetails  详情弹窗
  * @function onScreeningClk -点击展开高级筛选初级筛选
  * @function onOnreSize      获取指定元素的宽度
  * @function oncomprehensive   点击综合信息
- * @description 用户服务
+ * @function oninformatmembership  会员资料保存
+ * @function onNewaddyl        新增电子药理
+ * @description 用户服务 《首付人生》
  **/
 import { Component, Mixins } from 'vue-property-decorator';
 import style from '@/assets/styles/Theuser/userservice.module.scss';
@@ -31,6 +38,7 @@ import { onresize } from '@/components/mixins/onresize';
 import datalistTableTitle from '@/components/elementUItsx/eltabletsx/datalistTableTitle'
 import elTabletsx from '@/components/elementUItsx/eltabletsx/elTabletsx.vue'
 import eldialog from '@/components/elementUItsx/eldialog/eldialog.vue'
+import { genderList, ComprehensiveinofNamv } from '@/assets/model/userserviceTsType'
 @Component({
   components: {
     datalistTableTitle,
@@ -39,6 +47,7 @@ import eldialog from '@/components/elementUItsx/eldialog/eldialog.vue'
   }
 })
 export default class userservice extends Mixins(onresize) {
+  $OnlyMessage: any;
   //这是数据列表tableData 开始
   protected tableData: any = [
     {
@@ -475,12 +484,137 @@ export default class userservice extends Mixins(onresize) {
       showtableColumn: true
     }
   ]
+  protected detailsColumn: any = [
+    {
+      label: "ID",
+      prop: "id",
+      width: "100",
+      showOverflowTooltip: true,
+      showtableColumn: true
+    },
+    {
+      type: "Thecustom",
+      label: "姓名",
+      width: "85",
+      prop: "name",
+      showOverflowTooltip: true,
+      renderHeader: (h: any, { column }: any) => {
+        return [
+          column.label,
+          h(
+            "el-tooltip",
+            {
+              props: {
+                content: "这是提示文案123",
+                placement: "top",
+              },
+            },
+            [
+              h(
+                "span",
+                {
+                  class: "el-icon-question",
+                  style: "color:#409EFF;"
+                }
+              )
+            ]
+          ),
+        ];
+      },
+      showtableColumn: true
+    }, {
+      label: "参数1",
+      minwidth: '85',
+      prop: "amount1",
+      showOverflowTooltip: true,
+      showtableColumn: true
+    },
+    {
+      label: "参数2",
+      minwidth: '85',
+      prop: "amount2",
+      showOverflowTooltip: true,
+      showtableColumn: true
+    },
+    {
+      label: "参数3",
+      minwidth: '85',
+      prop: "amount3",
+      showOverflowTooltip: true,
+      showtableColumn: true
+    },
+    {
+      label: "参数4",
+      minwidth: '85',
+      prop: "amount4",
+      showOverflowTooltip: true,
+      showtableColumn: true
+    },
+    {
+      label: "参数5",
+      minwidth: '85',
+      prop: "amount5",
+      showOverflowTooltip: true,
+      showtableColumn: true
+    },
+    {
+      label: "参数5",
+      minwidth: '85',
+      prop: "amount6",
+      showOverflowTooltip: true,
+      showtableColumn: true
+    },
+    {
+      label: "参数6",
+      minwidth: '85',
+      prop: "amount7",
+      showOverflowTooltip: true,
+      showtableColumn: true
+    },
+  ]
+  protected ComprehensiveinofNamv: Array<ComprehensiveinofNamv> = [
+    {
+      lable: "会员资料",
+      key: 'hyzl'
+    },
+    {
+      lable: "购药情况",
+      key: 'gyqk'
+    },
+    {
+      lable: "地址本",
+      key: 'dzb'
+    },
+    {
+      lable: "回复历史",
+      key: 'hfls'
+    },
+    {
+      lable: "电子药历",
+      key: 'dzyl'
+    }
+  ]
+  protected genderList: Array<genderList> = [
+    {
+      key: '0',
+      name: '未知'
+    },
+    {
+      key: '1',
+      name: '男',
+    },
+    {
+      key: '1',
+      name: '女',
+    }
+  ]
+  protected genderMod: string = '0'
   protected isvalue: string = ''
   protected screening: boolean = false
   protected LockingMember: boolean = false
   protected oninformation: boolean = false
-  protected activeName: string = '0'
-
+  protected activeName: string = 'hyzl'
+  protected Newaddyl: boolean = false
   //表格设置数据变量
   protected elTabletsxborder: boolean = true
   protected elTabletsxstripe: boolean = true
@@ -504,6 +638,12 @@ export default class userservice extends Mixins(onresize) {
   }
   protected oncomprehensive() {
     this.oninformation = !this.oninformation
+  }
+  protected oninformatmembership() {
+    this.oninformation = false
+  }
+  protected onNewaddyl() {
+    this.Newaddyl = !this.Newaddyl
   }
   protected render() {
     return <div class={style.userservice}>
@@ -794,7 +934,18 @@ export default class userservice extends Mixins(onresize) {
                 const item: any = param.isitem
                 return <div>
                   <el-button type="text" size="mini" onClick={this.oncomprehensive.bind(this)} class={style.comprehensive}>综合信息</el-button>
-                  <el-button type="text" size="mini" class={style.lock}>锁定死粉</el-button>
+                  <el-popconfirm
+                    title="您确定锁定为死粉吗？"
+                    {...{
+                      on: {
+                        confirm: () => {
+                          this.$OnlyMessage.success('锁定成功');
+                        }
+                      }
+                    }}
+                  >
+                    <el-button type="text" size="mini" slot="reference" class={style.lock}>锁定死粉</el-button>
+                  </el-popconfirm>
                 </div>
               }
             }}
@@ -850,38 +1001,490 @@ export default class userservice extends Mixins(onresize) {
               this.oninformation = false
             },
             title: '会员综合信息',
-            iswidth: "680px"
+            iswidth: "930px"
           }}
           scopedSlots={{
             elcontentFK: () => {
               return <div class={style.informationeldialog}>
                 <div class={style.informationeldialogtabs}>
                   <el-tabs
-                    v-model={this.activeName} type="card"
+                    v-model={this.activeName}
                     props={{
                       beforeLeave: (tab: string) => {
                         console.log(tab);
                       }
                     }}>
-                    <el-tab-pane label="会员资料" name="0"></el-tab-pane>
-                    <el-tab-pane label="购药情况" name="1"></el-tab-pane>
-                    <el-tab-pane label="地址本" name="2"></el-tab-pane>
-                    <el-tab-pane label="回访历史" name="3"></el-tab-pane>
-                    <el-tab-pane label="电子药历" name="4"></el-tab-pane>
+                    {
+                      this.ComprehensiveinofNamv.map((item: ComprehensiveinofNamv, index: Number) => {
+                        return (
+                          <el-tab-pane label={item.lable} name={item.key} key={index}></el-tab-pane>
+                        )
+                      })}
                   </el-tabs>
                 </div>
-
+                {
+                  //会员资料开始
+                }
+                {
+                  this.activeName === 'hyzl' ?
+                    <div class={style.informatmembership}>
+                      <el-descriptions
+                        props={{
+                          column: 3,
+                        }}
+                        size="mini"
+                        border>
+                        <el-descriptions-item>
+                          <template slot="label">
+                            <div class={style.informatmembershipLabel}>
+                              <span>*</span>用户来源
+                            </div>
+                          </template>
+                          <el-input
+                            class={style.el_width}
+                            size='mini'
+                            placeholder="请输入内容"
+                            disabled>
+                          </el-input>
+                        </el-descriptions-item>
+                        <el-descriptions-item>
+                          <template slot="label">
+                            <div class={style.informatmembershipLabel}>
+                              <span>*</span>会员姓名
+                            </div>
+                          </template>
+                          <el-input
+                            class={style.el_width}
+                            size='mini'
+                            placeholder="请输入会员姓名"
+                          >
+                          </el-input>
+                        </el-descriptions-item>
+                        <el-descriptions-item>
+                          <template slot="label">
+                            <div class={style.informatmembershipLabel}>
+                              <span>*</span>性别
+                            </div>
+                          </template>
+                          <el-select placeholder="请选择"
+                            v-model={this.genderMod}
+                            size='mini'
+                            class={style.el_width}
+                          >
+                            {
+                              this.genderList.map((item: genderList, index: Number) => {
+                                return (
+                                  <el-option
+                                    key={index}
+                                    label={item.name}
+                                    value={item.key}>
+                                  </el-option>
+                                )
+                              })}
+                          </el-select>
+                        </el-descriptions-item>
+                        <el-descriptions-item>
+                          <template slot="label">
+                            <div class={style.informatmembershipLabel}>
+                              <span>*</span>出生日期
+                            </div>
+                          </template>
+                          <el-date-picker
+                            type="date"
+                            size='mini'
+                            class={style.el_width}
+                            placeholder="选择日期">
+                          </el-date-picker>
+                        </el-descriptions-item>
+                        <el-descriptions-item>
+                          <template slot="label">
+                            <div class={style.informatmembershipLabel}>
+                              创建日期
+                            </div>
+                          </template>
+                          <el-date-picker
+                            type="date"
+                            size='mini'
+                            disabled
+                            class={style.el_width}
+                            placeholder="选择日期">
+                          </el-date-picker>
+                        </el-descriptions-item>
+                        <el-descriptions-item>
+                          <template slot="label">
+                            <div class={style.informatmembershipLabel}>
+                              会员ID
+                            </div>
+                          </template>
+                          <el-input
+                            class={style.el_width}
+                            size='mini'
+                            placeholder="请输入内容"
+                            disabled>
+                          </el-input>
+                        </el-descriptions-item>
+                        <el-descriptions-item>
+                          <template slot="label">
+                            <div class={style.informatmembershipLabel}>
+                              <span>*</span>手机号
+                            </div>
+                          </template>
+                          <el-input
+                            class={style.el_width}
+                            size='mini'
+                            placeholder="请输入会员姓名"
+                          >
+                          </el-input>
+                        </el-descriptions-item>
+                        <el-descriptions-item>
+                          <template slot="label">
+                            <div class={style.informatmembershipLabel}>
+                              备注
+                            </div>
+                          </template>
+                          <el-input
+                            size='mini'
+                            type="text"
+                            placeholder="请输入内容"
+                            maxlength="10"
+                            show-word-limit
+                          >
+                          </el-input>
+                        </el-descriptions-item>
+                      </el-descriptions>
+                    </div>
+                    : ''
+                }
+                {
+                  //购药情况
+                }
+                {
+                  this.activeName === 'gyqk' ?
+                    <div class={style.Tobuymedicine}>
+                      <elTabletsx
+                        props={{
+                          data: this.tableData,
+                          border: true,
+                          stripe: true,
+                          size: 'mini',
+                          tooltipEffect: "dark",
+                          elTableColumn: this.detailsColumn,
+                          maxHeight: 300,
+                          stylecLIS: "border-radius: 5px;box-shadow: #ebeef5 0px 0px 13px;color:#515151;",
+                          cellStyle: ({ row, rowIndex }: any) => {
+                            var style = this.elTabletsxcellStyle
+                            if (rowIndex % 2 == 0) {
+                              style += this.elTabletsxoddnumber
+                            }
+                            if (rowIndex % 2 !== 0) {
+                              style += this.elTabletsxevennumber
+                            }
+                            return style
+                          },
+                          headercellstyle: () => {
+                            var style = this.elTabletsxheadercellstyle
+                            style += this.elTabletsxheaderBGS
+                            return style;
+                          },
+                          total: 50
+                        }}
+                        scopedSlots={{
+                          Thecustom: (param: any) => {
+                            const item: any = param.isitem
+                            return <div>
+                              <i class="el-icon-time"></i>
+                              <span style="margin-left: 10px">{item.name}</span>
+                            </div>
+                          }
+                        }}
+                      >
+                      </elTabletsx>
+                    </div>
+                    : ''
+                }
+                {
+                  //地址本
+                }
+                {
+                  this.activeName === 'dzb' ?
+                    <div class={style.Tobuymedicine}>
+                      <elTabletsx
+                        props={{
+                          data: this.tableData,
+                          border: true,
+                          stripe: true,
+                          size: 'mini',
+                          tooltipEffect: "dark",
+                          elTableColumn: this.detailsColumn,
+                          maxHeight: 300,
+                          stylecLIS: "border-radius: 5px;box-shadow: #ebeef5 0px 0px 13px;color:#515151;",
+                          cellStyle: ({ row, rowIndex }: any) => {
+                            var style = this.elTabletsxcellStyle
+                            if (rowIndex % 2 == 0) {
+                              style += this.elTabletsxoddnumber
+                            }
+                            if (rowIndex % 2 !== 0) {
+                              style += this.elTabletsxevennumber
+                            }
+                            return style
+                          },
+                          headercellstyle: () => {
+                            var style = this.elTabletsxheadercellstyle
+                            style += this.elTabletsxheaderBGS
+                            return style;
+                          },
+                          total: 50
+                        }}
+                        scopedSlots={{
+                          Thecustom: (param: any) => {
+                            const item: any = param.isitem
+                            return <div>
+                              <i class="el-icon-time"></i>
+                              <span style="margin-left: 10px">{item.name}</span>
+                            </div>
+                          }
+                        }}
+                      >
+                      </elTabletsx>
+                    </div>
+                    : ''
+                }
+                {
+                  //回复历史
+                }
+                {
+                  this.activeName === 'hfls' ?
+                    <div class={style.Tobuymedicine}>
+                      <elTabletsx
+                        props={{
+                          data: this.tableData,
+                          border: true,
+                          stripe: true,
+                          size: 'mini',
+                          tooltipEffect: "dark",
+                          elTableColumn: this.detailsColumn,
+                          maxHeight: 300,
+                          stylecLIS: "border-radius: 5px;box-shadow: #ebeef5 0px 0px 13px;color:#515151;",
+                          cellStyle: ({ row, rowIndex }: any) => {
+                            var style = this.elTabletsxcellStyle
+                            if (rowIndex % 2 == 0) {
+                              style += this.elTabletsxoddnumber
+                            }
+                            if (rowIndex % 2 !== 0) {
+                              style += this.elTabletsxevennumber
+                            }
+                            return style
+                          },
+                          headercellstyle: () => {
+                            var style = this.elTabletsxheadercellstyle
+                            style += this.elTabletsxheaderBGS
+                            return style;
+                          },
+                          total: 50
+                        }}
+                        scopedSlots={{
+                          Thecustom: (param: any) => {
+                            const item: any = param.isitem
+                            return <div>
+                              <i class="el-icon-time"></i>
+                              <span style="margin-left: 10px">{item.name}</span>
+                            </div>
+                          }
+                        }}
+                      >
+                      </elTabletsx>
+                    </div>
+                    : ''
+                }
+                {
+                  //电子药历
+                }
+                {
+                  this.activeName === 'dzyl' ?
+                    <div class={style.medicine}>
+                      <div class={style.medicine_header}>
+                        <div class={style.medicine_header_left}>
+                          <el-button size='mini' type="primary">电子病历</el-button>
+                          <el-button size='mini' type="success">电子药历</el-button>
+                        </div>
+                      </div>
+                      <div class={style.medicine_footer}>
+                        <elTabletsx
+                          props={{
+                            data: this.tableData,
+                            border: true,
+                            stripe: true,
+                            size: 'mini',
+                            tooltipEffect: "dark",
+                            elTableColumn: this.detailsColumn,
+                            maxHeight: 300,
+                            stylecLIS: "border-radius: 5px;box-shadow: #ebeef5 0px 0px 13px;color:#515151;",
+                            cellStyle: ({ row, rowIndex }: any) => {
+                              var style = this.elTabletsxcellStyle
+                              if (rowIndex % 2 == 0) {
+                                style += this.elTabletsxoddnumber
+                              }
+                              if (rowIndex % 2 !== 0) {
+                                style += this.elTabletsxevennumber
+                              }
+                              return style
+                            },
+                            headercellstyle: () => {
+                              var style = this.elTabletsxheadercellstyle
+                              style += this.elTabletsxheaderBGS
+                              return style;
+                            },
+                            total: 50
+                          }}
+                          scopedSlots={{
+                            Thecustom: (param: any) => {
+                              const item: any = param.isitem
+                              return <div>
+                                <i class="el-icon-time"></i>
+                                <span style="margin-left: 10px">{item.name}</span>
+                              </div>
+                            }
+                          }}
+                        >
+                        </elTabletsx>
+                      </div>
+                    </div>
+                    : ''
+                }
               </div>
             },
             elfooterFK: () => {
               return <div>
-                759
+                {
+                  //会员资料按钮
+                  this.activeName === 'hyzl' ?
+                    <div>
+                      <el-button onClick={this.oninformatmembership.bind(this)} size='mini' type="primary">保存</el-button>
+                    </div>
+                    : ''
+                }
+                {
+                  //会员购药情况
+                }
+                {
+                  this.activeName === 'gyqk' || this.activeName === 'dzb' || this.activeName === 'hfls' ?
+                    <div>
+                      <el-button onClick={this.oncomprehensive.bind(this)} size='mini' type="primary">关闭</el-button>
+                    </div>
+                    :
+                    ''
+                }
+                {
+                  this.activeName === 'dzyl' ?
+                    <div><el-button size='mini' onClick={this.onNewaddyl.bind(this)} type="primary">新增</el-button> </div>
+                    : ''
+                }
               </div>
             }
           }}
         >
         </eldialog>
-      </div >
+      </div>
+      <div class={style.addyaoli}>
+        <eldialog
+          props={{
+            visibleSync: this.Newaddyl,
+            Shutdown: () => {
+              this.Newaddyl = false
+            },
+            title: '添加',
+            iswidth: "700px"
+          }}
+          scopedSlots={{
+            elcontentFK: () => {
+              return <div calss={style.addyaoli}>
+                <el-descriptions
+                  props={{
+                    column: 2,
+                  }}
+                  size="mini"
+                  border>
+                  <el-descriptions-item>
+                    <template slot="label">
+                      <div class={style.informatmembershipLabel}>
+                        <span>*</span>购药人关系
+                      </div>
+                    </template>
+                    <el-input
+                      class={style.el_width}
+                      size='mini'
+                      placeholder="请输入内容"
+                    >
+                    </el-input>
+                  </el-descriptions-item>
+                  <el-descriptions-item>
+                    <template slot="label">
+                      <div class={style.informatmembershipLabel}>
+                        <span>*</span>药物治疗反馈
+                      </div>
+                    </template>
+                    <el-input
+                      class={style.el_width}
+                      size='mini'
+                      placeholder="请输入内容"
+                    >
+                    </el-input>
+                  </el-descriptions-item>
+                  <el-descriptions-item>
+                    <template slot="label">
+                      <div class={style.informatmembershipLabel}>
+                        <span>*</span>曾用药方案
+                      </div>
+                    </template>
+                    <el-input
+                      class={style.el_width}
+                      size='mini'
+                      placeholder="请输入内容"
+                    >
+                    </el-input>
+                  </el-descriptions-item>
+                  <el-descriptions-item>
+                    <template slot="label">
+                      <div class={style.informatmembershipLabel}>
+                        <span>*</span>现联合用药
+                      </div>
+                    </template>
+                    <el-input
+                      class={style.el_width}
+                      size='mini'
+                      placeholder="请输入内容"
+                    >
+                    </el-input>
+                  </el-descriptions-item>
+                  <el-descriptions-item>
+                    <template slot="label">
+                      <div class={style.informatmembershipLabel}>
+                        其他
+                      </div>
+                    </template>
+                    <el-input
+                      size='mini'
+                      type="text"
+                      placeholder="请输入内容"
+                      maxlength="10"
+                      show-word-limit
+                    >
+                    </el-input>
+                  </el-descriptions-item>
+                </el-descriptions>
+              </div>
+            },
+            elfooterFK: () => {
+              return <div>
+                <div>
+                  <el-button size='mini' onClick={this.onNewaddyl.bind(this)} type="success">保存</el-button>
+                </div>
+              </div>
+            }
+          }}
+        >
+        </eldialog>
+      </div>
     </div >
   }
 }

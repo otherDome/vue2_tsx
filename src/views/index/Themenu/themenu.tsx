@@ -22,7 +22,7 @@ import style from '@/assets/styles/index/Themenu/themenu.module.scss';
 import { modelnavlist } from '@/assets/model/navlist'
 
 @Component
-export default class App extends Vue {
+export default class menuleft extends Vue {
   private navlist: any = []
   private addUrl: string = ''
   private addUrlName: string = ''

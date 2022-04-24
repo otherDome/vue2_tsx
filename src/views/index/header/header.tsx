@@ -27,7 +27,7 @@ import style from '@/assets/styles/index/header/header.module.scss';
     themenu
   }
 })
-export default class App extends Vue {
+export default class HomeIndexHeader extends Vue {
   @Inject('reload') readonly reload!: Function;
   $Maxer: any;
   protected breadcrumbList: any = [
