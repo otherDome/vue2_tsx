@@ -104,6 +104,22 @@
         border-radius: 5px;
         box-shadow: 0 0px 4px #e4e7ed;
         margin-bottom: 15px;
+        .elTable_list_header {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            .elTable_list_header_left {
+                width: 50%;
+            }
+            .elTable_list_header_right {
+                width: 50%;
+            }
+        }
+        .elTable_list_footer {
+            width: 100%;
+            padding-top: 20px;
+            box-sizing: border-box;
+        }
     }
 }
 

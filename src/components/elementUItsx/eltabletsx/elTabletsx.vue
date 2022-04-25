@@ -42,6 +42,7 @@
           :render-header="item.renderHeader"
           :show-overflow-tooltip="item.showOverflowTooltip"
           :fixed="item.fixed"
+          :style="item.fixed === 'right' ? 'right:4px' : ''"
           :width="item.width"
           :min-width="item.minwidth ? item.minwidth : ''"
           :filters="item.filters"
@@ -419,14 +420,16 @@ export default class elTabletsxFk extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+/deep/ .el-table__fixed-right {
+  right: 0px !important;
+  height: 100% !important;
+}
 .elTabletsxFk {
   width: 100%;
   height: 100%;
-
   .elTabletsxFk_table {
     width: 100%;
     height: 100%;
-
     .Overflowhidden {
       width: 100%;
       overflow: hidden; //超出的文本隐藏

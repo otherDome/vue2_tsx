@@ -40,7 +40,7 @@ export class onresize extends Vue {
       this.elFromwidth = val
       this.Widthtimer = true
       const that = this;
-      //console.log("this.elFromwidth", this.elFromwidth)
+      console.log("this.elFromwidth", this.elFromwidth)
       setTimeout(function () {
         that.Widthtimer = false;
       }, 400);
