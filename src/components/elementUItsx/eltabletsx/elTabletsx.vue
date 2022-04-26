@@ -9,6 +9,7 @@
         :size="size"
         :show-summary="showSummary"
         :max-height="maxHeight"
+        :height="isheight"
         :style="stylecLIS"
         class="tableBox"
         :row-style="rowStyle"
@@ -202,6 +203,13 @@ export default class elTabletsxFk extends Vue {
   })
   public size!: string
 
+  @Prop({
+    type: Number,
+    default: () => {
+      return
+    },
+  })
+  public isheight!: Number
   //是否在表尾显示合计行
   @Prop({
     type: Boolean,

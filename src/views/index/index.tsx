@@ -101,7 +101,7 @@ export default class HomeIndex extends Vue {
             if (tabListJson.pathname !== 'home') {
               isnewlist.push(tabListJson)
             }
-            const newlist = this.$filters.roteraRR(isnewlist)
+            const newlist = this.$filters.roteraRR(isnewlist, 'urlID')
             postJson.newlist = newlist
             postJson.tabsValuevux = tabList.pathname
             vuX.postvuex('routingJson', postJson)
