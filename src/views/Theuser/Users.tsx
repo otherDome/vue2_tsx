@@ -977,7 +977,7 @@ export default class Users extends Mixins(onresize) {
                 return <div>这是一个名字为expand的插槽可以自定义里面内容 {item.id}</div>
               },
               Thecustom: (param: any) => {
-                const item: any = param.isitem
+                const item: any = param.isitem.row
                 return <div>
                   <i class="el-icon-time"></i>
                   <span style="margin-left: 10px">{item.name}</span>

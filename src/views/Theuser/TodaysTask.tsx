@@ -894,7 +894,7 @@ export default class TodaysTask extends Mixins(onresize) {
             }}
             scopedSlots={{
               Thecustom: (param: any) => {
-                const item: any = param.isitem
+                const item: any = param.isitem.row
                 return <div>
                   <i class="el-icon-time"></i>
                   <span style="margin-left: 10px">{item.name}</span>

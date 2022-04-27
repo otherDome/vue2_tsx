@@ -1,0 +1,83 @@
+.results {
+    width: 100%;
+    .results_from {
+        width: 100%;
+        padding: 20px 20px 20px 20px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0px 4px #e4e7ed;
+        margin-bottom: 15px;
+        .results_from_header {
+            display: flex;
+            .results_from_left {
+                width: calc(100% - 250px);
+                 :global(.el-form-item--mini.el-form-item) {
+                    margin-bottom: 0;
+                }
+                .Timezone {
+                    width: 220px;
+                }
+            }
+            .results_from_right {
+                width: 250px;
+                display: flex;
+                justify-content: flex-end;
+                .screening {
+                    cursor: pointer;
+                    font-size: 14px;
+                    line-height: 29px;
+                    display: flex;
+                    color: #409EFF;
+                    .icon_filter {
+                        margin-top: 2px;
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+        .results_from_header_top {
+            width: 100%;
+            display: flex;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e4e7ed;
+            margin-bottom: 10px;
+            .results_from_header_top_left {
+                width: 50%;
+                .shaixuan {
+                    display: flex;
+                    cursor: pointer;
+                    color: #409EFF;
+                    .icon_filter {
+                        margin-top: 2px;
+                        margin-right: 3px;
+                    }
+                }
+            }
+            .results_from_header_top_right {
+                width: 50%;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+        .results_from_header_footer {
+             :global(.el-form-item) {
+                margin-bottom: 0px;
+            }
+        }
+    }
+    .results_Table {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0px 4px #e4e7ed;
+        .results_Table_header {
+            width: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

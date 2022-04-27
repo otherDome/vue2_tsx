@@ -61,7 +61,7 @@
               v-else-if="item.type === 'Thecustom'"
               :class="item.showOverflowTooltip === true ? 'Overflowhidden' : ''"
             >
-              <slot name="Thecustom" :isitem="scope.row"> </slot>
+              <slot name="Thecustom" :isitem="scope"> </slot>
             </div>
             <div
               v-else-if="item.type === 'operation'"

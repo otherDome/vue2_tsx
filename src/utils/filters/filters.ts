@@ -58,6 +58,11 @@ class filters {
     }
     return returnAge;//返回周岁年龄
   }
-
+  phonezz(phone:any) {
+    var tells = phone
+    var tell = /(\d{3})\d*(\d{4})/;
+    phone = tells.replace(tell, '$1****$2')
+    return phone
+  }
 }
 export default new filters();
