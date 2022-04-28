@@ -12,7 +12,7 @@
             display: flex;
             .results_from_left {
                 width: calc(100% - 250px);
-                 :global(.el-form-item--mini.el-form-item) {
+                 :global(.el-form-item) {
                     margin-bottom: 0;
                 }
                 .Timezone {

@@ -1,0 +1,90 @@
+.Afterpurchase {
+    width: 100%;
+    .Afterpurchase_from {
+        width: 100%;
+        padding: 20px 20px 20px 20px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0px 4px #e4e7ed;
+        margin-bottom: 15px;
+        .Afterpurchase_from_header {
+            display: flex;
+            width: 100%;
+            .Afterpurchase_from_left {
+                width: calc(100% - 240px);
+                .Timezone {
+                    width: 240px;
+                }
+                 :global(.el-form-item) {
+                    margin-bottom: 0;
+                }
+            }
+            .Afterpurchase_from_right {
+                width: 240px;
+                display: flex;
+                .screening {
+                    cursor: pointer;
+                    font-size: 14px;
+                    line-height: 29px;
+                    display: flex;
+                    color: #409EFF;
+                    .icon_filter {
+                        margin-top: 2px;
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+        .Afterpurchase_from_footer {
+            width: 100%;
+            .Afterpurchase_from_footer_top {
+                width: 100%;
+                display: flex;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #e4e7ed;
+                margin-bottom: 10px;
+                .Afterpurchase_from_footer_top_left {
+                    width: 50%;
+                    .shaixuan {
+                        display: flex;
+                        cursor: pointer;
+                        color: #409EFF;
+                        .icon_filter {
+                            margin-top: 2px;
+                            margin-right: 3px;
+                        }
+                    }
+                }
+                .Afterpurchase_from_footer_top_right {
+                    width: 50%;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+            }
+            .Afterpurchase_from_footer_footer {
+                width: 100%;
+                .Timezone {
+                    width: 230px;
+                }
+                 :global(.el-form-item) {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+    .Afterpurchase_table {
+        width: 100%;
+        padding: 20px 20px 20px 20px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0px 4px #e4e7ed;
+        margin-bottom: 15px;
+        .Afterpurchase_table_header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+    }
+}

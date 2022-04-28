@@ -19,11 +19,12 @@
  * @function onScreeningClk -点击展开高级筛选初级筛选
  * @description 业绩汇总
  **/
-import { Component, Vue } from 'vue-property-decorator';
-import style from '@/assets/styles/DataReport/results..module.scss';
+import { Component, Mixins } from 'vue-property-decorator';
+import style from '@/assets/styles/DataReport/results.module.scss';
 import datalistTableTitle from '@/components/elementUItsx/eltabletsx/datalistTableTitle'
 import elTabletsx from '@/components/elementUItsx/eltabletsx/elTabletsx.vue'
 import eldialog from '@/components/elementUItsx/eldialog/eldialog.vue'
+import { onresize } from '@/components/mixins/onresize';
 @Component({
   components: {
     elTabletsx,
@@ -31,7 +32,7 @@ import eldialog from '@/components/elementUItsx/eldialog/eldialog.vue'
     datalistTableTitle
   }
 })
-export default class App extends Vue {
+export default class results extends Mixins(onresize) {
   //临时变量区域
   protected value1: string = ''
   protected isvalue: string = ''
@@ -618,7 +619,7 @@ export default class App extends Vue {
     },
   ]
   protected eldialogVsibleSync: boolean = false
-  protected screening: boolean = true
+  protected screening: boolean = false
 
   //表格设置数据变量
   protected elTabletsxborder: boolean = true
@@ -641,12 +642,15 @@ export default class App extends Vue {
   protected onScreeningClk() {
     this.screening = !this.screening
   }
+  protected created() {
+    this.onOnreSize('elFromwidth')
+  }
   protected mounted() {
-
+    this.onresizeInit('elFromwidth')
   }
   protected render() {
     return <div class={style.results}>
-      <div class={style.results_from}>
+      <div class={style.results_from} id='elFromwidth'>
         {
           this.screening === false ? <div class={style.results_from_header}>
             <div class={style.results_from_left}>
@@ -663,28 +667,32 @@ export default class App extends Vue {
                     <el-option label="零售单" value="1"></el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item>
-                  <el-select
-                    filterable
-                    v-model={this.isvalue}
-                    placeholder="请选择查询方式">
-                    <el-option label="全部" value="0"></el-option>
-                    <el-option label="小程序" value="1"></el-option>
-                    <el-option label="代客" value="2"></el-option>
-                    <el-option label="引流" value="3"></el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item>
-                  <el-date-picker
-                    v-model={this.value1}
-                    class={style.Timezone}
-                    type="daterange"
-                    range-separator="至"
-                    start-placeholder="开始日期"
-                    end-placeholder="结束日期">
-                  </el-date-picker>
-                </el-form-item>
+                {
+                  this.elFromwidth > 698 ? <el-form-item>
+                    <el-select
+                      filterable
+                      v-model={this.isvalue}
+                      placeholder="请选择查询方式">
+                      <el-option label="全部" value="0"></el-option>
+                      <el-option label="小程序" value="1"></el-option>
+                      <el-option label="代客" value="2"></el-option>
+                      <el-option label="引流" value="3"></el-option>
+                    </el-select>
+                  </el-form-item> : ""
+                }
 
+                {
+                  this.elFromwidth > 930 ? <el-form-item>
+                    <el-date-picker
+                      v-model={this.value1}
+                      class={style.Timezone}
+                      type="daterange"
+                      range-separator="至"
+                      start-placeholder="开始日期"
+                      end-placeholder="结束日期">
+                    </el-date-picker>
+                  </el-form-item> : ''
+                }
               </el-form>
             </div>
             <div class={style.results_from_right}>
@@ -743,7 +751,7 @@ export default class App extends Vue {
                   size='mini'
                   inline={true}
                 >
-                  <el-form-item>
+                  <el-form-item label="订单类别">
                     <el-select
                       filterable
                       v-model={this.isvalue}
@@ -752,7 +760,7 @@ export default class App extends Vue {
                       <el-option label="零售单" value="1"></el-option>
                     </el-select>
                   </el-form-item>
-                  <el-form-item>
+                  <el-form-item label="查询方式">
                     <el-select
                       filterable
                       v-model={this.isvalue}
@@ -763,7 +771,7 @@ export default class App extends Vue {
                       <el-option label="引流" value="3"></el-option>
                     </el-select>
                   </el-form-item>
-                  <el-form-item>
+                  <el-form-item label="时间区间">
                     <el-date-picker
                       v-model={this.value1}
                       class={style.Timezone}
@@ -773,16 +781,10 @@ export default class App extends Vue {
                       end-placeholder="结束日期">
                     </el-date-picker>
                   </el-form-item>
-
                 </el-form>
               </div>
-
-
             </div>
-
         }
-
-
       </div>
       <div class={style.results_Table}>
         <div class={style.results_Table_header}>

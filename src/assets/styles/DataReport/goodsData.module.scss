@@ -1,0 +1,105 @@
+.goodsData {
+    width: 100%;
+    .goodsData_from {
+        width: 100%;
+        padding: 20px 20px 20px 20px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0px 4px #e4e7ed;
+        margin-bottom: 15px;
+        .goodsData_from_header {
+            width: 100%;
+            display: flex;
+            .goodsData_from_header_left {
+                width: calc(100% - 250px);
+                .Timezone {
+                    width: 220px;
+                }
+                 :global(.el-form-item) {
+                    margin-bottom: 0;
+                }
+            }
+            .goodsData_from_header_right {
+                display: flex;
+                width: 250px;
+                .screening {
+                    cursor: pointer;
+                    font-size: 14px;
+                    line-height: 29px;
+                    display: flex;
+                    color: #409EFF;
+                    .icon_filter {
+                        margin-top: 2px;
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+        .goodsData_from_footer {
+            width: 100%;
+            .goodsData_from_footer_top {
+                width: 100%;
+                display: flex;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #e4e7ed;
+                margin-bottom: 10px;
+                .goodsData_from_footer_top_left {
+                    width: 50%;
+                    .shaixuan {
+                        display: flex;
+                        cursor: pointer;
+                        color: #409EFF;
+                        .icon_filter {
+                            margin-top: 2px;
+                            margin-right: 3px;
+                        }
+                    }
+                }
+                .goodsData_from_footer_top_right {
+                    width: 50%;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+            }
+            .goodsData_from_footer_ft {
+                width: 100%;
+                 :global(.el-form-item) {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+    .goodsData_frommax680 {}
+    .goodsData_frommin680 {
+        display: none;
+    }
+    .goodsData_table {
+        width: 100%;
+        padding: 20px 20px 20px 20px;
+        box-sizing: border-box;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0px 4px #e4e7ed;
+        margin-bottom: 15px;
+        .goodsData_table_title {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: flex-end;
+            .goodsData_table_title_dc {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .goodsData {
+        .goodsData_frommax680 {
+            display: none;
+        }
+        .goodsData_frommin680 {
+            display: inline-block;
+        }
+    }
+}
