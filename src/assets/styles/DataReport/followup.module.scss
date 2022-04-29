@@ -81,5 +81,10 @@
         border-radius: 5px;
         box-shadow: 0 0px 4px #e4e7ed;
         margin-bottom: 15px;
+        .followup_Table_header {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
     }
 }

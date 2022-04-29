@@ -13,7 +13,7 @@
             .results_from_left {
                 width: calc(100% - 250px);
                  :global(.el-form-item) {
-                    margin-bottom: 0;
+                    margin-bottom: 0px;
                 }
                 .Timezone {
                     width: 220px;
@@ -62,7 +62,7 @@
         }
         .results_from_header_footer {
              :global(.el-form-item) {
-                margin-bottom: 0px;
+                margin-bottom: 10px;
             }
         }
     }
