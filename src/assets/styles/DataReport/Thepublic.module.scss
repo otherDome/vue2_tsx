@@ -36,6 +36,37 @@
             margin-bottom: 10px;
             display: flex;
             justify-content: flex-end;
+            .wxData_table_header_bistn {
+                margin-right: 8px;
+            }
+        }
+    }
+    .yinca {
+        display: none;
+    }
+    .yinca1 {
+        display: inline-block;
+    }
+}
+
+@media screen and (max-width: 1160px) {
+    .wxData {
+        .yinca {
+            display: inline-block;
+        }
+        .wxData_from_left {
+            width: 100%!important;
+        }
+        .yinca1 {
+            display: none!important;
+        }
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .wxData {
+         :global(.el-form-item) {
+            margin-bottom: 10px!important;
         }
     }
 }

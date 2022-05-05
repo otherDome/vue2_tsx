@@ -82,6 +82,7 @@ export default class HomeIndexHeader extends Vue {
     dynamicJSON.AFold = this.AFold
     vuX.postvuex('routingJson', dynamicJSON)
     this.$bus.$emit('AFold_bus', this.AFold)
+
   }
   protected Therefresh() {
     this.reload();

@@ -51,9 +51,13 @@ export class onresize extends Vue {
     const routingJson = vuX.getvuex('routingJson')
     this.AFold_bus = routingJson.AFold
     this.elFromwidth = (window as any).screenWidth = document.getElementById(documentIID)?.offsetWidth
+
     this.$bus.$on('AFold_bus', (e: boolean) => {
       this.AFold_bus = e
-      this.elFromwidth = (window as any).screenWidth = document.getElementById(documentIID)?.offsetWidth
+      const that = this;
+      setTimeout(function () {
+        that.elFromwidth = (window as any).screenWidth = document.getElementById(documentIID)?.offsetWidth
+      }, 400);
     });
   }
 }

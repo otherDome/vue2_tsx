@@ -563,7 +563,7 @@ export default class wxData extends Mixins(onresize) {
             </el-form-item>
           </el-form>
         </div>
-        <div class={style.wxData_from_right}>
+        <div class={[style.wxData_from_right, style.yinca1]}>
           <el-button
             icon="el-icon-search"
             size="mini"
@@ -581,6 +581,21 @@ export default class wxData extends Mixins(onresize) {
       </div>
       <div class={style.wxData_table}>
         <div class={style.wxData_table_header}>
+          <div class={[style.wxData_table_header_bistn, style.yinca]}>
+            <el-button
+              icon="el-icon-search"
+              size="mini"
+              type="primary"
+            > 查询
+            </el-button>
+            <el-button
+              type="info"
+              size="mini"
+              icon="el-icon-refresh-right"
+            >
+              重置
+            </el-button>
+          </div>
           <datalistTableTitle
             props={{
               tableColumn: this.elTableColumn

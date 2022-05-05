@@ -536,6 +536,9 @@ export default class followup extends Mixins(onresize) {
     this.onOnreSize('elFromwidth')
   }
   protected mounted() {
+    this.$bus.$on('AFold_bus', (e: boolean) => {
+      this.onresizeInit('elFromwidth')
+    })
     this.onresizeInit('elFromwidth')
   }
   protected render() {
