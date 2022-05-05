@@ -31,13 +31,32 @@
             margin-bottom: 10px;
             display: flex;
             justify-content: flex-end;
+            .goodswhs_table_header_isbtn {
+                margin-right: 10px;
+            }
             .goodswhs_table_header_dc {
                 margin-right: 10px;
             }
         }
     }
+    .goodswhs_formMax910 {
+        display: inline-block;
+    }
+    .goodswhs_formMin910 {
+        display: none;
+    }
 }
 
-@media screen and (max-width: 730px) {
-    .goodswhs {}
+@media screen and (max-width: 910px) {
+    .goodswhs {
+        .goodswhs_form_left {
+            width: 100%!important;
+        }
+        .goodswhs_formMax910 {
+            display: none!important;
+        }
+        .goodswhs_formMin910 {
+            display: inline-block!important;
+        }
+    }
 }

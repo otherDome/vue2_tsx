@@ -575,7 +575,7 @@ export default class goodswhs extends Mixins(onresize) {
             </el-form-item>
           </el-form>
         </div>
-        <div class={style.goodswhs_form_right}>
+        <div class={[style.goodswhs_form_right, style.goodswhs_formMax910]}>
           <el-button
             icon="el-icon-search"
             size="mini"
@@ -593,19 +593,22 @@ export default class goodswhs extends Mixins(onresize) {
       </div>
       <div class={style.goodswhs_table}>
         <div class={style.goodswhs_table_header}>
-          <el-button
-            icon="el-icon-search"
-            size="mini"
-            type="primary"
-          > 查询
-          </el-button>
-          <el-button
-            type="info"
-            size="mini"
-            icon="el-icon-refresh-right"
-          >
-            重置
-          </el-button>
+          <div class={[style.goodswhs_table_header_isbtn, style.goodswhs_formMin910]}>
+            <el-button
+              icon="el-icon-search"
+              size="mini"
+              type="primary"
+            > 查询
+            </el-button>
+            <el-button
+              type="info"
+              size="mini"
+              icon="el-icon-refresh-right"
+            >
+              重置
+            </el-button>
+          </div>
+
           <el-button class={style.goodswhs_table_header_dc} size='mini' type="success" icon='el-icon-download'>导出</el-button>
           <datalistTableTitle
             props={{
