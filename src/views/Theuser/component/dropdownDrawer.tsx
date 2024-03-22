@@ -633,7 +633,7 @@ export default class dropdownDrawer extends Vue {
                   </div>
                   {
                     this.currentSymptoms.length === 0 ?
-                      <div div class='elDrawer_mainbody_right_mainlodge_zz'>
+                      <div class='elDrawer_mainbody_right_mainlodge_zz'>
                         <el-empty props={{
                           imageSize: 30
                         }}></el-empty>

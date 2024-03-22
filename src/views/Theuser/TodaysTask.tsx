@@ -821,8 +821,8 @@ export default class TodaysTask extends Mixins(onresize) {
       </div>
       <div class={style.elTable_list}>
         <div class={style.elTable_list_header}>
-          <div calss={style.elTable_list_header_left}></div>
-          <div calss={style.elTable_list_header_right}>
+          <div class={style.elTable_list_header_left}></div>
+          <div class={style.elTable_list_header_right}>
             <datalistTableTitle
               props={{
                 tableColumn: this.elTableColumn

@@ -1397,7 +1397,7 @@ export default class userservice extends Mixins(onresize) {
           }}
           scopedSlots={{
             elcontentFK: () => {
-              return <div calss={style.addyaoli}>
+              return <div class={style.addyaoli}>
                 <el-descriptions
                   props={{
                     column: 2,
