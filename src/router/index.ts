@@ -325,8 +325,8 @@ router.beforeEach((to:any, from, next) => {
   NProgress.start()
   const title =
   to.meta.title == undefined
-    ? "德开医药health系统"
-    : "德开医药health系统-" + to.meta.title;
+    ? "XXX医药health系统"
+    : "XXX医药health系统-" + to.meta.title;
   window.document.title = title;
   next()
 })

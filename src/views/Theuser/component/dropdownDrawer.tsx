@@ -35,7 +35,7 @@ export default class dropdownDrawer extends Vue {
   protected value2: any = 0
   protected value3: string = '2022-02-23 18:29:25'
   protected value4: string = '13098092937'
-  protected value5: string = '[天猫]德开大药房旗舰店'
+  protected value5: string = '[天猫]XXX大药房旗舰店'
   protected value6: string = ''
   protected value7: string = ''
   protected value8: string = ''

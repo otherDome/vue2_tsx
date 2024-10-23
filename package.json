@@ -2,6 +2,9 @@
   "name": "text",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">= 14.17.1"
+  },
   "scripts": {
     "serve:dev": "cross-env NODE_ENV=development dotenv -e .env.dev.serve vue-cli-service serve",
     "serve:online": "cross-env NODE_ENV=online dotenv -e .env.online.serve vue-cli-service serve",
